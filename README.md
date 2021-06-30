@@ -19,6 +19,6 @@ My background is building high performance, full stack applications for front of
 - [J.P. Morgan](https://www.jpmorgan.com/global), VP Software Engineer, Athena Research
 - [MayStreet](https://maystreet.com), Software Engineer
 
-### Teaching
+## Teaching
 I have taught in the Computer Science department at Columbia University since 2015. More information is available on [my Columbia website](https://www.cs.columbia.edu/~paine/).
 
