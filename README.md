@@ -22,7 +22,9 @@ I have taught in the Computer Science department at Columbia University since 20
 
 ## Media
 
-- *JPMorgan's requirement for new staff: coding lessons*, **Financial Times 2018** ([link](https://www.ft.com/content/4c17d6ce-c8b2-11e8-ba8f-ee390057b8c9))
-- *JPMorgan's Python training guide for analysts and traders*, **efinancialcareers** ([link](https://news.efinancialcareers.com/us-en/3004043/jpmorgan-python-training-analysts-and-traders))
-- *Beyond Spreadsheets*, **NYC Data Council 2020**, w/ Jeff Sternberg ([@sternb0t](https://github.com/sternb0t)) - Technical Director Google ([recording](https://youtu.be/PYTVU4A_3Kc))
-- *Production Notebooks*, **JupyterCon 2020** ([link to presentation](https://tim.paine.nyc/talks/jupytercon.html#/))
+| | | | |
+|:--:|:--:|:--:|:--:|
+| *Production Notebooks* | **JupyterCon 2020**  | | [link to presentation](https://tim.paine.nyc/talks/jupytercon.html#/) |
+| *Beyond Spreadsheets* | **NYC Data Council 2020** | w/ Jeff Sternberg ([@sternb0t](https://github.com/sternb0t)) - Technical Director Google | [recording](https://youtu.be/PYTVU4A_3Kc) |
+|*JPMorgan's requirement for new staff: coding lessons* | **Financial Times 2018** | | [link](https://www.ft.com/content/4c17d6ce-c8b2-11e8-ba8f-ee390057b8c9) |
+| *JPMorgan's Python training guide for analysts and traders* | **efinancialcareers** | | [link](https://news.efinancialcareers.com/us-en/3004043/jpmorgan-python-training-analysts-and-traders) |
