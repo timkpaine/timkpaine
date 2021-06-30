@@ -1,6 +1,7 @@
 # Hello
 My name is Tim, I am currently head of software engineering at [IEX Cloud](https://github.com/iexcloud).
 
+|---|---|---|---|
 | [Personal Site](https://tim.paine.nyc/) | [Teaching](https://www.cs.columbia.edu/~paine/) | [Twitter](https://twitter.com/timkpaine) | [LinkedIn](https://www.linkedin.com/in/timkpaine/) |
 
 ## Experience
