@@ -15,7 +15,7 @@ My background is building high performance, full stack applications for front of
 | | | |
 |:--:|:--:|:--:|
 | <img width="100" src="./iex.png" alt="IEX"></img> | [IEX](https://iextrading.com) | Head of Software Engineeering - [IEX Cloud](https://iexcloud.io) |
-| <img width="100" src="./jpmorgan.png" alt="J.P. Morgan"></img> | [J.P. Morgan](https://www.jpmorgan.com/global) | VP Software Engineer - Athena Research |
+| <img width="100" src="./jpmorgan.png" alt="J.P. Morgan"></img> | [J.P. Morgan](https://www.jpmorgan.com/global) | Vice President - Athena Research |
 | <img width="100" src="./maystreet.png" alt="MayStreet"></img> | [MayStreet](https://maystreet.com) |  Software Engineer |
 
 ## Teaching
