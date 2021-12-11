@@ -11,6 +11,8 @@
 ## Experience
 My background is building high performance, full stack applications for front office business users and developers, focusing on streaming data, analytics, and machine learning. 
 
+You can find my resume [here](https://tim.paine.nyc/rsc/TPCV.pdf).
+
 | | | |
 |:--:|:--:|:--:|
 | <img width="100" src="./iex.png" alt="IEX"></img> | [IEX](https://iextrading.com) | Head of Software Engineeering, [IEX Cloud](https://iexcloud.io) |
