@@ -16,10 +16,10 @@ You can find my resume [here](https://tim.paine.nyc/rsc/TPCV.pdf).
 | | | |
 |:--:|:--:|:--:|
 | (not disclosed) | (not disclosed) | Developer (Working on something new, can't share much yet!) |
-| <img width="100" src="./iex.png" alt="IEX"></img> | [IEX](https://iextrading.com) | Head of Software Engineeering, [IEX Cloud](https://iexcloud.io) |
-| <img width="100" src="./columbia.png" alt="Columbia"></img> | [Columbia University](https://www.columbia.edu/) | Associate in Computer Science |
-| <img width="100" src="./jpmorgan.png" alt="J.P. Morgan"></img> | [J.P. Morgan](https://www.jpmorgan.com/global) | Vice President, Athena Research |
-| <img width="100" src="./maystreet.png" alt="MayStreet"></img> | [MayStreet](https://maystreet.com) |  Software Engineer |
+| <img width="75" src="./columbia.png" alt="Columbia"></img> | [Columbia University](https://www.columbia.edu/) | Associate in Computer Science |
+| <img width="75" src="./iex.png" alt="IEX"></img> | [IEX](https://iextrading.com) | Head of Software Engineeering, [IEX Cloud](https://iexcloud.io) |
+| <img width="75" src="./jpmorgan.png" alt="J.P. Morgan"></img> | [J.P. Morgan](https://www.jpmorgan.com/global) | Vice President, Athena Research |
+| <img width="75" src="./maystreet.png" alt="MayStreet"></img> | [MayStreet](https://maystreet.com) |  Software Engineer |
 
 ## Teaching
 I have taught in the Computer Science department at Columbia University since 2015. More information is available on [my Columbia website](https://www.cs.columbia.edu/~paine/).
