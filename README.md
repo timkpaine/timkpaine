@@ -15,7 +15,6 @@ You can find my resume [here](https://tim.paine.nyc/rsc/TPCV.pdf).
 
 | | | | |
 |:--:|:--:|:--:|:--:|
-|  | (not disclosed) | Developer (Working on something new, can't share much yet!) | 2022- |
 | <img width="75" src="./cubist.png" alt="Cubist"></img> | [Point72 - Cubist](https://www.point72.com/cubist/) | Central Research Team | 2022- |
 | <img width="75" src="./columbia.png" alt="Columbia"></img> | [Columbia University](https://www.columbia.edu/) | Associate in Computer Science | 2015- |
 | <img width="75" src="./iex.png" alt="IEX"></img> | [IEX](https://iextrading.com) | Head of Software Engineeering, [IEX Cloud](https://iexcloud.io) | 2020-2021 |
