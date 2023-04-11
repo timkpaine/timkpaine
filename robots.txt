@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://tim.paine.nyc/sitemap.xml

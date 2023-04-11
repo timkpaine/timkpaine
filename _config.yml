@@ -1,0 +1,7 @@
+title: Timothy K. Paine
+description: Developer, NYC
+logo: /static/img/tim.jpg
+theme: jekyll-theme-minimal
+url: "https://tim.paine.nyc"
+plugins:
+  - jekyll-sitemap
