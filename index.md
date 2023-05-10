@@ -42,6 +42,7 @@ About me or my work
 | | | | |
 |:--:|:---|:---|:---|
 | | *Production Notebooks* | **JupyterCon 2020**  | [link to presentation](https://tim.paine.nyc/talks/jupytercon.html#/) |
+| | *Visualizing Live Data Pipelines* | **JupyterCon 2023**  | [link to presentation](https://tim.paine.nyc/talks/jupytercon-2023.html#/) |
 | | *Beyond Spreadsheets* | **NYC Data Council 2020** | [recording](https://youtu.be/PYTVU4A_3Kc) |
 | | *JPMorgan's requirement for new staff: coding lessons* | **Financial Times - 2018** | [link](https://www.ft.com/content/4c17d6ce-c8b2-11e8-ba8f-ee390057b8c9) |
 | | *JPMorgan's Python training guide for analysts and traders* | **efinancialcareers - 2020** | [link](https://news.efinancialcareers.com/us-en/3004043/jpmorgan-python-training-analysts-and-traders) |

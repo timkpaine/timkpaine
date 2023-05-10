@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>JupyterCon 2023 - Visualizing Data Pipelines</title>
+		<link rel="stylesheet" href="assets/dist/reveal.css">
+		<link rel="stylesheet" href="assets/dist/theme/white.css" id="theme">
+        <link rel="stylesheet" href="assets/plugin/highlight/monokai.css">
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBFEVM4RY"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-PJBFEVM4RY');
+        </script>
+        <style>
+            .reveal .smallfont {
+                font-size: 18px;
+            }
+        </style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <section data-markdown>
+                    <script type="text/template">
+                        <!-- .slide: data-background="#000000" -->
+                        # Visualizing Data Pipelines
+
+                        ## with ipydagred3
+
+                        <br>
+
+                        Tim Paine / [@timkpaine](https://github.com/timkpaine)
+                        
+                        Cubist Systematic Strategies
+                    </script>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Talk Overview
+
+                            Background and use cases
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Implementing a widget library: `ipydagred3`
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Working through examples
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            Future work
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Background
+                            ---
+                            ## Data pipelines
+                            ---
+                            <img src="assets/img/jupytercon2023/airflow.png" class="shadow" width=1000></img>
+                            ---
+                            <img src="assets/img/jupytercon2023/luigi.png" width=800></img>
+                            ---
+                            <img src="assets/img/jupytercon2023/dagster.jpg" class="shadow" width=1000></img>
+                            ---
+                            <img src="assets/img/jupytercon2023/prefect.png" class="shadow" width=1000></img>
+                            ---
+                            ## Task graphs
+                            ---
+                            <img src="assets/img/jupytercon2023/dask.png" class="shadow" width=1000></img>
+                            ---
+                            <img src="assets/img/jupytercon2023/kedro.png" class="shadow" width=800></img>
+                            ---
+                            ## Dataflow computations
+                            ---
+                            <img src="assets/img/jupytercon2023/streamz.png" class="shadow" width=1000></img>
+                            ---
+                            <img src="assets/img/jupytercon2023/pyfunctional.png" class="shadow" width=800></img>
+                            ---
+                            <img src="assets/img/jupytercon2023/reactivex.png" class="shadow" width=1000></img>
+                            ---
+                            <img src="assets/img/jupytercon2023/mdf.png" class="shadow" width=800></img>
+                            ---
+                            <img src="assets/img/jupytercon2023/loman.png" class="shadow" width=700></img>
+                            ---
+                            ## Prior art?
+                            Lots
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+                            ---
+                            ## Graphviz
+                            ---
+                            <img src="assets/img/jupytercon2023/tomatoes.gif" width=600></img>
+                            ---
+                            We want something as easy to use as graphviz, but with more browser-first interactivity
+                            ---
+                            ## Cyctoscape
+
+                            [ipycytoscape](https://github.com/cytoscape/ipycytoscape)<!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Built with [cytoscape.js](https://js.cytoscape.org/)
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            [Introductory blog post](https://joseberlines.medium.com/learning-and-visualising-graphs-with-ipycytoscape-1ca150f24933) by [Jose Ferro](https://github.com/joseberlines/)
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            ## But
+
+                            Didn't exist at the time
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Better for visualizing large, static and/or infrequently updating graphs
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Not as great for real-time/interactive graphs
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            Needed something capable of visualizing 100s updates per second, thousands of nodes
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            ## dagre
+
+                            3 related libraries: [graphlib](https://github.com/dagrejs/graphlib), [dagre](https://github.com/dagrejs/dagre), [dagre-d3](https://github.com/dagrejs/dagre-d3)
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            All deprecated 🙁
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            [dagre-es](https://github.com/tbo47/dagre-es) fork
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            Used (alongside cytoscape) in [mermaid charts](https://mermaid.js.org/)
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            ## Use case (for this talk)
+
+                            ---
+
+                            Streaming and lazy dependency graphs are very widely used in finance to represent securities, perform calculations, manage state machines, represent interdependent assets
+
+                            ---
+
+                            ## Tributary
+
+
+                            [tributary](https://github.com/streamlet-dev/tributary/) is a "toy" implementation of synchronous dataflow engines like [TSecDB at Goldman Sachs](https://www.efinancialcareers.co.uk/news/2017/03/the-nine-top-technology-teams-at-goldman-sachs) or [Reactive at JP Morgan](https://www.youtube.com/watch?v=ZYD9yyMh9Hk)
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Large, heterogenous graphs with intricate interdepencies
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Strong need for interactive interrogation / debugability
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Building a widget
+
+                            Lots of tutorials and cookiecutters available from the [Jupyter Widgets Documentation](https://ipywidgets.readthedocs.io/en/stable/index.html)
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Let us exchange data back and forth between python and javascript models over websockets
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            <img src="assets/img/jupytercon2023/widget_arch.png" class="shadow" width=200></img>
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+
+                            Will focus on the differentiating features of `ipydagred3`, in particular things like its incremental updateability
+
+                            ---
+
+                            ## State Sync / Incremental updating
+
+                            Most widgets have an attribute to store all their data
+
+                            ---
+
+                            ```python
+                            class Graph(Widget):
+                                nodes = MutableList(Instance(Node))
+                                    .tag(sync=True, **widget_serialization)
+                                edges = MutableList(Instance(Edge))
+                                    .tag(sync=True, **widget_serialization)
+                            ```
+
+                            ---
+
+                            But this can make it difficult to synchronize:
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            incremental updates (add/remove/modify nodes and edges)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            partial graph construction (create node/edge relationships independent from graph)
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            graph construction before/after rendering
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            graph manipulation before/after rendering
+                            <!-- .element: class="fragment" data-fragment-index="5" -->
+
+                            ---
+                            Both ipycytoscape and ipydagred3 have to carefully manage the synchronization of the models with the rendering of the graph
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Luckily, Jupyter Widgets provide helpful mechanisms for this
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            [Low Level Tutorial](https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Low%20Level.html)
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+                            
+                            ## Comm model
+
+                            <img src="assets/img/jupytercon2023/transport.svg" width=800></img>
+                            
+                            ---
+                            
+                            [`send` method](https://ipywidgets.readthedocs.io/en/stable/reference/ipywidgets.html#ipywidgets.widgets.widget.Widget.send) lets us send custom JSON messages back and forth between python and javascript
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            <img src="assets/img/jupytercon2023/send.png" width=800></img>
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Available on `DOMWidget` (python) and `DOMWidgetView` (js) classes
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            We can use this to add easy incremental updates to our widget
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            <img src="assets/img/jupytercon2023/node.png" width=800></img>
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            `node` / `edge` / `graph` classes designed to work independently of jupyter
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            `node` / `edge` instances will "automatically" attach the connectivity layer when attached to a graph
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            All changes synchronized independently via a single top level widget instance
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+
+                            Let's work through some examples
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Examples
+
+                            ---
+
+                            Basic Example
+
+                            ---
+
+                            <img src="assets/img/jupytercon2023/basic_example.gif" class="shadow" width=700></img>
+
+                            ---
+
+
+                            ## Connecting to a larger framework
+
+                            Hooking into a framework like `tributary` becomes very simple
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Instantiate a `Graph`, Create a `Node` for each node, `Edge` for each connection
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Green when executing, white when not
+                            <!-- .element: class="fragment" data-fragment-index="5" -->
+
+                            Yellow when waiting to execute, red when nothing left to execute
+                            <!-- .element: class="fragment" data-fragment-index="6" -->
+
+                            ---
+
+                            <img src="assets/img/jupytercon2023/tributary1.png" width=700></img>
+
+                            ---
+
+                            Tributary Example (slowed for illustrative purposes)
+
+                            ---
+
+                            <img src="assets/img/jupytercon2023/tributary_example.gif" class="shadow" width=700></img>
+
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Where to go from here?
+
+                            I love widgets, but its annoying that they're limited to notebooks
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            [Voilà](https://github.com/voila-dashboards/voila) / [Panel](https://github.com/holoviz/panel) / [Solara](https://github.com/widgetti/solara/)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Can we generalize to any mechanism?
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+
+                            ## Transports
+
+                            [transports](https://github.com/timkpaine/transports) is a generic syncronization library
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Very much a work in progress!
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Conversation on [this issue](https://github.com/jupyter-widgets/ipywidgets/issues/3293)
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            Swap [traitlets](https://traitlets.readthedocs.io/en/stable/) for generic [pydantic](https://docs.pydantic.dev/latest/) models
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Compile to WebAssembly for Python/JS portability
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Abstract away the transport protocol so that REST / WebSocket / Jupyter Comms / etc are separately managed (similar idea to Socket.IO)
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            [Pilot Project - dagre-d3-lite](https://github.com/timkpaine/dagre-d3-lite)
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            <img src="assets/img/jupytercon2023/transports_demo.gif" class="shadow" width=700></img>
+
+                            ---
+
+
+                            ```python
+                            graph = Graph()
+                            transport = JSONTransport()
+                        
+                            @app.websocket("/ws")
+                            async def websocket_endpoint(websocket: WebSocket):
+                                handler = StarletteWebSocketServer(
+                                    websocket=websocket,
+                                    transport=transport,
+                                    model=graph,
+                                )
+                                await handler.handle()
+                            ```
+
+                            ---
+
+                            ```javascript
+                            const jst = new JSONTransport();
+                            const handler = new WebSocketClient({ transport: jst });
+                            jst.hosts(Graph);
+
+                            const graph = await handler.initial();
+                            graph.render(document.querySelector("div.dagred3"));
+                            await handler.handle();
+                            ```
+
+                            ---
+
+                            `Models` are constructed / syncronized recursively (via [bigbrother](https://github.com/timkpaine/bigbrother))
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Updates to models are processed by `Transports` which handle serialization/deserialization
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            `Handlers` connect transports across protocols (currently just WebSockets)
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            # Q/A
+                        </script>
+                    </section>
+                </section>
+
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            <!-- .slide: data-background="#000000" -->
+                            Tim Paine
+                            
+                            [Cubist Systematic Strategies](https://point72.com/cubist/)
+
+                            <br>
+
+                            <div style="display: flex; flex-direction: column; justify-content:center;align-items:center;">
+                                <div style="display: flex; flex-direction: row; justify-content:center;align-items:center;">
+                                    <img src="assets/img/jupytercon2023/gh.png" width=100></img>
+                                    <a href="https://github.com/timkpaine"><span>@timkpaine</span></a>
+                                </div>
+                                <div style="display: flex; flex-direction: row; justify-content:center;align-items:center;">
+                                    <img src="assets/img/jupytercon2023/gh.png" width=100></img>
+                                    <a href="https://github.com/timkpaine/ipydagred3"><span>@timkpaine/ipydagred3</span></a>
+                                </div>
+                            </div>
+
+                            ---
+
+                            ## References / Links
+
+                            [airflow](https://airflow.apache.org/), [luigi](https://github.com/spotify/luigi), [dagster](https://github.com/dagster-io/dagster), [prefect](https://github.com/PrefectHQ/prefect),
+                            [dask](https://www.dask.org/), [kedro](https://github.com/kedro-org/kedro), [mdf](https://github.com/man-group/mdf), [pyungo](https://github.com/cedricleroy/pyungo), [streamz](https://streamz.readthedocs.io/en/latest/)
+                            [PyFunctional](https://github.com/EntilZha/PyFunctional), [loman](https://github.com/janushendersonassetallocation/loman), [RxPy](https://github.com/ReactiveX/RxPY),
+                            [ipycytoscape](https://github.com/cytoscape/ipycytoscape), [cytoscape.js](https://js.cytoscape.org/), [dagre-es](https://github.com/tbo47/dagre-es), [mermaid charts](https://mermaid.js.org/)
+                            [tributary](https://github.com/streamlet-dev/tributary/), [Jupyter Widgets](https://ipywidgets.readthedocs.io/en/stable/index.html), [Voilà](https://github.com/voila-dashboards/voila),
+                            [Panel](https://github.com/holoviz/panel), [Solara](https://github.com/widgetti/solara/), [transports](https://github.com/timkpaine/transports), [traitlets](https://traitlets.readthedocs.io/en/stable/),
+                            [pydantic](https://docs.pydantic.dev/latest/), [dagre-d3-lite](https://github.com/timkpaine/dagre-d3-lite), [bigbrother](https://github.com/timkpaine/bigbrother)
+
+                        </script>
+                    </section>
+                </section>
+
+
+            </div>
+		</div>
+		<script src="assets/dist/reveal.js"></script>
+        <script src="assets/plugin/markdown/markdown.js"></script>
+        <script src="assets/plugin/highlight/highlight.js"></script>
+        <script src="assets/plugin/notes/notes.js"></script>
+		<script>
+			Reveal.initialize({
+				center: true,
+				controls: true,
+				history: true,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+				progress: true,
+                slideNumber: true
+			});
+        </script>
+        
+	</body>
+</html>
