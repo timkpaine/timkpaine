@@ -5,3 +5,5 @@ theme: jekyll-theme-minimal
 url: "https://tim.paine.nyc"
 plugins:
   - jekyll-sitemap
+include:
+  - .well-known
