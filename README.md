@@ -5,7 +5,6 @@
 [![](https://img.shields.io/badge/LinkedIn-blue)](https://www.linkedin.com/in/timkpaine/)
 
 [![GitHub followers](https://img.shields.io/github/followers/timkpaine?label=Follow&style=social)](https://github.com/timkpaine)
-[![Twitter Follow](https://img.shields.io/twitter/follow/timkpaine?label=Follow&style=social)](https://twitter.com/timkpaine)
 
 
 ## Experience
