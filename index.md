@@ -16,9 +16,6 @@ layout: default
 <a href="https://github.com/timkpaine">
     <img alt="GitHub followers" src="https://img.shields.io/github/followers/timkpaine?label=Follow&style=social">
 </a>
-<a href="https://twitter.com/timkpaine">
-    <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/timkpaine?label=Follow&style=social">
-</a>
 </div>
 
 # Experience
