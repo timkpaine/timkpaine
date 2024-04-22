@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>JupyterCon 2020 - Production Notebooks</title>
-		<link rel="stylesheet" href="assets/dist/reveal.css">
-		<link rel="stylesheet" href="assets/dist/theme/white.css" id="theme">
+    <head>
+        <meta charset="utf-8">
+        <title>JupyterCon 2020 - Production Notebooks</title>
+        <link rel="stylesheet" href="assets/dist/reveal.css">
+        <link rel="stylesheet" href="assets/dist/theme/white.css" id="theme">
         <link rel="stylesheet" href="assets/plugin/highlight/monokai.css">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBFEVM4RY"></script>
         <script>
@@ -18,10 +18,10 @@
                 font-size: 18px;
             }
         </style>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
                 <section data-markdown>
                     <script type="text/template">
                         <!-- .slide: data-background="#000000" -->
@@ -99,7 +99,7 @@
                         <script type="text/template">
                             # How we use Jupyter
 
-                            --- 
+                            ---
 
                             <img src="assets/img/jupytercon2020/jupyter.png" width=300></img>
 
@@ -108,21 +108,21 @@
                             ---
 
                             JupyterLab (1 deployment for ~1.5k users, libraries available to run instances locally)
-                            
-                            Static reports using NBConvert and Papermill (hundreds scheduled daily) <!-- .element: class="fragment" data-fragment-index="1" -->                            
+
+                            Static reports using NBConvert and Papermill (hundreds scheduled daily) <!-- .element: class="fragment" data-fragment-index="1" -->
 
                             Live applications using Voilà and Panel (~50 in production, >100 in development)  <!-- .element: class="fragment" data-fragment-index="2" -->
-                            
+
                             ---
 
                             ## Infrastructure support
 
                             Scheduler suitable for both batch and HA jobs (called "Bob") <!-- .element: class="fragment" data-fragment-index="1" -->
-                            
+
                             Distributed, replicating object store (called "Hydra") <!-- .element: class="fragment" data-fragment-index="2" -->
-                                
+
                             Used for both data and code (as a monorepo) <!-- .element: class="fragment" data-fragment-index="3" -->
-                            
+
                             Allows you to look at "slices", union them together backed by a shared "production" layer <!-- .element: class="fragment" data-fragment-index="4" -->
 
                             ---
@@ -132,15 +132,15 @@
                             For this talk, focusing on production reports rather than our JupyterHub-style deployment infrastructure  <!-- .element: class="fragment" data-fragment-index="1" -->
 
                             Share functionality amongst a larger group, or with non-technical users <!-- .element: class="fragment" data-fragment-index="2" -->
-                            
+
                             <em>"Can I hide the code and just see the ouputs?"</em> <!-- .element: class="fragment" data-fragment-index="3" -->
-                            
+
                             Run the notebook in some automated fashion <!-- .element: class="fragment" data-fragment-index="4" -->
-                            
+
                             Stable, testable, deployable, extensible <!-- .element: class="fragment" data-fragment-index="5" -->
 
-                            --- 
-                            
+                            ---
+
                             ## "I Don't Like Notebooks"
 
                             Avoid common pitfalls and notebook antipatterns <!-- .element: class="fragment" data-fragment-index="1" -->
@@ -151,7 +151,7 @@
 
                             All library development should be done in an IDE <!-- .element: class="fragment" data-fragment-index="4" -->
 
-                            --- 
+                            ---
 
                             ## Linearly-Executed Notebooks
 
@@ -186,7 +186,7 @@
                                 <img src="assets/img/jupytercon2020/gh.png" width=100></img>
                                 <span>@jpmorganchase/nbcelltests</span>
                             </div>
-    
+
                             ---
 
                             `nbcelltests` is a library we've been developing that lets us lint and test notebooks.
@@ -207,13 +207,13 @@
                             ---
 
                             But for us, we can't always store outputs
-                            
+
                             Notebook outputs are purged to remove sensitive data  <!-- .element: class="fragment" data-fragment-index="1" -->
 
                             <span>Most of what our notebooks do is temporal in nature, meaning it will <b>never</b> match the previous outputs</span>  <!-- .element: class="fragment" data-fragment-index="2" -->
 
                             ---
-                            
+
                             ## Prior (concurrent?) art
 
                             <div style="display: flex; flex-direction: row; justify-content:center;align-items:center;">
@@ -307,7 +307,7 @@
                                 <img src="assets/img/jupytercon2020/gh.png" width=100></img>
                                 <span>@jpmorganchase/nbcelltests</span>
                             </div>
-    
+
 
                         </script>
                     </section>
@@ -326,7 +326,7 @@
                             ## Voilà Prelaunch Hook
 
                             Prelaunch hook allows us to inspect the tornado request and inject cells to do authentication, user impersonation, logging, production validation, and more elaborate custom styling.  <!-- .element: class="fragment" data-fragment-index="1" -->
-                            
+
                             <div style="display: flex; flex-direction: row; justify-content:center;align-items:center;">
                                 <img src="assets/img/jupytercon2020/gh.png" width=100></img>
                                 <span>@voila-dashboards/voila (PR)</span>
@@ -360,14 +360,14 @@
                             ---
 
                             <img src="assets/img/jupytercon2020/jlabtemplates.png" width=800></img>
-                            
+
                             Leverage template notebooks to share common boilerplate, encourage good patterns, save team templates. <!-- .element: class="fragment" data-fragment-index="1" -->
-                            
+
                             <div style="display: flex; flex-direction: row; justify-content:center;align-items:center;">
                                 <img src="assets/img/jupytercon2020/gh.png" width=100></img>
                                 <span>@jpmorganchase/jupyterlab_templates</span>
                             </div> <!-- .element: class="fragment" data-fragment-index="3" -->
-                            
+
                             ---
 
                             ## Kernel wrapper
@@ -382,13 +382,13 @@
 
                                 # Restrict Mem
                                 resource.setrlimit(resource.RLIMIT_AS,
-                                    (rlimits['mem_soft'], rlimits['mem_hard'])) 
+                                    (rlimits['mem_soft'], rlimits['mem_hard']))
 
                                 # Launch ipykernel
                                 ipykernel.kernelapp.launch_new_instance(
                                     argv=['-f', connectionFile, '--profile', profile]
                                 )
-                            ``` 
+                            ```
                             <!-- .element: class="fragment" data-fragment-index="2" -->
 
 
@@ -433,7 +433,7 @@
                     <script type="text/template">
                         <!-- .slide: data-background="#000000" -->
                         Tim Paine
-                        
+
                         J.P. Morgan
 
                         <br>
@@ -457,21 +457,21 @@
 
 
             </div>
-		</div>
-		<script src="assets/dist/reveal.js"></script>
+        </div>
+        <script src="assets/dist/reveal.js"></script>
         <script src="assets/plugin/markdown/markdown.js"></script>
         <script src="assets/plugin/highlight/highlight.js"></script>
         <script src="assets/plugin/notes/notes.js"></script>
-		<script>
-			Reveal.initialize({
-				center: true,
-				controls: true,
-				history: true,
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
-				progress: true,
+        <script>
+            Reveal.initialize({
+                center: true,
+                controls: true,
+                history: true,
+                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+                progress: true,
                 slideNumber: true
-			});
+            });
         </script>
-        
-	</body>
+
+    </body>
 </html>

@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>High Performance Data Visualization for the Web</title>
-		<link rel="stylesheet" href="assets/dist/reveal.css">
-		<link rel="stylesheet" href="assets/dist/theme/white.css" id="theme">
+    <head>
+        <meta charset="utf-8">
+        <title>High Performance Data Visualization for the Web</title>
+        <link rel="stylesheet" href="assets/dist/reveal.css">
+        <link rel="stylesheet" href="assets/dist/theme/white.css" id="theme">
         <link rel="stylesheet" href="assets/plugin/highlight/monokai.css">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBFEVM4RY"></script>
         <script>
@@ -18,10 +18,10 @@
                 font-size: 18px;
             }
         </style>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
                 <section data-markdown>
                     <script type="text/template">
                         <!-- .slide: data-background-image="assets/img/cubist/lightbg.png" -->
@@ -63,18 +63,13 @@
                             ---
 
                             Web Frameworks abound
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
 
-                            ---
-
-                            TODO survey web frameworks
-
-                            ---
+                            [FastAPI, Flast, Tornado, Sanic, Django, etc](https://github.com/mingrammer/python-web-framework-stars)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
 
                             Data visualization components abound!
-
-                            ---
-
-                            TODO survey data visualization components
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
 
                             ---
 
@@ -95,8 +90,13 @@
 
                             ## Pain Point 1 - Virtualization
 
-                            TODO insert arrow image
-                            <!-- .element: class="fragment" data-fragment-index="1" -->
+                            ---
+
+                            <img src="assets/img/perspective2024/airflow1.png" class="shadow" width=1000></img>
+
+                            ---
+
+                            <img src="assets/img/perspective2024/airflow2.png" class="shadow" width=1000></img>
 
                             ---
 
@@ -117,32 +117,64 @@
                             ---
 
                             Most grids are "dumb"
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
 
                             Maybe support filtering / sorting
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
 
                             Maybe support spark charts
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
 
                             Maybe (big maybe!) support pivoting
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            <img src="assets/img/perspective2024/aggrid.png" class="shadow" width=1000></img>
 
                             ---
 
                             Grids aren't always adequate
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
 
                             Even flexible grids don't give users the power to explore
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
 
                             Visualization explosion
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
 
-                            TODO insert picture of stripe homepage
+                            ---
+
+                            <img src="assets/img/perspective2024/stripe.png" class="shadow" width=1000></img>
+
+                            ---
+
+                            <img src="assets/img/perspective2024/grafana.png" class="shadow" width=1000></img>
 
                             ---
 
                             ## Pain Point 3 - Streaming
 
                             Streaming data is extremely common
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
 
                             Polling + pagination?
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
 
-                            Webframeworks and visualization frameworks don't make this easy
+                            Web frameworks and visualization frameworks don't make this easy
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+
+                            [Example websocket broadcast server](https://fastapi.tiangolo.com/advanced/websockets/#handling-disconnections-and-multiple-clients)
+
+                            ---
+
+                            What about e.g. streaming aggregations for N users?
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            State + Updates?
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
 
 
                         </script>
@@ -151,30 +183,63 @@
                 <section>
                     <section data-markdown data-separator="---">
                         <script type="text/template">
-                            ## Perspective
+                            ## [Perspective](https://github.com/finos/perspective)
 
-                            Perspective is an open source...TODO
+                            <i>Interactive analytics and data visualization component, which is especially well-suited for large and/or streaming datasets</i>
+
+                            ---
+
+                            ## Concretely...
+
+                            Streaming, pivoting data engine
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Written in C++
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Bound to Python on the backend
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            Bound to JS on the frontend (via WebAssembly)
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            UI Plugins in Rust/TS
+                            <!-- .element: class="fragment" data-fragment-index="5" -->
+
+                            ---
+
+                            Symmetric C++ engine, GIL-free processing
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Client and Client/Server Architectures
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Fast virtualization with Apache Arrow diffs
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+
 
 
                         </script>
                     </section>
                 </section>
             </div>
-		</div>
-		<script src="assets/dist/reveal.js"></script>
+        </div>
+        <script src="assets/dist/reveal.js"></script>
         <script src="assets/plugin/markdown/markdown.js"></script>
         <script src="assets/plugin/highlight/highlight.js"></script>
         <script src="assets/plugin/notes/notes.js"></script>
-		<script>
-			Reveal.initialize({
-				center: true,
-				controls: true,
-				history: true,
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
-				progress: true,
+        <script>
+            Reveal.initialize({
+                center: true,
+                controls: true,
+                history: true,
+                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+                progress: true,
                 slideNumber: true
-			});
+            });
         </script>
 
-	</body>
+    </body>
 </html>
