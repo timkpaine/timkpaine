@@ -63,7 +63,113 @@
                 <section>
                     <section data-markdown data-separator="---">
                         <script type="text/template">
-                            ## Background
+                            How many people work with non-developers?
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            ---
+
+                            Apps! Dashboards! Widgets!
+
+                            ---
+
+                            Iterative results can often be delivered interactively...
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            ...but sometimes they cannot...
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ...and sometimes, they "just want a pdf" (gasp!)
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+
+                            What is the overhead for research reports?
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            What is the overhead of parameterized reports?
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            What is the overhead of separating research platform (Jupyter) from presentation platform?
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+
+                            Some examples:
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            In finance, analysts often need writeups "on-demand"
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Sometimes its popular enough that its highly curated
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            "Give me a report on Apple (AAPL)"
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            "Give me a report on [NY City Municipal Water Finance Authority Bond](https://www.nyc.gov/site/nyw/investing-in-nyw-bonds/investing.page)"
+                            <!-- .element: class="fragment" data-fragment-index="5" -->
+
+                            ---
+
+                            Some other examples:
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            News, especially in the age of LLMs
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Sports, Politics/Voting, Finance, Transit, Weather, etc
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            Machine Learning / Model Research
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+
+                            ---
+
+                            What is the overhead of separating research platform (Jupyter) from presentation platform?
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            If I'm using Jupyter for my research, maybe I can use it for my paper?
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Background - Tools
+
+                            ---
+
+                            Jupyter - needs no introduction
+
+
+
+                            ---
+
+                            [NBConvert](https://nbconvert.readthedocs.io)
+
+                            [Voilà](https://voila.readthedocs.io/en/stable/)
+
+                            [Panel](https://panel.holoviz.org/)
+
+                            [Jupyter Book](https://jupyterbook.org)
+
+                            ---
+
+                            nbconvert was originally created with $ \LaTeX $ papers in mind
+
+                            but most development work (and venture capital money) has focused on apps
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            Jupyter Book is the closest, and [Myst](https://mystmd.org) is fantastic
+
+                            ---
+
+                            Enter `nbprint`
 
 
                         </script>
@@ -72,10 +178,71 @@
                 <section>
                     <section data-markdown data-separator="---">
                         <script type="text/template">
-                            ## nbprint
+                            <img src="assets/img/nbprint2024/nbprint.png" width=500> </img>
 
-                            nbprint is an open source...TODO
+                            ---
 
+                            `nbprint` is an [open source](https://github.com/nbprint/nbprint) bridge between `jupyter`/`nbconvert` and [W3C Paged Media](https://www.w3.org/TR/css-page-3/)
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            [paged.js](https://pagedjs.org)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            "Paged.js is a free and open source JavaScript library that paginates content in the browser to create PDF output from any HTML content. This means you can design works for print (eg. books) using HTML and CSS!"
+
+                            ---
+
+                            wait what?
+
+                            ---
+
+                            [Examples](https://pagedjs.org/made-with-paged.js.html)
+
+                            ---
+
+                            `nbprint` also comes with [papermill integration](https://github.com/nteract/papermill) for parameterization
+
+                            ---
+
+                            ## Disclosure
+
+                            Still a work in progress, under active development
+
+                            ---
+
+                            Optional static configuration (yaml) to notebooks (or start from existing notebooks)
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            nbconvert notebooks to html with custom templates for `pagedjs` integration
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+
+                            use nbconvert webpdf (headless chrome) for direct-to-pdf
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+
+                            Let's look at 3 example results
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Future work
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Q/A
+
+                            <span>Tim Paine / <a style="text-decoration: underline;" href="https://github.com/timkpaine">@timkpaine</a></span>
 
                         </script>
                     </section>
@@ -86,12 +253,13 @@
         <script src="assets/plugin/markdown/markdown.js"></script>
         <script src="assets/plugin/highlight/highlight.js"></script>
         <script src="assets/plugin/notes/notes.js"></script>
+        <script src="assets/plugin/math/math.js"></script>
         <script>
             Reveal.initialize({
                 center: true,
                 controls: true,
                 history: true,
-                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ],
                 progress: true,
                 slideNumber: true
             });
