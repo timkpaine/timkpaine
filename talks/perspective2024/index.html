@@ -51,7 +51,13 @@
           document.getElementById(table).load(websocket.open_table(table));
         });
 
-        document.getElementById("status").restore({sort: [["last_update", "desc"]]});
+        document.getElementById("status").restore({
+          plugin: "X Bar",
+          group_by: ["status"],
+          columns: ["machine_id"],
+          aggregates: {"status": "last"},
+          sort: [["last_update", "desc"]]
+        });
         document.getElementById("jobs").restore({sort: [["start_time", "desc"]]});
 
     });

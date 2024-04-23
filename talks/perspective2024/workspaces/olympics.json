@@ -1,0 +1,263 @@
+{
+  "sizes": [
+    0.2,
+    0.8
+  ],
+  "detail": {
+    "main": {
+      "type": "split-area",
+      "orientation": "horizontal",
+      "children": [
+        {
+          "type": "tab-area",
+          "widgets": [
+            "PERSPECTIVE_GENERATED_ID_1"
+          ],
+          "currentIndex": 0
+        },
+        {
+          "type": "tab-area",
+          "widgets": [
+            "PERSPECTIVE_GENERATED_ID_0"
+          ],
+          "currentIndex": 0
+        }
+      ],
+      "sizes": [
+        0.4562403927372095,
+        0.5437596072627905
+      ]
+    }
+  },
+  "mode": "globalFilters",
+  "master": {
+    "widgets": [
+      "PERSPECTIVE_GENERATED_ID_2",
+      "PERSPECTIVE_GENERATED_ID_3",
+      "PERSPECTIVE_GENERATED_ID_4",
+      "PERSPECTIVE_GENERATED_ID_6"
+    ],
+    "sizes": [
+      0.30408239877352156,
+      0.11690332556283606,
+      0.3290142756636424,
+      0.25
+    ]
+  },
+  "viewers": {
+    "PERSPECTIVE_GENERATED_ID_2": {
+      "version": "2.10.0",
+      "plugin": "Datagrid",
+      "plugin_config": {
+        "columns": {},
+        "editable": false,
+        "scroll_lock": false
+      },
+      "columns_config": {},
+      "settings": false,
+      "theme": "Pro Light",
+      "title": "Nation",
+      "group_by": [
+        "NOC"
+      ],
+      "split_by": [],
+      "columns": [
+        "ID"
+      ],
+      "filter": [],
+      "sort": [],
+      "expressions": {},
+      "aggregates": {
+        "ID": "distinct count"
+      },
+      "master": true,
+      "table": "olympics",
+      "linked": false,
+      "selectable": ""
+    },
+    "PERSPECTIVE_GENERATED_ID_3": {
+      "version": "2.10.0",
+      "plugin": "Datagrid",
+      "plugin_config": {
+        "columns": {},
+        "editable": false,
+        "scroll_lock": false
+      },
+      "columns_config": {},
+      "settings": false,
+      "theme": "Pro Light",
+      "title": "Sex",
+      "group_by": [
+        "Sex"
+      ],
+      "split_by": [],
+      "columns": [
+        "ID"
+      ],
+      "filter": [],
+      "sort": [],
+      "expressions": {},
+      "aggregates": {
+        "ID": "distinct count"
+      },
+      "master": true,
+      "table": "olympics",
+      "linked": false,
+      "selectable": ""
+    },
+    "PERSPECTIVE_GENERATED_ID_4": {
+      "version": "2.10.0",
+      "plugin": "Datagrid",
+      "plugin_config": {
+        "columns": {},
+        "editable": false,
+        "scroll_lock": false
+      },
+      "columns_config": {},
+      "settings": false,
+      "theme": "Pro Light",
+      "title": "Sport",
+      "group_by": [
+        "Sport"
+      ],
+      "split_by": [],
+      "columns": [
+        "ID"
+      ],
+      "filter": [],
+      "sort": [],
+      "expressions": {},
+      "aggregates": {
+        "ID": "distinct count",
+        "Sport": "dominant"
+      },
+      "master": true,
+      "table": "olympics",
+      "linked": false,
+      "selectable": ""
+    },
+    "PERSPECTIVE_GENERATED_ID_6": {
+      "version": "2.10.0",
+      "plugin": "Datagrid",
+      "plugin_config": {
+        "columns": {},
+        "editable": false,
+        "scroll_lock": false
+      },
+      "columns_config": {},
+      "settings": false,
+      "theme": "Pro Light",
+      "title": "Games",
+      "group_by": [
+        "Games"
+      ],
+      "split_by": [],
+      "columns": [
+        "ID"
+      ],
+      "filter": [],
+      "sort": [
+        [
+          "Games",
+          "desc"
+        ]
+      ],
+      "expressions": {},
+      "aggregates": {
+        "ID": "distinct count"
+      },
+      "master": true,
+      "table": "olympics",
+      "linked": false,
+      "selectable": ""
+    },
+    "PERSPECTIVE_GENERATED_ID_1": {
+      "version": "2.10.0",
+      "plugin": "X/Y Scatter",
+      "plugin_config": {},
+      "columns_config": {},
+      "settings": false,
+      "theme": "Pro Light",
+      "title": "Avg Height vs Weight by Sport",
+      "group_by": [
+        "Sport"
+      ],
+      "split_by": [],
+      "columns": [
+        "Height",
+        "Weight",
+        null,
+        "City",
+        null,
+        "Sport",
+        null
+      ],
+      "filter": [
+        [
+          "Height",
+          "==",
+          null
+        ]
+      ],
+      "sort": [
+        [
+          "Name",
+          "desc"
+        ]
+      ],
+      "expressions": {},
+      "aggregates": {
+        "Weight": "avg",
+        "Sport": "dominant",
+        "Height": "avg",
+        "Name": "distinct count"
+      },
+      "master": false,
+      "table": "olympics",
+      "linked": false
+    },
+    "PERSPECTIVE_GENERATED_ID_0": {
+      "version": "2.10.0",
+      "plugin": "Heatmap",
+      "plugin_config": {},
+      "columns_config": {},
+      "settings": false,
+      "theme": "Pro Light",
+      "title": "Age Distribution by Sport",
+      "group_by": [
+        "Age"
+      ],
+      "split_by": [
+        "Sport"
+      ],
+      "columns": [
+        "Name"
+      ],
+      "filter": [
+        [
+          "Medal",
+          "!=",
+          "NA"
+        ],
+        [
+          "Age",
+          "is not null",
+          null
+        ]
+      ],
+      "sort": [
+        [
+          "Name",
+          "col asc"
+        ]
+      ],
+      "expressions": {},
+      "aggregates": {
+        "Age": "avg"
+      },
+      "master": false,
+      "table": "olympics",
+      "linked": false
+    }
+  }
+}

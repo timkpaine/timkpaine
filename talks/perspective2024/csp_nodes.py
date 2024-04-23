@@ -2,14 +2,46 @@ import csp
 from csp import ts
 from datetime import timedelta
 from ipywidgets import HBox, VBox
-from superstore import machines, MACHINE_SCHEMA, usage, USAGE_SCHEMA, status, STATUS_SCHEMA, jobs, JOBS_SCHEMA
+from superstore import (
+    machines,
+    MACHINE_SCHEMA,
+    usage,
+    USAGE_SCHEMA,
+    status,
+    STATUS_SCHEMA,
+    jobs,
+    JOBS_SCHEMA,
+)
 from perspective import PerspectiveWidget, Table as PerspectiveTable
 from random import random
 from typing import List
 
+__all__ = (
+    "MACHINE_SCHEMA",
+    "machines",
+    "USAGE_SCHEMA",
+    "usage",
+    "STATUS_SCHEMA",
+    "status",
+    "JOBS_SCHEMA",
+    "jobs",
+    "machine_usage",
+    "machine_status",
+    "machine_jobs",
+    "push_to_perspective",
+    "push_to_perspective_table",
+)
+
+MACHINE_SCHEMA = dict(MACHINE_SCHEMA)
+USAGE_SCHEMA = dict(USAGE_SCHEMA)
+STATUS_SCHEMA = dict(STATUS_SCHEMA)
+JOBS_SCHEMA = dict(JOBS_SCHEMA)
+
 
 @csp.node
-def machine_usage(machines: List[dict], interval: timedelta = timedelta(seconds=5)) -> ts[List[dict]]:
+def machine_usage(
+    machines: List[dict], interval: timedelta = timedelta(seconds=5)
+) -> ts[List[dict]]:
     with csp.alarms():
         a_tick = csp.alarm(bool)
 
@@ -29,8 +61,11 @@ def machine_usage(machines: List[dict], interval: timedelta = timedelta(seconds=
         csp.output(s_machine_usage.values())
         csp.schedule_alarm(a_tick, interval, True)
 
+
 @csp.node
-def machine_status(usage: ts[List[dict]], interval: timedelta = timedelta(seconds=5)) -> ts[List[dict]]:
+def machine_status(
+    usage: ts[List[dict]], interval: timedelta = timedelta(seconds=5)
+) -> ts[List[dict]]:
     with csp.alarms():
         a_tick = csp.alarm(bool)
 
@@ -49,7 +84,9 @@ def machine_status(usage: ts[List[dict]], interval: timedelta = timedelta(second
 
 
 @csp.node
-def machine_jobs(machines: List[dict], interval: timedelta = timedelta(seconds=5)) -> ts[List[dict]]:
+def machine_jobs(
+    machines: List[dict], interval: timedelta = timedelta(seconds=5)
+) -> ts[List[dict]]:
     with csp.alarms():
         a_tick = csp.alarm(bool)
 
@@ -65,10 +102,12 @@ def machine_jobs(machines: List[dict], interval: timedelta = timedelta(seconds=5
         csp.output(ret)
         csp.schedule_alarm(a_tick, interval, True)
 
+
 @csp.node
 def push_to_perspective(data: ts[list], widget: PerspectiveWidget):
     if csp.ticked(data):
         widget.update(data)
+
 
 @csp.node
 def push_to_perspective_table(data: ts[list], table: PerspectiveTable):
