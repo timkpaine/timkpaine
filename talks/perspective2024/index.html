@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective/dist/cdn/perspective.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer/dist/cdn/perspective-viewer.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer-datagrid/dist/cdn/perspective-viewer-datagrid.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer-d3fc/dist/cdn/perspective-viewer-d3fc.js"></script>
+    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer/dist/css/pro.css"/>
+    <style>
+      body {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      body > * {
+        height: 50%;
+      }
+      div.row {
+        display: flex;
+        flex-direction: row;
+      }
+      div.row > * {
+        width: 50%;
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <div class="row">
+      <perspective-viewer id="machines"></perspective-viewer>
+      <perspective-viewer id="usage"></perspective-viewer>
+    </div>
+    <div class="row">
+      <perspective-viewer id="status"></perspective-viewer>
+      <perspective-viewer id="jobs"></perspective-viewer>
+    </div>
+  </body>
+
+
+  <script type="module">
+    import perspective from "https://cdn.jsdelivr.net/npm/@finos/perspective/dist/cdn/perspective.js";
+
+    window.addEventListener("DOMContentLoaded", async function () {
+        const websocket = perspective.websocket("ws://localhost:8080/websocket");
+        const worker = perspective.worker();
+        ["machines", "usage", "status", "jobs"].forEach(async (table) => {
+          document.getElementById(table).load(websocket.open_table(table));
+        });
+
+        document.getElementById("status").restore({sort: [["last_update", "desc"]]});
+        document.getElementById("jobs").restore({sort: [["start_time", "desc"]]});
+
+    });
+</script>
+</html>
