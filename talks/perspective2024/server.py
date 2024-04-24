@@ -1,7 +1,6 @@
 import asyncio
 import csp
 import logging
-import os.path
 import threading
 import uvicorn
 from csp_nodes import machine_usage, machine_status, machine_jobs, push_to_perspective_table, machines, MACHINE_SCHEMA, USAGE_SCHEMA, STATUS_SCHEMA, JOBS_SCHEMA
