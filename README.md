@@ -27,7 +27,7 @@ I have taught in the Computer Science department at Columbia University since 20
 | | | | |
 |:--:|:--:|:--:|:--:|
 | *High Performance Data Visualization for the Web* | **PyCon Italia 2024** | [link to presentation](https://tim.paine.nyc/talks/perspective2024.html#/), [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) | |
-| *Jupyter Notebooks for Print Media* | **PyCon DE / PyData Berlin 2024** | | |
+| *Jupyter Notebooks for Print Media* | **PyCon DE / PyData Berlin 2024** | [link to presentation](https://tim.paine.nyc/talks/nbprint2024.html#/) | |
 | *High Performance Data Visualization for the Web* | **PyCon DE / PyData Berlin 2024** | [link to presentation](https://tim.paine.nyc/talks/perspective2024.html#/), [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) | |
 | *Building FPGA-based Machine Learning Accelerators in Python* | **PyCon US 2024** | | |
 | *Visualizing Live Data Pipelines* | **JupyterCon 2023**  | [link to presentation](https://tim.paine.nyc/talks/jupytercon2023.html#/) |
