@@ -7,7 +7,7 @@
 
 
 ## Experience
-My background is building high performance, full stack applications for front office business users and developers, focusing on streaming data, analytics, and machine learning. 
+My background is building high performance, full stack applications for front office business users and developers, focusing on streaming data, analytics, and machine learning.
 
 You can find my resume [here](https://tim.paine.nyc/rsc/TPCV.pdf).
 
@@ -26,12 +26,12 @@ I have taught in the Computer Science department at Columbia University since 20
 
 | | | | |
 |:--:|:--:|:--:|:--:|
-| *High Performance Data Visualization for the Web* | **PyCon Italia 2024** | | |
+| *High Performance Data Visualization for the Web* | **PyCon Italia 2024** | [link to presentation](https://tim.paine.nyc/talks/perspective2024.html#/), [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) | |
 | *Jupyter Notebooks for Print Media* | **PyCon DE / PyData Berlin 2024** | | |
-| *High Performance Data Visualization for the Web* | **PyCon DE / PyData Berlin 2024** | | |
+| *High Performance Data Visualization for the Web* | **PyCon DE / PyData Berlin 2024** | [link to presentation](https://tim.paine.nyc/talks/perspective2024.html#/), [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) | |
 | *Building FPGA-based Machine Learning Accelerators in Python* | **PyCon US 2024** | | |
 | *Visualizing Live Data Pipelines* | **JupyterCon 2023**  | [link to presentation](https://tim.paine.nyc/talks/jupytercon2023.html#/) |
 | *Production Notebooks* | **JupyterCon 2020**  | [link to presentation](https://tim.paine.nyc/talks/jupytercon2020.html#/) | |
 | *Beyond Spreadsheets* | **NYC Data Council 2020** | [recording](https://youtu.be/PYTVU4A_3Kc) | w/ Jeff Sternberg ([@sternb0t](https://github.com/sternb0t)) <br> Technical Director Google  |
-| *JPMorgan's Python training guide for analysts and traders* | **efinancialcareers - 2020** | [link](https://www.efinancialcareers.com/news/2020/06/jpmorgan-python-training-analysts-and-traders) | | 
+| *JPMorgan's Python training guide for analysts and traders* | **efinancialcareers - 2020** | [link](https://www.efinancialcareers.com/news/2020/06/jpmorgan-python-training-analysts-and-traders) | |
 | *JPMorgan's requirement for new staff: coding lessons* | **Financial Times - 2018** | [link](https://www.ft.com/content/4c17d6ce-c8b2-11e8-ba8f-ee390057b8c9) | |
