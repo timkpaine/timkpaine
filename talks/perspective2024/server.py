@@ -41,7 +41,6 @@ def make_perspective_app(manager: PerspectiveManager):
 
     app = FastAPI()
     app.add_api_websocket_route("/websocket", websocket_handler)
-    print("mounting static files")
     app.mount("/", StaticFiles(directory=".", html=True), name="static")
 
     app.add_middleware(
