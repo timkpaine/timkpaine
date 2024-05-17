@@ -44,19 +44,331 @@
                 <section>
                     <section data-markdown data-separator="---">
                         <script type="text/template">
+                            <img src="assets/img/fpga2024/qr.png" width=400 />
+
+                            ---
+
                             ## Talk Overview
 
-                            Background and Motivation
+                            Background
                             <!-- .element: class="fragment" data-fragment-index="1" -->
 
-                            Example 
+                            Motivation
                             <!-- .element: class="fragment" data-fragment-index="2" -->
 
-                            State of Open HW Dev
+                            Examples - Precanned and From Scratch
                             <!-- .element: class="fragment" data-fragment-index="3" -->
 
-                            Future Prospects
+                            Ecosystem and State of Open HW Dev
                             <!-- .element: class="fragment" data-fragment-index="4" -->
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Background
+
+                            How many people have programmed for:
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            CPU?
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            GPU?
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            Raspberry Pi / Arduino?
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            FPGA?
+                            <!-- .element: class="fragment" data-fragment-index="5" -->
+
+                            ---
+
+                            ## Glossary
+
+                            ---
+
+                            CPU, GPU
+
+                            **FPGA** - Field Programmable Gate Array
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            **ASIC** - Application Specific Integrated Circuit
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            Accelerators
+
+                            Cryptography, Compression, Network Processing
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Graphics, Motion, Neural Engine, AI
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ASICs / CoProcessors
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            FPGA
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            SmartNIC - Smart Network Interface Controller
+                            <!-- .element: class="fragment" data-fragment-index="5" -->
+
+                            DPU - Data Processing Unit
+                            <!-- .element: class="fragment" data-fragment-index="6" -->
+
+                            ---
+
+                            SoC - System-on-chip
+
+                            ---
+
+                            <div style="display: flex; flex-direction: column; align-items: center">
+                                <div style="display: flex; flex-direction: row">
+                                    <img style="margin: 0;" src="assets/img/fpga2024/apple1.jpg" width=400 />
+                                    <img style="margin: 0;" src="assets/img/fpga2024/apple2.jpg" width=400 />
+                                </div>
+                                <div style="display: flex; flex-direction: row">
+                                    <img style="margin: 0;" src="assets/img/fpga2024/apple3.jpg" width=400 />
+                                    <img style="margin: 0;" src="assets/img/fpga2024/apple4.jpg" width=400 />
+                                </div>
+
+                            </div>
+
+                            &#169; Apple Inc.
+
+                            ---
+
+                            ## FPGA and SoC Manufacturers
+
+                            | | | |
+                            |:--|:--|:--|
+                            | <img style="margin: 0;" src="assets/img/fpga2024/altera.png" width=150 /> | <img style="margin: 0;" src="assets/img/fpga2024/intel.svg" width=100 />   | <span style="font-size: 30px;">Agilex, Stratix, Arria, Cyclone</span> |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/xilinx.png" width=150 /> | <img style="margin: 0;" src="assets/img/fpga2024/amd.png" width=150 />   | <span style="font-size: 30px;">Virtex, Kintex, Artix, Spartan, Zynq</span> |
+                            | <img style="margin: 0; background-color: black;" src="assets/img/fpga2024/lattice.png" width=150 /> |   | <span style="font-size: 30px;">iCE40</span> |
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            | | | |
+                            |:--|:--|:--|
+                            | <img style="margin: 0;" src="assets/img/fpga2024/microsemi.png" width=150 /> | <img style="margin: 0;" src="assets/img/fpga2024/quicklogic.jpg" width=150 /> | <img style="margin: 0;" src="assets/img/fpga2024/gowin.png" width=150 /> |
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            and more...
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            ### Board and Module Manufacturers
+
+                            | | | |
+                            |:--:|:--:|:--:|
+                            | <img style="margin: 0;" src="assets/img/fpga2024/alinx.png" width=150 /> | <img style="margin: 0;" src="assets/img/fpga2024/antmicro.png" width=250 /> | <img style="margin: 0;" src="assets/img/fpga2024/digilent.png" width=200 /> |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/enclustra.png" width=250 /> | <img style="margin: 0;" src="assets/img/fpga2024/terasic.png" width=150 /> | <img style="margin: 0;" src="assets/img/fpga2024/numato.png" width=250 /> |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/qmtech.png" width=75 /> | <img style="margin: auto;" src="assets/img/fpga2024/machdyne.png" width=150 /> | <img style="margin: 0;" src="assets/img/fpga2024/sipeed.png" width=150 /> |
+
+                            and more...
+
+                            ---
+
+                            ### Developing hardware designs
+
+                            Development
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Simulation and Testing (Verification)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Sythesis
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            Process Design
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            SoC Building (Part of Development)
+                            <!-- .element: class="fragment" data-fragment-index="5" -->
+
+                            ---
+
+                            ## Development
+
+                            | | |
+                            |:--:|:--|
+                            | | Verilog |
+                            | | SystemVerilog |
+                            | | VHDL |
+                            | | [SystemC](https://systemc.org) |
+                            | | [Chisel](https://www.chisel-lang.org)) |
+                            | | [Clash](https://clash-lang.org) |
+                            | | [MyHDL](https://www.myhdl.org) |
+                            | | [Amaranth](https://github.com/amaranth-lang/amaranth) |
+                            | | [migen](https://github.com/m-labs/migen) |
+
+                            ---
+
+                            ### Verification
+
+                            | | | |
+                            |:--:|:--|:--|
+                            | <img style="margin: 0;" src="assets/img/fpga2024/cadence.png" width=130 /> | Xcelium/Jasper SuperLint | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/siemens.png" width=130 /> | ModelSim/QuestaSim/QuestaLint | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/synopsys.png" width=130 /> | VCS/SpyGlass | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/altera.png" width=130 /> | Quartus | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/xilinx.png" width=130 /> | Vivado | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/verilator.png" width=60 /> | Verilator | OSS |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/cocotb.svg" width=80 /> | cocotb | OSS |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/verible.png" width=50 /> | Verible | OSS |
+
+                            ---
+
+                            ## Synthesis
+
+                            | | | |
+                            |:--:|:--|:--|
+                            | <img style="margin: 0;" src="assets/img/fpga2024/xilinx.png" width=130 /> | Vivado | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/altera.png" width=130 /> | Quartus | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/cadence.png" width=130 /> | Stratus HLS | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/synopsys.png" width=130 /> | Synphony HLS | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/xilinx.png" width=130 /> | Vitis HLS | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/altera.png" width=130 /> | Intel HLS | P |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/yosys.png" width=130 /> | yosys | OSS |
+
+                            ---
+
+                            ## Process Design
+
+                            | | | |
+                            |:--:|:--:|:--:|
+                            | <img style="margin: 0;" src="assets/img/fpga2024/google.svg" width=200 />  | <img style="margin: 0;" src="assets/img/fpga2024/skywater.svg" width=200 /> | <img style="margin: 0;" src="assets/img/fpga2024/cadence.png" width=200 /> |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/efabless.png" width=130 />  | <img style="margin: 0; background-color: black;" src="assets/img/fpga2024/precision.png" width=130 /> | <img style="margin: 0;" src="assets/img/fpga2024/antmicro.png" width=150 /> |
+
+                            90nm+ (compare to Apple M4 on TSMC 2nm)
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            ---
+
+                            ## SoC Design
+
+                            | | |
+                            |:--:|:--|
+                            | | [Amaranth](https://github.com/amaranth-lang/amaranth) |
+                            | | [LiteX](https://github.com/enjoy-digital/litex) |
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            Perspectives?
+
+                            (We'll come back at the end)
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            ---
+
+                            So what can you actually do in
+
+                            ---
+
+                            ~~2015~~
+
+                            ---
+
+                            *2020*
+
+                            ---
+
+                            **2024**
+
+                            A lot!
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            ---
+
+                            FPGA Development boards?
+
+                            As expensive as always!
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            \$500+
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            ### "School Boards" - $300
+
+                            | | |
+                            |:--:|:--|
+                            | <img style="margin: 0;" src="assets/img/fpga2024/arty.png" width=200 /> | [Digilent Arty A7](https://digilent.com/shop/arty-a7-100t-artix-7-fpga-development-board/) |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/de1.jpg" width=260 />| [Terasic DE1](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=165&No=836#contents)
+
+                            ---
+
+                            But this is PyCon, and your the talk description said <$200!
+
+                            ---
+
+                            So let's talk about
+
+                            <img style="margin: 0;" src="assets/img/fpga2024/pynq.png" width=200 />
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            <img style="margin: 0;" src="assets/img/fpga2024/pynq.png" width=200 />
+
+                            ---
+
+                            Started ~2016 by Xilinx
+
+                            Zynq (FPGA + Arm) + Python
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            [Docs](https://pynq.readthedocs.io/en/latest/) / [Forum](https://discuss.pynq.io/)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            <img style="margin: 0;" src="assets/img/fpga2024/zynq_block_diagram.jpg" width=800 />
+
+                            &#169; Advanced Micro Devices, Inc.
+
+                            ---
+
+                            | | |
+                            |:--:|:--:|
+                            | <img style="margin: 0;" src="assets/img/fpga2024/pynq_board.jpg" width=200 />| <img style="margin: 0;" src="assets/img/fpga2024/tul.png" width=200 /> |
+
+                            [$129](https://www.newark.com/tul-corporation/1m1-m000127dev/tul-pynq-z2/dp/13AJ3027?st=pynq%20z2)
+
+                            ---
+
+                            ## tl;dr
+
+                            ```python
+                            import numpy as np
+                            from pynq import allocate, Overlay
+
+                            ol = Overlay('example.bit')
+
+                            input_buffer = allocate(shape=(5,), dtype=np.uint32)
+                            output_buffer = allocate(shape=(5,), dtype=np.uint32)
+
+                            for i in range(5): input_buffer[i] = i
+
+                            ol.axi_dma.sendchannel.transfer(input_buffer)
+                            ol.axi_dma.recvchannel.transfer(output_buffer)
+                            ol.axi_dma.sendchannel.wait()
+                            ol.axi_dma.recvchannel.wait()
+                            ```
+
                         </script>
                     </section>
                 </section>
