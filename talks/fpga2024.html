@@ -5,7 +5,7 @@
         <title>Building FPGA-based Machine Learning Accelerators in Python</title>
         <link rel="stylesheet" href="assets/dist/reveal.css">
         <link rel="stylesheet" href="assets/dist/theme/white.css" id="theme">
-        <link rel="stylesheet" href="assets/plugin/highlight/monokai.css">
+        <link rel="stylesheet" href="assets/plugin/highlight/stackoverflow-light.css">
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBFEVM4RY"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
@@ -100,7 +100,7 @@
 
                             ---
 
-                            Accelerators
+                            ## Accelerators
 
                             Cryptography, Compression, Network Processing
                             <!-- .element: class="fragment" data-fragment-index="1" -->
@@ -181,10 +181,10 @@
                             Simulation and Testing (Verification)
                             <!-- .element: class="fragment" data-fragment-index="2" -->
 
-                            Sythesis
+                            Synthesis
                             <!-- .element: class="fragment" data-fragment-index="3" -->
 
-                            Process Design
+                            IC Design / VLSI
                             <!-- .element: class="fragment" data-fragment-index="4" -->
 
                             SoC Building (Part of Development)
@@ -194,17 +194,17 @@
 
                             ## Development
 
-                            | | |
-                            |:--:|:--|
-                            | | Verilog |
-                            | | SystemVerilog |
-                            | | VHDL |
-                            | | [SystemC](https://systemc.org) |
-                            | | [Chisel](https://www.chisel-lang.org)) |
-                            | | [Clash](https://clash-lang.org) |
-                            | | [MyHDL](https://www.myhdl.org) |
-                            | | [Amaranth](https://github.com/amaranth-lang/amaranth) |
-                            | | [migen](https://github.com/m-labs/migen) |
+                            Verilog, SystemVerilog, VHDL
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            [SystemC](https://systemc.org)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            [Chisel](https://www.chisel-lang.org), [Clash](https://clash-lang.org), [MyHDL](https://www.myhdl.org)
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            [Amaranth](https://github.com/amaranth-lang/amaranth), [migen](https://github.com/m-labs/migen)
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
 
                             ---
 
@@ -237,14 +237,14 @@
 
                             ---
 
-                            ## Process Design
+                            ## IC Design
 
                             | | | |
                             |:--:|:--:|:--:|
                             | <img style="margin: 0;" src="assets/img/fpga2024/google.svg" width=200 />  | <img style="margin: 0;" src="assets/img/fpga2024/skywater.svg" width=200 /> | <img style="margin: 0;" src="assets/img/fpga2024/cadence.png" width=200 /> |
                             | <img style="margin: 0;" src="assets/img/fpga2024/efabless.png" width=130 />  | <img style="margin: 0; background-color: black;" src="assets/img/fpga2024/precision.png" width=130 /> | <img style="margin: 0;" src="assets/img/fpga2024/antmicro.png" width=150 /> |
 
-                            90nm+ (compare to Apple M4 on TSMC 2nm)
+                            90nm+ process
                             <!-- .element: class="fragment" data-fragment-index="1" -->
 
                             ---
@@ -253,8 +253,8 @@
 
                             | | |
                             |:--:|:--|
-                            | | [Amaranth](https://github.com/amaranth-lang/amaranth) |
-                            | | [LiteX](https://github.com/enjoy-digital/litex) |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/amaranth.png" width=120 /> | [Amaranth](https://github.com/amaranth-lang/amaranth) |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/litex.png" width=200 />| [LiteX](https://github.com/enjoy-digital/litex) |
 
                         </script>
                     </section>
@@ -274,10 +274,6 @@
                             ---
 
                             ~~2015~~
-
-                            ---
-
-                            *2020*
 
                             ---
 
@@ -368,6 +364,541 @@
                             ol.axi_dma.sendchannel.wait()
                             ol.axi_dma.recvchannel.wait()
                             ```
+
+                            ---
+
+                            That's pretty cool...
+
+                            But what if I want to raise VC money?
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            (Or get accepted to PyCon?)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            <img style="margin: 0;" src="assets/img/fpga2024/meme.jpg" width=500 />
+
+                            ---
+
+                            What do we need, and can we get by with just Python?
+
+                            ---
+
+                            ## Modelling
+
+                            <img src="assets/img/fpga2024/pytorch.png" width=200 />
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            <br />
+
+                            <img src="assets/img/fpga2024/onnx.png" width=200 />
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            <br />
+
+                            <img src="assets/img/fpga2024/brevitas.svg" width=200 />
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            <br />
+
+                            <img src="assets/img/fpga2024/finn.png" width=180 />
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            ## Synthesis
+
+                            We'll use Xilinx's Vivado for Synthesis (free)
+
+                            Total cost of software:
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            $0
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            <img style="margin: 0;" src="assets/img/fpga2024/meme2.jpg" width=500 />
+
+                            ---
+
+                            <img style="margin: 0;" src="assets/img/fpga2024/meme3.jpg" width=500 />
+
+                            ---
+
+                            Let's look at code
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Example Model - from scratch
+
+                            I don't trust examples, so let's build our own from scratch
+
+                            ---
+
+                            Let's predict a sine wave
+
+                            Apart from errors due to quantization and sampling,
+
+                            we should be able to do this with a trivial model
+
+                            <img class="shadow" style="margin: 0;" src="assets/img/fpga2024/sine.png" width=800 />
+
+                            ---
+
+                            ## Model
+
+                            ```python
+                            class Net(Module):
+                                def __init__(self, n_neurons, input_shape):
+                                    super(Net, self).__init__()
+                                    self.fc1 = Linear(input_shape, n_neurons)
+                                    self.fc2 = Linear(n_neurons, 1)
+
+                                def forward(self, x):
+                                    out = self.fc1(x)
+                                    out = self.fc2(out)
+                                    return out
+                            ```
+
+                            ---
+
+                            ## Quantization-aware Model
+
+                            ```python
+                            class QuantNet(Module):
+                                def __init__(self, n_neurons, input_shape):
+                                    super(QuantNet, self).__init__()
+                                    self.inp = QuantIdentity(bit_width=8)
+                                    self.fc1 = QuantLinear(input_shape, n_neurons)
+                                    self.fc2 = QuantLinear(n_neurons, 1)
+
+                                def forward(self, x):
+                                    out = self.quant_inp(x)
+                                    out = self.fc1(out)
+                                    out = self.fc2(out)
+                                    return out
+                            ```
+
+                            ---
+
+                            ## Torch -> QONNX
+
+                            ```python
+                            from brevitas.export import export_qonnx
+
+                            export_qonnx(
+                                my_trained_model,
+                                torch.randn(1, 20),
+                                "mymodel.onnx",
+                            )
+                            ```
+
+                            ---
+
+                            ## QONNX -> FINN
+
+                            ```python
+                            cfg = DataflowBuildConfig(
+                                output_dir="./build",
+                                mvau_wwidth_max=80,
+                                target_fps=1000000,
+                                synth_clk_period_ns=10.0,
+                                board="Pynq-Z1",
+                                shell_flow_type=ShellFlowType.VIVADO_ZYNQ,
+                                steps=steps,
+                                verify_steps=[],
+                            )
+                            ```
+
+                            ---
+
+                            ```python
+                            steps=[
+                                "step_qonnx_to_finn", "step_tidy_up", "step_streamline",
+                                "step_convert_to_hw", "step_create_dataflow_partition",
+                                "step_specialize_layers",
+                                "step_target_fps_parallelization",
+                                "step_apply_folding_config", "step_minimize_bit_width",
+                                "step_hw_codegen", "step_hw_ipgen", "step_set_fifo_depths",
+                                "step_out_of_context_synthesis",
+                                "step_synthesize_bitfile",
+                                "step_make_pynq_driver",
+                                "step_deployment_package",
+                            ]
+
+                            build_dataflow_cfg("./build/mymodel.onnx", cfg)
+                            ```
+
+                            ---
+
+                            ## FINN Outputs
+
+                            Model bitfile we can load on FPGA
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Python/numpy model driver
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Some utilities
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            **NOTE** Some aspects of the model might not be convertible to hardware (e.g. fixed->floating multiplier)
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            ```python
+                            from pynq.pl_server.device import Device
+                            from driver_base import FINNExampleOverlay
+
+                            accel = FINNExampleOverlay(
+                                bitfile_name="finn-accel.bit",
+                                platform="zynq-iodma",
+                                io_shape_dict=io_shape_dict,
+                                batch_size=1,
+                                device=Device.devices[0],
+                            )
+                            ```
+
+                            ---
+
+                            ```python
+                            test = []
+                            for _ in range(len(y_test) - 20):
+                                batch = y_test[_:_+batch_size].reshape(1, 20)
+
+                                predicted_value = accel.execute(batch)
+
+                                test.append(predicted_value[0])
+                            ```
+
+                            ---
+
+                            <img class="shadow" style="margin: 0;" src="assets/img/fpga2024/sine_pred.png" width=1000 />
+
+
+                            ---
+
+                            Can we do a little better?
+
+                            <img style="margin: 0;" src="assets/img/fpga2024/sine_harm.png" width=800 />
+                            <!-- .element: class="fragment shadow" data-fragment-index="1" -->
+
+                            ---
+
+                            <img class="shadow" style="margin: 0;" src="assets/img/fpga2024/sine_harm_pred.png" width=1000 />
+
+                            ---
+
+                            ## Example Model - MNIST
+
+                            Let's try an off-the-shelf Xilinx example
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            <img src="assets/img/fpga2024/finn-examples.png" width=500 />
+                            <!-- .element: class="fragment shadow" data-fragment-index="1" -->
+
+
+                            [xilinx/finn-examples](https://github.com/xilinx/finn-examples)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            [prebuilt accelerators](https://github.com/xilinx/finn-examples?tab=readme-ov-file#example-neural-network-accelerators)
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+
+                            ## MNIST
+
+                            Let's try a live demo too!
+
+                            ---
+
+                            I'm convinced!
+
+                            But this is still a bit of a "toy"
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            What's next?
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            | | | |
+                            |:--:|:--:|:--:|
+                            | <img style="margin: 0;" src="assets/img/fpga2024/rpi.jpg" width=200 /> | <img style="margin: 0;" src="assets/img/fpga2024/pc.jpg" width=200 /> | <img style="margin: 0;" src="assets/img/fpga2024/server.jpg" width=200 /> |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/gpu-small.jpg" width=100 /> | <img style="margin: 0;" src="assets/img/fpga2024/titan.png" width=200 /> | <img style="margin: 0;" src="assets/img/fpga2024/h100.jpg" width=200 /> |
+                            | <img style="margin: 0;" src="assets/img/fpga2024/pynq_board.jpg" width=250 /> | <span style="font-size: 200px">?</span> | <img style="margin: 0;" src="assets/img/fpga2024/versal.png" width=300 /> |
+
+                            ---
+
+                            ## Costs
+
+                            HW Costs
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Software Costs
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Other Tooling Costs
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            (Good proxy for impact of open source)
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            | | | |
+                            |:--:|:--:|:--:|
+                            | `$40` / `$0` | `$500` / `$0` | `$10,000` / `$0*` |
+                            | `$150` / `$0` | `$1,000`  | `$30,000` / `$0*` |
+                            | `$150` / `$0` | ? | `$15,000` / `$5,000/yr` |
+
+                            ---
+
+                            ## Why?
+
+                            For our bigger and higher performance accelerators, this tier has the
+                            combination of features and size we need
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            But more importantly for the ecosystem...
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            This is the sweet spot for Open Source (and many other things)
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            This is where **Power Users** live
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            ## My Requirements
+
+                            200k+ LUTs on FPGA
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            PCIe/Lightning
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Network
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            1GB+ RAM
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            `<$1,000` (ideally `<$500`)
+                            <!-- .element: class="fragment" data-fragment-index="5" -->
+
+                            ---
+
+                            As of 2024, it exists!
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Several comparable models, from providers earlier in the presentation
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            `$300` - `$1,500` range
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            Pretty powerful!
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            <img src="assets/img/fpga2024/nitefury.png" width=250 />
+
+                            <img src="assets/img/fpga2024/baseboard.jpg" width=500 />
+
+                            [NiteFury II](https://rhsresearch.com)
+
+                            [LiteX Acorn Baseboard](https://github.com/enjoy-digital/litex-acorn-baseboard)
+
+                            ---
+
+                            But how do I program PCIe / Network / RAM in addition to my hardware?
+
+                            Can I do it in **Python**?
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            <img src="assets/img/fpga2024/litex.png" width=500 />
+
+                            ---
+
+                            [LiteX](https://github.com/enjoy-digital/litex) and [Amaranth](https://amaranth-lang.org/docs/amaranth/latest/) are tools for building SoCs
+
+                            **Python!**
+
+                            ---
+
+                            Can represent pure hardware (HDL)
+
+                            Can represent complicated systems, on-chip networks, etc
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Can link together separate IP (e.g. connect to an existing Verilog project)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            [litex-hub/litex-boards](https://github.com/litex-hub/litex-boards)
+
+                            <img src="assets/img/fpga2024/litex-banner.jpg" width=800 />
+
+                            ---
+
+                            ```python
+                            class BaseSoC(SoCCore):
+                                def __init__(self, sys_clk_freq=100e6, **kwargs):
+                                    # DDR3 SDRAM
+                                    self.ddrphy = s7ddrphy.A7DDRPHY(
+                                        platform.request("ddram"),
+                                        memtype="DDR3",
+                                        nphases=4,
+                                        sys_clk_freq=sys_clk_freq,
+                                        iodelay_clk_freq=200e6)
+                                    self.add_sdram("sdram",
+                                        phy=self.ddrphy,
+                                        module=MT41K512M16(sys_clk_freq, "1:4"),
+                                        l2_cache_size=kwargs.get("l2_size", 8192)
+                                    )
+
+                            ```
+
+                            ---
+
+                            ```python
+                            # PCIe
+                            self.comb += platform.request("pcie_clkreq_n").eq(0)
+                            self.pcie_phy = S7PCIEPHY(platform,
+                                platform.request("pcie_x4"),
+                                data_width=128,
+                                bar0_size =0x20000)
+                            self.add_pcie(phy=self.pcie_phy, ndmas=1, address_width=64)
+                            platform.add_period_constraint(
+                                self.crg.cd_sys.clk,
+                                1e9/sys_clk_freq,
+                            )
+                            ```
+
+                            ---
+
+                            ## User designs
+
+                            ```python
+                            self.leds = LedChaser(
+                                pads=platform.request_all("user_led"),
+                                sys_clk_freq=sys_clk_freq
+                            )
+                            ```
+
+                            ---
+
+                            Integrate with existing hardware code (e.g. FINN-generated code)
+
+                            Write new hardware code in `migen`, `amaranth`, or traditional HDLs like Verilog
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            System Integration and on-chip Networks
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Build tool integration (e.g. Vivado, Yosys)
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            ---
+
+                            150+ boards
+
+                            [Fantastic Tutorials](https://github.com/litex-hub/fpga_101)
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            [Lots of demos and examples (and talks!)](https://youtu.be/MkVX_mh5dOU)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            No demo today :-(
+
+                            Run out of time and doesn't run on my Macbook
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            ... maybe next year ;-)
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            ---
+
+                            ## Takeaway
+
+                            Just like you can get a GPU and start using it for programming tasks
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            You can get an FPGA and start using it
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Harder to do, more domain knowledge
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            Getting easier and easier
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+
+                        </script>
+                    </section>
+                </section>
+                <section>
+                    <section data-markdown data-separator="---">
+                        <script type="text/template">
+                            ## Ecosystem Thoughts
+
+                            Never been easier or more accessible
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            Major companies like Xilinx/AMD are active in OSS
+                            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+                            Not there yet, but momentum is growing and 10 year change has been **dramatic**
+                            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+                            Python-based "on ramps" to getting started in hardware development
+                            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+                            ---
+
+                            OSS tools like Verilator and cocotb are industry-standard
+
+
+                            Ecosystem is really exciting
+                            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+                            ---
+
+                            <img style="margin: 0;" src="assets/img/fpga2024/meme2.jpg" width=500 />
+
+                            ---
+
+                            ### 10 Projects and Orgs To Follow
+
+                            | | | | |
+                            |:--:|:--:|:--:|:--:|
+                            | <a href="https://www.yosyshq.com/about"><img style="margin: 0;" src="assets/img/fpga2024/yosys.png" width=150 /></a> | <a href="https://amaranth-lang.org/docs/amaranth/latest/"><img style="margin: 0;" src="assets/img/fpga2024/amaranth.png" width=50 />Amaranth</a> | <a href="https://www.chipsalliance.org"><img style="margin: 0;" src="assets/img/fpga2024/chips_alliance.svg" width=150 /></a> | <a href="https://fastmachinelearning.org"><img style="margin: 0;" src="assets/img/fpga2024/fastml.png" width=50 />FastML</a>  |
+                            | <a href="https://fastmachinelearning.org/hls4ml/"><img style="margin: 0;" src="assets/img/fpga2024/hls4ml.png" width=150 /></a>  | <a href="https://github.com/pytorch/glow"><img style="margin: 0;" src="assets/img/fpga2024/glow.svg" width=150 /></a> |<a href="https://github.com/google/xls"><img style="margin: 0;" src="assets/img/fpga2024/xls.svg" width=150 /></a>  | <a href="https://github.com/sld-columbia/esp"><img style="margin: 0;" src="assets/img/fpga2024/esp.png" width=50 />ESP</a> |
+                            | <a href="https://fastmachinelearning.org"><img style="margin: 0;" src="assets/img/fpga2024/fossi.svg" width=150 /></a> | <a href="https://tinytapeout.com" style="font-size: 30px;"><img style="margin: 0;" src="assets/img/fpga2024/tinytapeout.png" width=50 />Tiny Tapeout</a> | | |
+
+
+
 
                         </script>
                     </section>
