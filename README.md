@@ -15,7 +15,7 @@ You can find my resume [here](https://tim.paine.nyc/rsc/TPCV.pdf).
 |:--:|:--:|:--:|:--:|
 | <img width="75" src="./static/img/cubist.png" alt="Cubist"></img> | [Point72 - Cubist](https://www.point72.com/cubist/) | Central Research Team | 2022- |
 | <img width="75" src="./static/img/columbia.png" alt="Columbia"></img> | [Columbia University](https://www.columbia.edu/) | Associate in Computer Science | 2015- |
-| <img width="75" src="./static/img/iex.png" alt="IEX"></img> | [IEX](https://iextrading.com) | Head of Software Engineeering, [IEX Cloud](https://iexcloud.io) | 2020-2021 |
+| <img width="75" src="./static/img/iex.png" alt="IEX"></img> | [IEX](https://iextrading.com) | Head of Software Engineeering, Cloud | 2020-2021 |
 | <img width="75" src="./static/img/jpmorgan.png" alt="J.P. Morgan"></img> | [J.P. Morgan](https://www.jpmorgan.com/global) | Vice President, Athena Research | 2016-2020 |
 | <img width="75" src="./static/img/maystreet.png" alt="MayStreet"></img> | [MayStreet](https://maystreet.com) |  Software Engineer | 2015-2016 |
 
