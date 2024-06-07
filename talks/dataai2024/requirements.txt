@@ -1,0 +1,9 @@
+csp
+fastapi
+orjson
+perspective-python
+pyarrow
+pyspark
+superstore
+uvicorn
+websocket-client

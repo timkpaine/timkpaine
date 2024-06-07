@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <script type="module" src="./static/perspective.js"></script>
+    <script type="module" src="./static/perspective-viewer.js"></script>
+    <script type="module" src="./static/perspective-viewer-datagrid.js"></script>
+    <script type="module" src="./static/perspective-viewer-d3fc.js"></script>
+    <link rel="stylesheet" crossorigin="anonymous" href="./static/pro.css"/>
+    <style>
+      body {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      body > * {
+        height: 50%;
+      }
+      div.row {
+        display: flex;
+        flex-direction: row;
+      }
+      div.row > * {
+        width: 50%;
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <div class="row">
+      <perspective-viewer id="machines"></perspective-viewer>
+      <perspective-viewer id="usage"></perspective-viewer>
+    </div>
+    <div class="row">
+      <perspective-viewer id="status"></perspective-viewer>
+      <perspective-viewer id="jobs"></perspective-viewer>
+    </div>
+  </body>
+
+
+  <script type="module">
+    import perspective from "./static/perspective.js";
+
+    window.addEventListener("DOMContentLoaded", async function () {
+        const websocket = perspective.websocket("ws://localhost:8080/data");
+        const worker = perspective.worker();
+        ["machines", "usage", "status", "jobs"].forEach(async (table) => {
+          document.getElementById(table).load(websocket.open_table(table));
+        });
+
+        document.getElementById("status").restore({
+          plugin: "X Bar",
+          group_by: ["status"],
+          columns: ["machine_id"],
+          aggregates: {"status": "last"},
+          sort: [["last_update", "desc"]]
+        });
+        document.getElementById("jobs").restore({
+          group_by: ["machine_id"],
+          columns: ["job_id", "name", "units", "start_time", "end_time"],
+          aggregates: {job_id: "count", name: "last", units: "sum", start_time: "last", end_time: "last"},
+        });
+
+    });
+</script>
+</html>

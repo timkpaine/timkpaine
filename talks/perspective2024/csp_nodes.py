@@ -1,7 +1,6 @@
 import csp
 from csp import ts
 from datetime import timedelta
-from ipywidgets import HBox, VBox
 from superstore import (
     machines,
     MACHINE_SCHEMA,

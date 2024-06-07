@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <script type="module" src="./static/perspective.js"></script>
+    <script type="module" src="./static/perspective-viewer.js"></script>
+    <script type="module" src="./static/perspective-viewer-datagrid.js"></script>
+    <script type="module" src="./static/perspective-viewer-d3fc.js"></script>
+    <script type="module" src="./static/perspective-workspace.js"></script>
+    <link rel="stylesheet" crossorigin="anonymous" href="./static/pro.css"/>
+    <link rel="stylesheet" crossorigin="anonymous" href="./static/pro-workspace.css"/>
+    <style>
+      body {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <perspective-workspace id="workspace"></perspective-workspace>
+  </body>
+
+
+  <script type="module">
+    import perspective from "./static/perspective.js";
+
+    window.addEventListener("DOMContentLoaded", async function () {
+        const websocket = perspective.websocket("ws://localhost:8080/data");
+        const worker = perspective.worker();
+        ["machines", "usage", "status", "jobs"].forEach(async (table) => {
+          document.getElementById("workspace").tables.set(table, websocket.open_table(table));
+        });
+
+        document.getElementById("workspace").restore({"sizes":[0.2,0.8],"detail":{"main":{"type":"split-area","orientation":"vertical","children":[{"type":"split-area","orientation":"horizontal","children":[{"type":"tab-area","widgets":["PERSPECTIVE_GENERATED_ID_1"],"currentIndex":0},{"type":"tab-area","widgets":["PERSPECTIVE_GENERATED_ID_5"],"currentIndex":0}],"sizes":[0.37188027277840263,0.6281197272215974]},{"type":"tab-area","widgets":["PERSPECTIVE_GENERATED_ID_3"],"currentIndex":0},{"type":"tab-area","widgets":["PERSPECTIVE_GENERATED_ID_4"],"currentIndex":0}],"sizes":[0.5,0.25,0.25]}},"mode":"globalFilters","master":{"widgets":["PERSPECTIVE_GENERATED_ID_0"],"sizes":[1]},"viewers":{"PERSPECTIVE_GENERATED_ID_0":{"version":"2.10.0","plugin":"Datagrid","plugin_config":{"columns":{},"editable":false,"scroll_lock":false},"columns_config":{},"settings":false,"theme":null,"title":"Machines","group_by":[],"split_by":[],"columns":["machine_id","kind","cores","region","zone"],"filter":[],"sort":[],"expressions":{},"aggregates":{},"master":true,"table":"machines","linked":false,"selectable":""},"PERSPECTIVE_GENERATED_ID_1":{"version":"2.10.0","plugin":"Datagrid","plugin_config":{"columns":{},"editable":false,"scroll_lock":false},"columns_config":{"cpubar":{"number_fg_mode":"bar","fg_gradient":100},"membar":{"number_fg_mode":"bar","fg_gradient":94},"New Column 1":{"number_fg_mode":"bar","fg_gradient":91.41}},"settings":false,"theme":null,"title":"Usage","group_by":[],"split_by":[],"columns":["machine_id","cpu","cpubar","mem","membar","free","network","disk","kind","cores","region","zone"],"filter":[],"sort":[],"expressions":{"cpubar":"//cpubar\n\n\"cpu\"\n","membar":"\"mem\""},"aggregates":{},"master":false,"table":"usage","linked":false},"PERSPECTIVE_GENERATED_ID_5":{"version":"2.10.0","plugin":"Treemap","plugin_config":{},"columns_config":{},"settings":false,"theme":null,"title":"Usage Graph","group_by":["kind","region","zone"],"split_by":[],"columns":["cores","cpu",null],"filter":[],"sort":[],"expressions":{},"aggregates":{},"master":false,"table":"usage","linked":false},"PERSPECTIVE_GENERATED_ID_3":{"version":"2.10.0","plugin":"X Bar","plugin_config":{},"columns_config":{},"settings":false,"theme":null,"title":"Status","group_by":["status"],"split_by":[],"columns":["machine_id"],"filter":[],"sort":[],"expressions":{},"aggregates":{"status":"last"},"master":false,"table":"status","linked":false},"PERSPECTIVE_GENERATED_ID_4":{"version":"2.10.0","plugin":"Datagrid","plugin_config":{"columns":{},"editable":false,"scroll_lock":false},"columns_config":{},"settings":false,"theme":null,"title":"Jobs","group_by":["machine_id"],"split_by":[],"columns":["job_id","name","units","start_time","end_time"],"filter":[],"sort":[],"expressions":{},"aggregates":{job_id: "count", name: "last", units: "sum", start_time: "last", end_time: "last"},"master":false,"table":"jobs","linked":false}}});
+
+    });
+</script>
+</html>
