@@ -19,7 +19,7 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer): ..
 
 def build_app():
     # Fake data update interval
-    interval = 5
+    interval = .1
 
     # Create a fake list of machines
     s_machines = machines()

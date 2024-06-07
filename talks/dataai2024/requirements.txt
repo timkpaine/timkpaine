@@ -1,4 +1,3 @@
-csp
 fastapi
 orjson
 perspective-python
