@@ -41,13 +41,13 @@ def perspective_spark_bridge(
 ):
     app = fastapi_app or FastAPI()
     for table_name in tables:
-        print(f"Mounting {table_name}")
-
         @app.websocket(f"/tables/{table_name}")
         async def ws(websocket: WebSocket, table_name=table_name):
             await websocket.accept()
             data = await websocket.receive_json()
 
+            if not data:
+                return
             # If we use row-by-row, e.g. _push_to_psp_single in spark.py,
             # we can just do
             # tables[table_name].update([data])
