@@ -19,7 +19,7 @@ I have been teaching computer science courses at Columbia University since 2015.
 
 
 ### Rate
-My rate for general computer science tutoring is **$300/hr**.
+My rate for general computer science tutoring is **$400/hr**.
 
 
 <div class="contact">
