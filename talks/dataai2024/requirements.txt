@@ -1,8 +1,10 @@
 fastapi
 orjson
-perspective-python
+perspective-python==2.10.0
 pyarrow
 pyspark
 superstore
 uvicorn
 websocket-client
+ipywidgets
+jupyterlab

@@ -1,0 +1,31 @@
+services:
+  server:
+    build: .
+    command: python server.py
+    volumes:
+      # Useful for development
+      - .:/usr/src/app
+    environment:
+      - DATA_HOST=data
+    depends_on:
+      - data
+    ports:
+      - "127.0.0.1:8080:8080"
+
+  data:
+    build: .
+    volumes:
+      # Useful for development
+      - .:/usr/src/app
+    command: python helpers/data.py
+
+  jupyter:
+    build: .
+    # Useful for development
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - DATA_HOST=data
+    ports:
+      - "127.0.0.1:8888:8888"
+    command: jupyter lab --ip=0.0.0.0 --allow-root --no-browser --LabApp.token=''

@@ -5,9 +5,11 @@ import socketserver
 from orjson import dumps
 from superstore import machines, usage, status, jobs
 from time import sleep
+import os
 
 
-HOST = "localhost"
+# Allows docker to override which HOST to connect to for data
+HOST = os.environ.get("DATA_HOST", "localhost")
 MACHINES_PORT = 8081
 USAGE_PORT = 8082
 STATUS_PORT = 8083
@@ -19,7 +21,7 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer): ..
 
 def build_app():
     # Fake data update interval
-    interval = .1
+    interval = 5
 
     # Create a fake list of machines
     s_machines = machines()
@@ -62,10 +64,10 @@ def build_app():
                         self.request.sendall(dumps(job) + b"\n")
                 sleep(interval)
 
-    machine_server = ThreadedTCPServer((HOST, MACHINES_PORT), MachinesHandler)
-    usage_server = ThreadedTCPServer((HOST, USAGE_PORT), UsageHandler)
-    status_server = ThreadedTCPServer((HOST, STATUS_PORT), StatusHandler)
-    jobs_server = ThreadedTCPServer((HOST, JOBS_PORT), JobsHandler)
+    machine_server = ThreadedTCPServer(('0.0.0.0', MACHINES_PORT), MachinesHandler)
+    usage_server = ThreadedTCPServer(('0.0.0.0', USAGE_PORT), UsageHandler)
+    status_server = ThreadedTCPServer(('0.0.0.0', STATUS_PORT), StatusHandler)
+    jobs_server = ThreadedTCPServer(('0.0.0.0', JOBS_PORT), JobsHandler)
     return machine_server, usage_server, status_server, jobs_server
 
 

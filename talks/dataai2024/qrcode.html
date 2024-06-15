@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer@2.10.1/dist/cdn/perspective-viewer.js"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer-datagrid@2.10.1/dist/cdn/perspective-viewer-datagrid.js"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer-d3fc@2.10.1/dist/cdn/perspective-viewer-d3fc.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/@finos/perspective/dist/cdn/perspective-server.js" as="fetch" type="application/javascript" crossorigin="anonymous" />
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/@finos/perspective/dist/cdn/perspective-server.wasm" as="fetch" type="application/wasm" crossorigin="anonymous" />
+        <link rel="preload" href="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer/dist/cdn/perspective-viewer.wasm" as="fetch" type="application/wasm" crossorigin="anonymous" />
+        <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer/dist/css/themes.css" />
+        <script type="module">
+            import perspective from "https://cdn.jsdelivr.net/npm/@finos/perspective@2.10.1/dist/cdn/perspective.js";
+            var qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: "https://github.com/ProspectiveCo/databricks-conf-talk-june-2024",
+                width: 256,
+                height: 256,
+                correctLevel: QRCode.CorrectLevel.L,
+            });
+
+            let psp_data = [];
+            for (const row in qrcode._oQRCode.modules) {
+                for (const col in qrcode._oQRCode.modules[row]) {
+                    psp_data.push({ row, col, val: qrcode._oQRCode.modules[row][col] ? 1 : 0 });
+                }
+            }
+
+            const worker = await perspective.worker();
+            const viewer = document.getElementsByTagName("perspective-viewer")[0];
+            const table = worker.table(psp_data);
+            viewer.load(table);
+            viewer.restore({
+                version: "2.10.1",
+                plugin: "Datagrid",
+                plugin_config: {
+                    columns: {},
+                    scroll_lock: false,
+                },
+                columns_config: {
+                    val: {
+                        number_bg_mode: "color",
+                        pos_bg_color: "#000000",
+                        neg_bg_color: "#ffa38f",
+                    },
+                },
+                settings: true,
+                theme: "Pro Light",
+                title: null,
+                group_by: ["row"],
+                split_by: ["col"],
+                columns: ["val"],
+                filter: [],
+                sort: [],
+                expressions: {},
+                aggregates: {},
+            });
+        </script>
+        <style>
+            #qrcode {
+                display: none;
+            }
+            perspective-viewer {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="qrcode"></div>
+        <perspective-viewer></perspective-viewer>
+    </body>
+</html>

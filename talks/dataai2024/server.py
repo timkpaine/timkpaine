@@ -1,3 +1,4 @@
+import os
 from pyspark.sql import SparkSession
 from perspective import Table as PerspectiveTable, PerspectiveManager
 from time import sleep
