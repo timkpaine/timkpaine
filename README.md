@@ -30,6 +30,7 @@ I have taught in the Computer Science department at Columbia University since 20
 | *Jupyter Notebooks for Print Media* | **PyCon DE / PyData Berlin 2024** | [slides](https://tim.paine.nyc/talks/nbprint2024.html?print-pdf=true) | |
 | *High Performance Data Visualization for the Web* | **PyCon DE / PyData Berlin 2024** | [slides](https://tim.paine.nyc/talks/perspective2024.html?print-pdf=true) / [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) | |
 | *Building FPGA-based Machine Learning Accelerators in Python* | **PyCon US 2024** | [slides](https://tim.paine.nyc/talks/fpga2024.html?print-pdf=true)  | |
+| *Streaming Cross-sectional Visualization with Perspective* | **Databricks Data + AI 2024** | [slides](https://github.com/ProspectiveCo/databricks-conf-talk-june-2024) | w/ Tim Bess (@timbess) |
 | *Visualizing Live Data Pipelines* | **JupyterCon 2023**  | [slides](https://tim.paine.nyc/talks/jupytercon2023.html?print-pdf=true) |
 | *Production Notebooks* | **JupyterCon 2020**  | [recording](https://youtu.be/MTGlyvbNG_Q?si=TN7tgbAHizfqeGUi) / [slides](https://tim.paine.nyc/talks/jupytercon2020.html?print-pdf=true) | |
 | *Beyond Spreadsheets* | **NYC Data Council 2020** | [recording](https://youtu.be/PYTVU4A_3Kc) | w/ Jeff Sternberg ([@sternb0t](https://github.com/sternb0t)) <br> Technical Director Google  |
