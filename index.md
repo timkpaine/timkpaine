@@ -61,4 +61,4 @@ I have taught in the Computer Science department at Columbia University since 20
 # Projects
 My actively developed projects can be found on my [GitHub](https://github.com/timkpaine).
 
-I maintain projects in various organizations including [FINOS](https://www.finos.org), J.P. Morgan, and IEX. I am a maintainer and contributor to several large scale open source organizations, most notably [JupyterLab](https://github.com/jupyterlab) and Conda Forge.
+I maintain projects in various GitHub organizations including Point72, [FINOS](https://www.finos.org), and J.P. Morgan. I am a maintainer and contributor to several large scale open source organizations, most notably [JupyterLab](https://github.com/jupyterlab) and Conda Forge.
