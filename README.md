@@ -26,7 +26,7 @@ I have taught in the Computer Science department at Columbia University since 20
 
 | | | | |
 |:--:|:--:|:--:|:--:|
-| *High Performance Data Visualization for the Web* | **PyCon Italia 2024**, **PyCon DE / PyData Berlin 2024**, **PyData Paris 2024** | [recording](https://youtu.be/s6n9vEyM1gY?si=ppdz2TmuhPU89VvP) / [slides](https://tim.paine.nyc/talks/perspective2024.html?print-pdf=true) / [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) | |
+| *High Performance Data Visualization for the Web* | **PyCon Italia 2024**<br>**PyCon DE / PyData Berlin 2024**<br>**PyData Paris 2024** | [recording](https://youtu.be/s6n9vEyM1gY?si=ppdz2TmuhPU89VvP) / [slides](https://tim.paine.nyc/talks/perspective2024.html?print-pdf=true) / [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) | |
 | *Jupyter Notebooks for Print Media* | **PyCon DE / PyData Berlin 2024** | [slides](https://tim.paine.nyc/talks/nbprint2024.html?print-pdf=true) | |
 | *Building FPGA-based Machine Learning Accelerators in Python* | **PyCon US 2024** | [recording](https://youtu.be/xQHdj_G6pLQ?si=5LDceJ8IMvK6Mibl) / [slides](https://tim.paine.nyc/talks/fpga2024.html?print-pdf=true)  | |
 | *Streaming Cross-sectional Visualization with Perspective* | **Databricks Data + AI 2024** | [slides](https://github.com/ProspectiveCo/databricks-conf-talk-june-2024) | w/ Tim Bess ([@timbess](https://github.com/timbess)) <br> [@ProspectiveCo](https://github.com/ProspectiveCo) |
