@@ -24,14 +24,14 @@ I have taught in the Computer Science department at Columbia University since 20
 
 ## Media
 
-| | | | |
-|:--:|:--:|:--:|:--:|
-| *High Performance Data Visualization for the Web* | **PyCon Italia 2024**<br>**PyCon DE / PyData Berlin 2024**<br>**PyData Paris 2024** | [recording](https://youtu.be/s6n9vEyM1gY?si=ppdz2TmuhPU89VvP) / [slides](https://tim.paine.nyc/talks/perspective2024.html?print-pdf=true) / [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) | |
-| *Jupyter Notebooks for Print Media* | **PyCon DE / PyData Berlin 2024** | [slides](https://tim.paine.nyc/talks/nbprint2024.html?print-pdf=true) | |
-| *Building FPGA-based Machine Learning Accelerators in Python* | **PyCon US 2024** | [recording](https://youtu.be/xQHdj_G6pLQ?si=5LDceJ8IMvK6Mibl) / [slides](https://tim.paine.nyc/talks/fpga2024.html?print-pdf=true)  | |
-| *Streaming Cross-sectional Visualization with Perspective* | **Databricks Data + AI 2024** | [slides](https://github.com/ProspectiveCo/databricks-conf-talk-june-2024) | w/ Tim Bess ([@timbess](https://github.com/timbess)) <br> [@ProspectiveCo](https://github.com/ProspectiveCo) |
+| | | |
+|:--:|:--:|:--:|
+| *High Performance Data Visualization for the Web* | **PyCon Italia 2024**<br>**PyCon DE / PyData Berlin 2024**<br>**PyData Paris 2024** | [recording](https://youtu.be/s6n9vEyM1gY?si=ppdz2TmuhPU89VvP) / [slides](https://tim.paine.nyc/talks/perspective2024.html?print-pdf=true) / [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) |
+| *Jupyter Notebooks for Print Media* | **PyCon DE / PyData Berlin 2024** | [slides](https://tim.paine.nyc/talks/nbprint2024.html?print-pdf=true) |
+| *Building FPGA-based Machine Learning Accelerators in Python* | **PyCon US 2024** | [recording](https://youtu.be/xQHdj_G6pLQ?si=5LDceJ8IMvK6Mibl) / [slides](https://tim.paine.nyc/talks/fpga2024.html?print-pdf=true)  |
+| *Streaming Cross-sectional Visualization with Perspective*<br>w/ Tim Bess ([@timbess](https://github.com/timbess)) <br> [@ProspectiveCo](https://github.com/ProspectiveCo)| **Databricks Data + AI 2024** | [slides](https://github.com/ProspectiveCo/databricks-conf-talk-june-2024) |
 | *Visualizing Live Data Pipelines* | **JupyterCon 2023**  | [slides](https://tim.paine.nyc/talks/jupytercon2023.html?print-pdf=true) |
-| *Production Notebooks* | **JupyterCon 2020**  | [recording](https://youtu.be/MTGlyvbNG_Q?si=TN7tgbAHizfqeGUi) / [slides](https://tim.paine.nyc/talks/jupytercon2020.html?print-pdf=true) | |
-| *Beyond Spreadsheets* | **NYC Data Council 2020** | [recording](https://youtu.be/PYTVU4A_3Kc) | w/ Jeff Sternberg ([@sternb0t](https://github.com/sternb0t)) <br> Technical Director [@Google](https://github.com/google)  |
-| *JPMorgan's Python training guide for analysts and traders* | **efinancialcareers - 2020** | [link](https://www.efinancialcareers.com/news/2020/06/jpmorgan-python-training-analysts-and-traders) | |
-| *JPMorgan's requirement for new staff: coding lessons* | **Financial Times - 2018** | [link](https://www.ft.com/content/4c17d6ce-c8b2-11e8-ba8f-ee390057b8c9) | |
+| *Production Notebooks* | **JupyterCon 2020**  | [recording](https://youtu.be/MTGlyvbNG_Q?si=TN7tgbAHizfqeGUi) / [slides](https://tim.paine.nyc/talks/jupytercon2020.html?print-pdf=true) |
+| *Beyond Spreadsheets*<br>w/ Jeff Sternberg ([@sternb0t](https://github.com/sternb0t))<br>Technical Director [@Google](https://github.com/google)  | **NYC Data Council 2020** | [recording](https://youtu.be/PYTVU4A_3Kc) |
+| *JPMorgan's Python training guide for analysts and traders* | **efinancialcareers - 2020** | [link](https://www.efinancialcareers.com/news/2020/06/jpmorgan-python-training-analysts-and-traders) |
+| *JPMorgan's requirement for new staff: coding lessons* | **Financial Times - 2018** | [link](https://www.ft.com/content/4c17d6ce-c8b2-11e8-ba8f-ee390057b8c9) |
