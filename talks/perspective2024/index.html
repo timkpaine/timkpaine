@@ -1,10 +1,10 @@
 <html>
   <head>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective/dist/cdn/perspective.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer/dist/cdn/perspective-viewer.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer-datagrid/dist/cdn/perspective-viewer-datagrid.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer-d3fc/dist/cdn/perspective-viewer-d3fc.js"></script>
-    <link rel="stylesheet" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/@finos/perspective-viewer/dist/css/pro.css"/>
+    <script type="module" src="/static/perspective.js"></script>
+    <script type="module" src="/static/perspective-viewer.js"></script>
+    <script type="module" src="/static/perspective-viewer-datagrid.js"></script>
+    <script type="module" src="/static/perspective-viewer-d3fc.js"></script>
+    <link rel="stylesheet" crossorigin="anonymous" href="/static/pro.css"/>
     <style>
       body {
         position: absolute;
@@ -42,7 +42,7 @@
 
 
   <script type="module">
-    import perspective from "https://cdn.jsdelivr.net/npm/@finos/perspective/dist/cdn/perspective.js";
+    import perspective from "/static/perspective.js";
 
     window.addEventListener("DOMContentLoaded", async function () {
         const websocket = perspective.websocket("ws://localhost:8080/websocket");
