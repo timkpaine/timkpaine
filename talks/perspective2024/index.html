@@ -45,7 +45,7 @@
     import perspective from "/static/perspective.js";
 
     window.addEventListener("DOMContentLoaded", async function () {
-        const websocket = perspective.websocket("ws://localhost:8080/websocket");
+        const websocket = await perspective.websocket("ws://localhost:8080/websocket");
         const worker = perspective.worker();
         ["machines", "usage", "status", "jobs"].forEach(async (table) => {
           document.getElementById(table).load(websocket.open_table(table));

@@ -77,7 +77,7 @@ def machine_status(
     if csp.ticked(a_tick) and csp.valid(usage):
         ret = []
         for machine in usage:
-            ret.append(status(machine))
+            ret.append(status(machine, json=True))
         csp.output(ret)
         csp.schedule_alarm(a_tick, interval, True)
 
@@ -95,7 +95,7 @@ def machine_jobs(
     if csp.ticked(a_tick):
         ret = []
         for machine in machines:
-            job = jobs(machine)
+            job = jobs(machine, json=True)
             if job:
                 ret.append(job)
         csp.output(ret)
