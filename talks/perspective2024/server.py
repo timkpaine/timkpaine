@@ -6,7 +6,6 @@ from datetime import timedelta
 import csp
 import uvicorn
 from fastapi import FastAPI, WebSocket
-from fastapi.middleware.cors import CORSMiddleware
 from perspective import Server, Table
 from perspective.handlers.starlette import PerspectiveStarletteHandler
 from starlette.staticfiles import StaticFiles
