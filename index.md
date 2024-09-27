@@ -39,7 +39,7 @@ About me or my work
 |:--:|:--:|:--:|
 | *High Performance Data Visualization for the Web* | **PyCon Italia 2024**<br>**PyCon DE / PyData Berlin 2024**<br>**PyData Paris 2024** | [recording](https://youtu.be/s6n9vEyM1gY?si=ppdz2TmuhPU89VvP) / [slides](https://tim.paine.nyc/talks/perspective2024.html?print-pdf=true) / [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) |
 | *Jupyter Notebooks for Print Media* | **PyCon DE / PyData Berlin 2024** | [slides](https://tim.paine.nyc/talks/nbprint2024.html?print-pdf=true) |
-| *Building FPGA-based Machine Learning Accelerators in Python* | **PyCon US 2024** | [recording](https://youtu.be/xQHdj_G6pLQ?si=5LDceJ8IMvK6Mibl) / [slides](https://tim.paine.nyc/talks/fpga2024.html?print-pdf=true)  |
+| *Building FPGA-based Machine Learning Accelerators in Python* | **PyCon US 2024** | [recording](https://youtu.be/pFRFZDLnr-s?si=SR30urddcAYPRYc4) / [slides](https://tim.paine.nyc/talks/fpga2024.html?print-pdf=true)  |
 | *Streaming Cross-sectional Visualization with Perspective*<br>w/ Tim Bess ([@timbess](https://github.com/timbess)) | **Databricks Data + AI 2024** | [slides](https://github.com/ProspectiveCo/databricks-conf-talk-june-2024) |
 | *Visualizing Live Data Pipelines* | **JupyterCon 2023**  | [slides](https://tim.paine.nyc/talks/jupytercon2023.html?print-pdf=true) |
 | *Production Notebooks* | **JupyterCon 2020**  | [recording](https://youtu.be/MTGlyvbNG_Q?si=TN7tgbAHizfqeGUi) / [slides](https://tim.paine.nyc/talks/jupytercon2020.html?print-pdf=true) |
