@@ -49,7 +49,7 @@ About me or my work
 
 
 # Advising
-I advise several startups in data analytics, data visualization, and finance/trading. Please contact if interested in my services
+I advise several startups in data analytics, data visualization, and finance/trading.
 
 # Tutoring
 Please see my [tutoring](./tutoring) page for more information.
