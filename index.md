@@ -51,9 +51,6 @@ About me or my work
 # Advising
 I advise several startups in data analytics, data visualization, and finance/trading.
 
-# Tutoring
-Please see my [tutoring](./tutoring) page for more information.
-
 # Teaching
 I have taught in the Computer Science department at Columbia University since 2015. Topics include introductory/intermediate core computer science fundamentals in C, C++, and Python, as well as topics courses in computer hardware fundamentals and open source development methodologies. Please visit my [Columbia Computer Science homepage](https://www.cs.columbia.edu/~paine/) for more information.
 
