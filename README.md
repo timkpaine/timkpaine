@@ -13,11 +13,11 @@ You can find my resume [here](https://tim.paine.nyc/rsc/TPCV.pdf).
 
 |                                                                          |                                                     |                                      |           |
 | :----------------------------------------------------------------------: | :-------------------------------------------------: | :----------------------------------: | :-------: |
-|    <img width="75" src="./static/img/cubist.png" alt="Cubist"></img>     | [Point72 - Cubist](https://www.point72.com/cubist/) |        Central Research Team         |   2022-   |
-|  <img width="75" src="./static/img/columbia.png" alt="Columbia"></img>   |  [Columbia University](https://www.columbia.edu/)   |    Associate in Computer Science     |   2015-   |
-|       <img width="75" src="./static/img/iex.png" alt="IEX"></img>        |            [IEX](https://iextrading.com)            | Head of Software Engineeering, Cloud | 2020-2021 |
-| <img width="75" src="./static/img/jpmorgan.png" alt="J.P. Morgan"></img> |   [J.P. Morgan](https://www.jpmorgan.com/global)    |   Vice President, Athena Research    | 2016-2020 |
-| <img width="75" src="./static/img/maystreet.png" alt="MayStreet"></img>  |         [MayStreet](https://maystreet.com)          |          Software Engineer           | 2015-2016 |
+|    <img width="75" src="./static/img/cubist.png" alt="Cubist" />     | [Point72 - Cubist](https://www.point72.com/cubist/) |        Central Research Team         |   2022-   |
+|  <img width="75" src="./static/img/columbia.png" alt="Columbia" />   |  [Columbia University](https://www.columbia.edu/)   |    Associate in Computer Science     |   2015-   |
+|       <img width="75" src="./static/img/iex.png" alt="IEX" />        |            [IEX](https://iextrading.com)            | Head of Software Engineeering, Cloud | 2020-2021 |
+| <img width="75" src="./static/img/jpmorgan.png" alt="J.P. Morgan" /> |   [J.P. Morgan](https://www.jpmorgan.com/global)    |   Vice President, Athena Research    | 2016-2020 |
+| <img width="75" src="./static/img/maystreet.png" alt="MayStreet" />  |         [MayStreet](https://maystreet.com)          |          Software Engineer           | 2015-2016 |
 
 ## Teaching
 
@@ -43,13 +43,13 @@ I own and/or maintain projects in the following organizations.
 
 |                                                                                                               |                                                                         |                                                                         |
 | :------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------- | :---------------------------------------------------------------------- |
-| <img width="75" src="https://avatars.githubusercontent.com/u/112506536" alt="point72"></img>                  | [Point72](https://github.com/Point72)                                   | Point72 is a global asset management firm                               |
-| <img width="75" src="https://avatars.githubusercontent.com/u/35377814" alt="finos"></img>                     | [FINOS](https://github.com/finos)                                       | Fintech Open Source Foundation                                          |
-| <img width="75" src="https://avatars.githubusercontent.com/u/22640571" alt="J.P. Morgan Chase"></img>         | [J.P. Morgan Chase](https://github.com/jpmorganchase)                   | J.P. Morgan Chase is a multinational financial services firm            |
-| <img width="75" src="https://avatars.githubusercontent.com/u/137446063" alt="python project templates"></img> | [Python Project Templates](https://github.com/python-project-templates) | GitHub templates for Python, C++, Rust, JavaScript, Jupyter, and more   |
-| <img width="75" src="https://avatars.githubusercontent.com/u/137717672" alt="extension actions"></img>        | [Extension Actions](https://github.com/actions-ext)                     | Helper action snippets to enhance GitHub default actions                |
-| <img width="75" src="https://avatars.githubusercontent.com/u/166062041" alt="nbprintn"></img>                 | [nbprint](https://github.com/nbprint)                                   | A framework for building print-oriented media with Jupyter              |
-| <img width="75" src="https://avatars.githubusercontent.com/u/177271696" alt="airflow laminar"></img>          | [laminar](https://github.com/airflow-laminar)                           | Tools to make Airflow smoother                                          |
-| <img width="75" src="https://avatars.githubusercontent.com/u/150616690" alt="tree finder"></img>              | [tree-finder](https://github.com/tree-finder)                           | Versatile tree-viewer/filebrowser widget, built on top of regular-table |
-| <img width="75" src="https://avatars.githubusercontent.com/u/113467871" alt="dau logo"></img>                 | [dau](https://github.com/dau-dev)                                       | Dataflow hardware accelerator platform                                  |
-| <img width="75" src="https://avatars.githubusercontent.com/u/147121325" alt="1kbgz logo"></img>               | [1kbgz](https://github.com/1kbgz)                                       | NYC-based design studio                                                 |
+| <img width="75" src="https://avatars.githubusercontent.com/u/112506536" alt="point72" />                  | [Point72](https://github.com/Point72)                                   | Point72 is a global asset management firm                               |
+| <img width="75" src="https://avatars.githubusercontent.com/u/35377814" alt="finos" />                     | [FINOS](https://github.com/finos)                                       | Fintech Open Source Foundation                                          |
+| <img width="75" src="https://avatars.githubusercontent.com/u/22640571" alt="J.P. Morgan Chase" />         | [J.P. Morgan Chase](https://github.com/jpmorganchase)                   | J.P. Morgan Chase is a multinational financial services firm            |
+| <img width="75" src="https://avatars.githubusercontent.com/u/137446063" alt="python project templates" /> | [Python Project Templates](https://github.com/python-project-templates) | GitHub templates for Python, C++, Rust, JavaScript, Jupyter, and more   |
+| <img width="75" src="https://avatars.githubusercontent.com/u/137717672" alt="extension actions" />        | [Extension Actions](https://github.com/actions-ext)                     | Helper action snippets to enhance GitHub default actions                |
+| <img width="75" src="https://avatars.githubusercontent.com/u/166062041" alt="nbprintn" />                 | [nbprint](https://github.com/nbprint)                                   | A framework for building print-oriented media with Jupyter              |
+| <img width="75" src="https://avatars.githubusercontent.com/u/177271696" alt="airflow laminar" />          | [laminar](https://github.com/airflow-laminar)                           | Tools to make Airflow smoother                                          |
+| <img width="75" src="https://avatars.githubusercontent.com/u/150616690" alt="tree finder" />              | [tree-finder](https://github.com/tree-finder)                           | Versatile tree-viewer/filebrowser widget, built on top of regular-table |
+| <img width="75" src="https://avatars.githubusercontent.com/u/113467871" alt="dau logo" />                 | [dau](https://github.com/dau-dev)                                       | Dataflow hardware accelerator platform                                  |
+| <img width="75" src="https://avatars.githubusercontent.com/u/147121325" alt="1kbgz logo" />               | [1kbgz](https://github.com/1kbgz)                                       | NYC-based design studio                                                 |
