@@ -60,13 +60,13 @@
             Background and Motivation
             <!-- .element: class="fragment" data-fragment-index="1" -->
 
-            Copier
+            Options, Copier
             <!-- .element: class="fragment" data-fragment-index="2" -->
 
-            Example Setup, Real World Use Cases
+            Example Setup
             <!-- .element: class="fragment" data-fragment-index="3" -->
 
-            What's Next?
+            Real World Use Cases
             <!-- .element: class="fragment" data-fragment-index="4" -->
           </script>
         </section>
@@ -271,7 +271,7 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
             PR templates
             <!-- .element: class="fragment" data-fragment-index="3" -->
 
-            codeowners
+            Codeowners
             <!-- .element: class="fragment" data-fragment-index="4" -->
 
             ---
@@ -312,6 +312,21 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
             Update the project and files over time as the template changes
             <!-- .element: class="fragment" data-fragment-index="4" -->
 
+          </script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## Talk Overview
+
+            ~~Background and Motivation~~
+
+            Options, Copier
+
+            Example Setup
+
+            Real World Use Cases
           </script>
         </section>
       </section>
@@ -383,6 +398,330 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
 
             ---
 
+            <img src="assets/img/copier2025/gimli.webp" width=500  />
+
+          </script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## Talk Overview
+
+            ~~Background and Motivation~~
+
+            ~~Options, Copier~~
+
+            Example Setup
+
+            Real World Use Cases
+          </script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## Example Setup
+
+            Let's investigate what copier can do by looking at an example template
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            [python-project-templates/base](https://github.com/python-project-templates/base)
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            ---
+
+            [copier.yaml](https://github.com/python-project-templates/base/blob/main/copier.yaml)
+
+            ```yaml
+project_name:
+    type: str
+    help: What is your project name?
+
+project_description:
+    type: str
+    help: What is your project description?
+```
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            ---
+
+            ```bash
+copier copy https://github.com/python-project-templates/base.git path/to/new/project
+```
+
+            <img src="assets/img/copier2025/prompt.png" width=500  />
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            ---
+
+            `pyproject.toml.jinja`
+
+            ```toml
+[project]
+name = "{{project_name}}"
+authors = [{name = "{{team}}", email = "{{email}}"}]
+description = "{{project_description}}"
+            ```
+            ---
+
+            [Lots of functionality listed in the documentation](https://copier.readthedocs.io/en/stable/creating/#loop-over-lists-to-generate-files-and-directories)
+
+            ---
+
+            Let's look at a few things that I use
+
+            ---
+
+            Apply fixed functionality to a user-provided input
+
+            ```yaml
+_exclude:
+  - name-slug.jinja
+project_name_formatted:
+    type: str
+    default: "{% include 'name-slug.jinja' %}"
+    when: false
+            ```
+
+            ---
+
+            Choosing subfolder based on user input
+
+            ```yaml
+add_extension:
+  type: str
+  choices:
+    none:
+      value: python
+    "C++":
+      value: cpp
+    Rust:
+      value: rust
+    Jupyter Widget:
+      value: jupyter
+_subdirectory: "{{ add_extension }}"
+            ```
+
+            ---
+
+            Optionally including files/folders:
+
+            ```raw
+{% if use_github_actions %}.github{% endif %}
+{% if add_extension == 'js' %}package.json{% endif %}
+              ```
+
+            ---
+
+            Asking for more information
+
+            ```yaml
+js_tool:
+  type: str
+  choices:
+    "npm":
+      value: npm
+    "yarn":
+      value: yarn
+  when: add_extension == 'js'
+            ```
+
+            ---
+            More complicated logic
+
+            ```yaml
+extract_information_from_function:
+  type: str
+  help: |
+    Use a custom function to extract
+    information from an existing variable
+  default: "{% from 'my-func.jinja' import extract_info %}{{ extract_info(a_var) }}"
+  when: false
+```
+
+            ---
+
+            `my-func.jinja`
+
+            ```jinja
+{% macro extract_info(var) -%}
+{%- set some_local_var = (var or "abc").split(",") -%}
+{%- if len(some_local_var) == 1 -%}
+{{ var | upper }}
+{%- else -%}
+...
+            ```
+
+            ---
+
+            Include the answers in the output, so that the user can update!
+
+            `{{_copier_conf.answers_file}}.jinja`
+            ```jinja
+# Changes here will be overwritten by Copier
+{{ _copier_answers|to_nice_yaml }}
+            ```
+
+            ---
+
+            [Base](https://github.com/python-project-templates/base)
+
+            [Python](https://github.com/python-project-templates/python-template)
+
+            [Python + C++](https://github.com/python-project-templates/python-template-cpp)
+
+            [Python + Rust](https://github.com/python-project-templates/python-template-rust)
+
+            [Python + Jupyter](https://github.com/python-project-templates/python-template-jupyter)
+
+            [Python + JS](https://github.com/python-project-templates/python-template-js)
+
+          </script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## Copier Update
+
+            [Docs](https://copier.readthedocs.io/en/stable/updating/)
+
+            [How it works](https://copier.readthedocs.io/en/stable/updating/#how-the-update-works)
+
+            ---
+
+            ```bash
+copier update
+            ```
+
+            ---
+
+            <img src="assets/img/copier2025/diff.png" width=500  />
+
+            ---
+
+            Automation
+
+            [actions-ext/copier-update](https://github.com/actions-ext/copier-update)
+
+            ```yaml
+name: Copier Updates
+on:
+  schedule:
+    - cron: "0 5 * * 0"
+jobs:
+  update:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions-ext/copier-update@main
+      with:
+        token: ${{ secrets.WORKFLOW_TOKEN }}
+```
+
+            ---
+
+            <img src="assets/img/copier2025/update.png" width=800 />
+
+          </script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## Talk Overview
+
+            ~~Background and Motivation~~
+
+            ~~Options, Copier~~
+
+            ~~Example Setup~~
+
+            Real World Use Cases
+          </script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## Real World User Cases
+
+            For individuals, copier can allow you to synchronize changes in tools, configuration, preferences, etc, across all of your projects
+
+            [#38 Move to uv](https://github.com/python-project-templates/base/pull/38/files)
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            [#39 switch to actions-ext](https://github.com/python-project-templates/base/pull/39/files)
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            ---
+
+            For organizations, copier can allow you many of the benefits of a monorepo, without many of the downsides
+
+            ---
+
+            ## Changing Strategic/Supported Tools
+
+            `mamba` to `rattler-build`
+            <!-- .element: class="fragment" data-fragment-index="1s" -->
+
+            `pip` to `uv`
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            ---
+
+            ## Working Around Bugs/Releases
+
+            `cmake` in `cibuildwheel`, had to apply a temporary pin
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            `pytest-aiohttp`, `httpx`, `boto` issues requiring pins
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            `pandas 2.3.0` accidentally released without `>=3.10`
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            ---
+
+            ## Migrations, Navigating Organizational Changes
+
+            GitHub Actions runner changes / deprecations
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            New standard requirements, e.g. adding a vulnerability scanning stage to your CI/CD
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            Moving from one DB/Table/view to another
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            ---
+
+            ## Pushing Forward / Raising the Bar
+
+            Moving default Python to `3.11` from `3.9`
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            Updating base docker image version
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            Enforcing `isort` on all projects
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            ---
+
+            ## Others
+
+            Adding a project variant for Apache Airflow DAGs, including some examples for querying in-house data
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            Adding a plugin library for an internal configuration management systemss
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            Adding a new example project for a chat bot
+            <!-- .element: class="fragment" data-fragment-index="3" -->
 
           </script>
         </section>
