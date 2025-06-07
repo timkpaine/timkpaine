@@ -1,6 +1,8 @@
----
-layout: default
----
+```
+            ---
+```
+
+## layout: default
 
 # Hello
 
@@ -39,6 +41,7 @@ About me or my work
 
 |                                                                                                                    |                                                                                     |                                                                                                                                                                                                                             |
 | :----------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|                                     *Control all of your projects with copier*                                     |                               **PyData London 2025**                                |                                                                            [slides](https://tim.paine.nyc/talks/copier2025.html?print-pdf=true)                                                                             |
 |                                 *High Performance Data Visualization for the Web*                                  | **PyCon Italia 2024**<br>**PyCon DE / PyData Berlin 2024**<br>**PyData Paris 2024** | [recording](https://youtu.be/v5Y5ftlGNhU?si=PYUt1jI3zxhp6eAv) / [slides](https://tim.paine.nyc/talks/perspective2024.html?print-pdf=true) / [files](https://github.com/timkpaine/timkpaine/tree/main/talks/perspective2024) |
 |                                        *Jupyter Notebooks for Print Media*                                         |                          **PyCon DE / PyData Berlin 2024**                          |                                                      [recording](https://youtu.be/XEwZ-Dvs21s) / [slides](https://tim.paine.nyc/talks/nbprint2024.html?print-pdf=true)                                                      |
 |                           *Building FPGA-based Machine Learning Accelerators in Python*                            |                                  **PyCon US 2024**                                  |                                             [recording](https://youtu.be/pFRFZDLnr-s?si=SR30urddcAYPRYc4) / [slides](https://tim.paine.nyc/talks/fpga2024.html?print-pdf=true)                                              |
@@ -66,8 +69,8 @@ I am a maintainer and contributor to several large scale open source organizatio
 
 I own and/or maintain projects in the following organizations.
 
-|                                                                                                               |                                                                         |                                                                         |
-| :------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------- | :---------------------------------------------------------------------- |
+|                                                                                                           |                                                                         |                                                                         |
+| :-------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------- | :---------------------------------------------------------------------- |
 | <img width="75" src="https://avatars.githubusercontent.com/u/112506536" alt="point72" />                  | [Point72](https://github.com/Point72)                                   | Point72 is a global asset management firm                               |
 | <img width="75" src="https://avatars.githubusercontent.com/u/35377814" alt="finos" />                     | [FINOS](https://github.com/finos)                                       | Fintech Open Source Foundation                                          |
 | <img width="75" src="https://avatars.githubusercontent.com/u/22640571" alt="J.P. Morgan Chase" />         | [J.P. Morgan Chase](https://github.com/jpmorganchase)                   | J.P. Morgan Chase is a multinational financial services firm            |
