@@ -99,6 +99,26 @@
 
             ---
 
+            <img src="assets/img/copier2025/uplift.png" width=800  />
+
+            [link](https://github.com/finos/jupyterlab_templates/pull/203)
+
+            ---
+
+            <img src="assets/img/copier2025/uplift2.png" width=600  />
+
+            [link](https://github.com/finos/jupyterlab_templates/pull/203/files)
+
+          </script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## Background and Motivation
+
+            ---
+
             For me, repos tend to fall into a few categories:
 
             ---
@@ -113,11 +133,15 @@
 
             ---
 
+            <img src="assets/img/copier2025/grayhavens.png" width=700  />
+
+            ---
+
             # 2
 
             Little websites, utilities, scripts, CLIs, apps,
             or other small projects that serve a single purpose
-            but shouldn't be deprecated going to be deprecated
+            but shouldn't be deprecated
             <!-- .element: class="fragment" data-fragment-index="1" -->
 
             *hobbies*
@@ -216,7 +240,7 @@
 
             ---
 
-            lint/static analysis configuration
+            Lint/Static Analysis Configuration
 
             ```toml
 [tool.ruff]
@@ -239,7 +263,7 @@ section-order = ["future", "standard-library",
 
             ---
 
-            test coverage requirements
+            Test Coverage/Requirements/Configuration
 
             ```toml
 [tool.coverage.run]
@@ -276,6 +300,38 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
 
             ---
 
+            Orchestration
+
+            ```make
+develop:
+	uv pip install -e .[develop]
+lint:
+	python -m ruff check mylib
+	python -m ruff format --check mylib
+fix:
+	python -m ruff check --fix mylib
+	python -m ruff format mylib
+            ```
+
+            ---
+
+            Documentation/Infrastructure
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            .gitignore
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            Code of Conduct/Contributor Information
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            Text Fixtures
+            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+            etc etc
+            <!-- .element: class="fragment" data-fragment-index="5" -->
+
+            ---
+
             ## Things to Customize
 
             We also want to be able to customize things when we "clone" the template
@@ -296,6 +352,8 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
 
             <img src="assets/img/copier2025/jupyterlab.png" width=500  />
 
+            [link](https://github.com/orgs/jupyterlab/repositories?q=cookiecutter)
+
             ---
 
             Concretely, we want to
@@ -309,7 +367,7 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
             Change file contents (based on those inputs)
             <!-- .element: class="fragment" data-fragment-index="3" -->
 
-            Update the project and files over time as the template changes
+            **Update the project and files over time as the template changes**
             <!-- .element: class="fragment" data-fragment-index="4" -->
 
           </script>
@@ -346,7 +404,9 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
             ---
 
             [Create React App](https://create-react-app.dev/)
+
             [Create Next App](https://nextjs.org/docs/pages/api-reference/cli/create-next-app)
+
             Other bootstrapping tools
 
             ---
@@ -360,6 +420,9 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
             [cookiecutter/cookiecutter](https://github.com/cookiecutter/cookiecutter)
 
             ---
+
+            Widely adopted across the Python ecosystem
+            <!-- .element: class="fragment" data-fragment-index="0" -->
 
             Prompt user for inputs
             <!-- .element: class="fragment" data-fragment-index="1" -->
@@ -381,7 +444,7 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
 
             <img src="assets/img/copier2025/copier.png" width=250  />
 
-            [copier-org/copier](https://github.com/copier-org/copiers)
+            [copier-org/copier](https://github.com/copier-org/copier)
 
             [docs](https://copier.readthedocs.io/en/stable/)
 
@@ -393,7 +456,7 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
             Jinja-based templating
             <!-- .element: class="fragment" data-fragment-index="2" -->
 
-            Can sync with the base template when it changes!
+            **Can sync with the base template when it changes!**
             <!-- .element: class="fragment" data-fragment-index="3" -->
 
             ---
@@ -425,6 +488,9 @@ addopts = ["-vvv", "--junitxml=junit.xml"]
 
             Let's investigate what copier can do by looking at an example template
             <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            [python-project-templates](https://github.com/python-project-templates)
+            <!-- .element: class="fragment" data-fragment-index="2" -->
 
             [python-project-templates/base](https://github.com/python-project-templates/base)
             <!-- .element: class="fragment" data-fragment-index="2" -->
@@ -626,6 +692,17 @@ jobs:
 
             <img src="assets/img/copier2025/update.png" width=800 />
 
+            ---
+
+            Copier also makes it very easy to change prior choices
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            Don't change the answers file, just run `copier update`
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            Let's look at a [small example](https://github.com/timkpaine/temporal-cache/pull/55)
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
           </script>
         </section>
       </section>
@@ -651,11 +728,18 @@ jobs:
 
             For individuals, copier can allow you to synchronize changes in tools, configuration, preferences, etc, across all of your projects
 
+            ---
+
+
             [#38 Move to uv](https://github.com/python-project-templates/base/pull/38/files)
             <!-- .element: class="fragment" data-fragment-index="1" -->
 
+
             [#39 switch to actions-ext](https://github.com/python-project-templates/base/pull/39/files)
             <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            [example automation](https://github.com/1kbgz/organizeit2/pull/19)
+            <!-- .element: class="fragment" data-fragment-index="3" -->
 
             ---
 
@@ -740,6 +824,14 @@ jobs:
             Update via push (e.g. GitHub Actions) or pull (e.g. manual) to manage migrations in a monorepo-like way
             <!-- .element: class="fragment" data-fragment-index="3" -->
 
+            ---
+
+            For individuals: Reduce the overhead of managaing multiple projects, including inactive/backburner projects
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            For organizations: drive monorepo-style consistency and standardization, keep examples and documentation up to date, help your users help themselves as projects progress
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
           </script>
         </section>
       </section>
@@ -749,6 +841,8 @@ jobs:
             ## Q/A
 
             <span>Tim Paine / <a style="text-decoration: underline;" href="https://github.com/timkpaine">@timkpaine</a></span>
+
+            [github.com/python-project-templates](https://github.com/python-project-templates)
 
           </script>
         </section>
