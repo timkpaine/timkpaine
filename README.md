@@ -1,7 +1,7 @@
 # Hello
 
 [![](https://img.shields.io/badge/Website-red)](https://tim.paine.nyc/)
-[![](https://img.shields.io/badge/Teaching-green)](https://www.cs.columbia.edu/~paine/)
+[![](https://img.shields.io/badge/Teaching-green)](https://cs.columbia.edu/~paine/)
 [![](https://img.shields.io/badge/LinkedIn-blue)](https://www.linkedin.com/in/timkpaine/)
 [![GitHub followers](https://img.shields.io/github/followers/timkpaine?label=Follow&style=social)](https://github.com/timkpaine)
 
@@ -21,7 +21,7 @@ You can find my resume [here](https://tim.paine.nyc/rsc/TPCV.pdf).
 
 ## Teaching
 
-I have taught in the Computer Science department at Columbia University since 2015. More information is available on [my Columbia website](https://www.cs.columbia.edu/~paine/).
+I have taught in the Computer Science department at Columbia University since 2015. More information is available on [my Columbia website](https://cs.columbia.edu/~paine/).
 
 ## Media
 
