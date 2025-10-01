@@ -45,6 +45,31 @@
       <section>
         <section data-markdown data-separator="---">
           <script type="text/template">
+            ## About Me
+
+            Quantitative Developer at Cubist Systematic Strategies
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            <a href="https://point72.com/cubist/"><img src="assets/img/cubist/logo-horizontal-white.png" width=250></img></a>
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            Build tools for research and trading, from long term to high frequency
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            [@timkpaine](https://github.com/timkpaine)
+            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+            [@Point72](https://github.com/Point72)
+            <!-- .element: class="fragment" data-fragment-index="5" -->
+
+
+          </script>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
             ## Talk Overview
 
             Background and Motivation
@@ -94,7 +119,7 @@
 
             ---
 
-            TODO diagram here
+            <img src="assets/img/jupyterfs2025/2.png" width=500  />
 
             ---
 
@@ -102,19 +127,30 @@
 
             ---
 
-            TODO diagram here
+            <img src="assets/img/jupyterfs2025/3.png" width=700  />
 
             ---
 
             This workflow is very common, but has friction points and requires navigating across tools
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             Users often prefer to have an all-in-one environment where they can access their data, code, and compute in one place
+            <!-- .element: class="fragment" data-fragment-index="2" -->
 
             Jupyter is perfect for code, dispatching to compute, and accessing data, but suffers a bit when it comes to browsing and exploring data backends
+            <!-- .element: class="fragment" data-fragment-index="3" -->
 
             ---
 
             This is where `jupyter-fs` comes in!
+
+            Leverage Jupyter's extension ecosystem across generic backends
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            ---
+
+            <img src="assets/img/jupyterfs2025/4.png" width=700  />
+
 
           </script>
         </section>
@@ -148,9 +184,14 @@
 
             `jupyter-fs` is a:
 
-            - Jupyter `ContentsManager`
-            - Jupyter Server Extension
-            - JupyterLab Frontend Extension
+            <ul>
+              <li>Jupyter <code>ContentsManager</code></li>
+              <!-- .element: class="fragment" data-fragment-index="1" -->
+              <li>Jupyter Server Extension</li>
+              <!-- .element: class="fragment" data-fragment-index="2" -->
+              <li>JupyterLab Frontend Extension</li>
+              <!-- .element: class="fragment" data-fragment-index="3" -->
+            </ul>
 
             ---
 
@@ -164,37 +205,55 @@
             A `ContentsManager` is a filesystem abstraction interface for Jupyter
 
             [Docs](https://jupyter-server.readthedocs.io/en/latest/developers/contents.html)
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+
 
             ---
 
             There are some simple methods to implement:
 
-            - `get(path)`: Get a file or directory model.
-            - `save(model, path)`: Save a file or directory model to path.
-            - `delete_file(path)`: Delete the file or directory at path.
-            - `rename_file(old_path, new_path)`: Rename a file or directory.
+            <ul>
+            <li><code>get(path)</code>: Get a file or directory model.</li>
+              <!-- .element: class="fragment" data-fragment-index="1" -->
+            <li><code>save(model, path)</code>: Save a file or directory model to path.</li>
+              <!-- .element: class="fragment" data-fragment-index="2" -->
+            <li><code>delete_file(path)</code>: Delete the file or directory at path.</li>
+              <!-- .element: class="fragment" data-fragment-index="3" -->
+            <li><code>rename_file(old_path, new_path)</code>: Rename a file or directory.</li>
+              <!-- .element: class="fragment" data-fragment-index="4" -->
+            </ul>
 
             etc
+              <!-- .element: class="fragment" data-fragment-index="5" -->
 
             ---
 
             There are three simple data structures to return:
 
-            - Notebook: `.ipynb` file
-            - File: text or binary file
-            - Directory: folder of files
+            <ul>
+            <li>Notebook: <code>.ipynb</code> file</li>
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+            <li>File: text or binary file</li>
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+            <li>Directory: folder of files</li>
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+            </ul>
 
             ---
 
             The default `ContentsManager` is the `FileContentsManager` which interacts with the local filesystem
 
             We can override via Jupyter Configuration
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             ```python
             c.NotebookApp.contents_manager_class = "jupyterfs.MetaManager"
             ```
+            <!-- .element: class="fragment" data-fragment-index="2" -->
 
             **jupyter_server_config.json**
+            <!-- .element: class="fragment" data-fragment-index="3" -->
 
             ```json
             {
@@ -204,6 +263,7 @@
               }
             }
             ```
+            <!-- .element: class="fragment" data-fragment-index="3" -->
 
 
             ---
@@ -221,8 +281,10 @@
             More accurately, `MetaManager` is a bridge between Jupyter `ContentsManager` and a backend filesystem implemented in one of the two major Python filesystem libraries:
 
             `fsspec`
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             `pyfilesystem2`
+            <!-- .element: class="fragment" data-fragment-index="2" -->
 
             ---
 
@@ -254,7 +316,7 @@
 
             ---
 
-            TODO diagram of dispatch here
+            <img src="assets/img/jupyterfs2025/5.png" width=800  />
 
             ---
 
@@ -282,8 +344,10 @@
             Jupyter has a modular server architecture that allows for extensions.
 
             [Docs](https://jupyter-server.readthedocs.io/en/latest/developers/extensions.html)
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             When we replace the default `ContentsManager`, we also need to add a server extension to serve up the configuration API and static frontend assets.
+            <!-- .element: class="fragment" data-fragment-index="2" -->
 
             ---
 
@@ -308,15 +372,22 @@
             JupyterLab also has a modular frontend architecture that allows for extensions.
 
             [Docs](https://jupyter-notebook.readthedocs.io/en/stable/extending/frontend_extensions.html)
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             ---
 
             `jupyter-fs` provides a separate filesystem browser interface in the JupyterLab sidebar
 
             This is for a few reasons:
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+
             - The default file browser uses a "paning" view which is sometimes inconvenient for browsing data
+            <!-- .element: class="fragment" data-fragment-index="2" -->
             - The default file browser scales poorly when you have more than several hundred files or folders
+            <!-- .element: class="fragment" data-fragment-index="3" -->
             - We wanted the ability to create multiple independent file browsers unique to each separate backend
+            <!-- .element: class="fragment" data-fragment-index="4" -->
 
             ---
 
@@ -355,18 +426,23 @@
             ## Key Features and Usage
 
             At the most basic level, `jupyter-fs` could be considered a "drop in" UI replacement for the default Jupyter file browser
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             ---
 
             <img src="assets/img/jupyterfs2025/button1.png" height=100  />
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             <img src="assets/img/jupyterfs2025/button2.png" height=100  />
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             <img src="assets/img/jupyterfs2025/button3.png" height=100  />
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             <br>
 
             <img src="assets/img/jupyterfs2025/context.png" width=300  />
+            <!-- .element: class="fragment" data-fragment-index="2" -->
 
             ---
 
@@ -385,18 +461,23 @@
             ## Elephant in the room
 
             Your notebook and the data you're viewing might not be colocated!
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             Opening a notebook from a remote filesystem will run the notebook **locally**, while saving the file **remotely**
+            <!-- .element: class="fragment" data-fragment-index="2" -->
 
             Thus, this is very much oriented towards workflows where the data is remote but the code/notebook is local
+            <!-- .element: class="fragment" data-fragment-index="3" -->
 
             ---
 
             ## Overcoming
 
             Because of this nuance, we have a system for easily connecting the data you see on the left hand side with the code you write in the notebook
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             These are called *snippets*, and we ship many out of the box
+            <!-- .element: class="fragment" data-fragment-index="2" -->
 
             ---
 
@@ -407,6 +488,7 @@
             Snippets are registered, templated code blocks that can be copy-pasted into your notebook
 
             When done, they will be templated with the required parameters to access the data via the filesystem interface
+            <!-- .element: class="fragment" data-fragment-index="1" -->
 
             ---
 
@@ -416,7 +498,7 @@
 
             We can even access the pyfilesystem2 or fsspec filesystem object directly if we want to do something more custom
 
-            <img src="assets/img/jupyterfs2025/snippets3.png" width=800  />
+            <img src="assets/img/jupyterfs2025/snippets3.png" width=1000  />
 
 
             ---
