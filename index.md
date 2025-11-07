@@ -28,7 +28,6 @@ You can find my resume [here](./rsc/TPCV.pdf).
 |                                                                                                                             |                                                     |                                      |           |
 | :-------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------- | :----------------------------------- | :-------- |
 |    <img width="75" src="https://raw.githubusercontent.com/timkpaine/timkpaine/main/static/img/cubist.png" alt="Cubist">     | [Point72 - Cubist](https://www.point72.com/cubist/) | Central Research Team                | 2022-     |
-|  <img width="75" src="https://raw.githubusercontent.com/timkpaine/timkpaine/main/static/img/columbia.png" alt="Columbia">   | [Columbia University](https://www.columbia.edu/)    | Associate in Computer Science        | 2015-     |
 |       <img width="75" src="https://raw.githubusercontent.com/timkpaine/timkpaine/main/static/img/iex.png" alt="IEX">        | [IEX](https://iextrading.com)                       | Head of Software Engineeering, Cloud | 2020-2021 |
 | <img width="75" src="https://raw.githubusercontent.com/timkpaine/timkpaine/main/static/img/jpmorgan.png" alt="J.P. Morgan"> | [J.P. Morgan](https://www.jpmorgan.com/global)      | Vice President, Athena Research      | 2016-2020 |
 | <img width="75" src="https://raw.githubusercontent.com/timkpaine/timkpaine/main/static/img/maystreet.png" alt="MayStreet">  | [MayStreet](https://maystreet.com)                  | Software Engineer                    | 2015-2016 |
@@ -54,10 +53,6 @@ About me or my work
 # Advising
 
 I advise several startups in data analytics, data visualization, and finance/trading.
-
-# Teaching
-
-I have taught in the Computer Science department at Columbia University since 2015. Topics include introductory/intermediate core computer science fundamentals in C, C++, and Python, as well as topics courses in computer hardware fundamentals and open source development methodologies. Please visit my [Columbia Computer Science homepage](https://www.cs.columbia.edu/~paine/) for more information.
 
 # Projects
 
