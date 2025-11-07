@@ -8,9 +8,6 @@ layout: default
 <a class="button-link" href="https://tim.paine.nyc/">
     <img src="https://img.shields.io/badge/Website-red" alt="Website">
 </a>
-<a class="button-link" href="https://www.cs.columbia.edu/~paine/">
-    <img src="https://img.shields.io/badge/Teaching-green" alt="Teaching">
-</a>
 <a class="button-link" href="https://www.linkedin.com/in/timkpaine/">
     <img src="https://img.shields.io/badge/LinkedIn-blue" alt="LinkedIn">
 </a>
