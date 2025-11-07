@@ -8,8 +8,6 @@
 
 My background is building high performance, full stack applications for front office business users and developers, focusing on streaming data, analytics, and machine learning.
 
-You can find my resume [here](https://tim.paine.nyc/rsc/TPCV.pdf).
-
 |                                                                      |                                                     |                                      |           |
 | :------------------------------------------------------------------: | :-------------------------------------------------: | :----------------------------------: | :-------: |
 |    <img width="75" src="./static/img/cubist.png" alt="Cubist" />     | [Point72 - Cubist](https://www.point72.com/cubist/) |        Central Research Team         |   2022-   |

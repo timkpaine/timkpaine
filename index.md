@@ -20,8 +20,6 @@ layout: default
 
 My background is building high performance, full stack applications for front office business users and developers, focusing on streaming data, analytics, and machine learning.
 
-You can find my resume [here](./rsc/TPCV.pdf).
-
 |                                                                                                                             |                                                     |                                      |           |
 | :-------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------- | :----------------------------------- | :-------- |
 |    <img width="75" src="https://raw.githubusercontent.com/timkpaine/timkpaine/main/static/img/cubist.png" alt="Cubist">     | [Point72 - Cubist](https://www.point72.com/cubist/) | Central Research Team                | 2022-     |
