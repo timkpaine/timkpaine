@@ -18,10 +18,6 @@ You can find my resume [here](https://tim.paine.nyc/rsc/TPCV.pdf).
 | <img width="75" src="./static/img/jpmorgan.png" alt="J.P. Morgan" /> |   [J.P. Morgan](https://www.jpmorgan.com/global)    |   Vice President, Athena Research    | 2016-2020 |
 | <img width="75" src="./static/img/maystreet.png" alt="MayStreet" />  |         [MayStreet](https://maystreet.com)          |          Software Engineer           | 2015-2016 |
 
-## Teaching
-
-I have taught in the Computer Science department at Columbia University since 2015. More information is available on [my Columbia website](https://cs.columbia.edu/~paine/).
-
 ## Media
 
 |                                                                                                                    |                                                                                     |                                                                                                                                                                                                                             |
