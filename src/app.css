@@ -11,11 +11,22 @@
 }
 
 :root {
+  --grid-line: rgb(23 24 22 / 0.035);
   font-family: var(--font-sans);
   color: var(--color-ink);
   background: var(--color-paper);
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+}
+
+:root[data-theme='dark'] {
+  --color-paper: #121411;
+  --color-ink: #f2f0e9;
+  --color-muted: #a7aa9f;
+  --color-line: #373a33;
+  --grid-line: rgb(242 240 233 / 0.055);
+  color-scheme: dark;
 }
 
 html {
@@ -27,7 +38,7 @@ body {
   min-width: 320px;
   margin: 0;
   background:
-    linear-gradient(to right, rgb(23 24 22 / 0.035) 1px, transparent 1px) 50% 0 / min(12.5vw, 10rem) 100%,
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px) 50% 0 / min(12.5vw, 10rem) 100%,
     var(--color-paper);
 }
 

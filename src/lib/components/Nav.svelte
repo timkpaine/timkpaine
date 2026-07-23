@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from '$app/state';
+  import ThemeToggle from './ThemeToggle.svelte';
 
   const links = [
     { href: '/#work', label: 'Work' },
@@ -20,10 +21,10 @@
           height="28"
         />
       </span>
-      <span class="text-sm font-semibold tracking-[-0.02em]">Tim Paine</span>
+      <span class="hidden text-sm font-semibold tracking-[-0.02em] min-[360px]:inline">Tim Paine</span>
     </a>
 
-    <div class="flex items-center gap-5 sm:gap-8">
+    <div class="flex items-center gap-4 sm:gap-6 lg:gap-8">
       {#each links as link}
         <a
           class:font-semibold={link.href !== '/#work' && page.url.pathname.startsWith(link.href)}
@@ -33,6 +34,7 @@
           {link.label}
         </a>
       {/each}
+      <ThemeToggle />
       <a
         class="hidden rounded-full border border-ink px-4 py-2 text-xs font-semibold transition-colors hover:bg-ink hover:text-paper sm:block"
         href="https://www.linkedin.com/in/timkpaine/"

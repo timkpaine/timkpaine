@@ -70,7 +70,8 @@
           <span class="eyebrow text-muted">Live signal</span>
           <span class="flex flex-col items-end gap-1 font-mono uppercase">
             <span class="text-[0.65rem] tracking-[0.12em]" aria-live="polite">
-              NYC / 40.71° N / {temperature === null ? '--' : Math.round(temperature)}°F
+              NYC / 40.71° N <span class="mx-0.5 text-[0.7em] text-muted">×</span> 74.01° W /
+              {temperature === null ? '--' : Math.round(temperature)}°F
             </span>
             <a
               class="link-line text-[0.52rem] tracking-[0.1em] text-muted"
