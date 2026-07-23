@@ -8,12 +8,12 @@
 
 My background is building high performance, full stack applications for front office business users and developers, focusing on streaming data, analytics, and machine learning.
 
-|                                                                      |                                                     |                                      |           |
-| :------------------------------------------------------------------: | :-------------------------------------------------: | :----------------------------------: | :-------: |
-|    <img width="75" src="./static/img/cubist.png" alt="Cubist" />     | [Point72 - Cubist](https://www.point72.com/cubist/) |        Central Research Team         |   2022-   |
-|       <img width="75" src="./static/img/iex.png" alt="IEX" />        |            [IEX](https://iextrading.com)            | Head of Software Engineeering, Cloud | 2020-2021 |
-| <img width="75" src="./static/img/jpmorgan.png" alt="J.P. Morgan" /> |   [J.P. Morgan](https://www.jpmorgan.com/global)    |   Vice President, Athena Research    | 2016-2020 |
-| <img width="75" src="./static/img/maystreet.png" alt="MayStreet" />  |         [MayStreet](https://maystreet.com)          |          Software Engineer           | 2015-2016 |
+|                                                                             |                                                     |                                      |           |
+| :-------------------------------------------------------------------------: | :-------------------------------------------------: | :----------------------------------: | :-------: |
+|    <img width="75" src="./public/static/img/cubist.png" alt="Cubist" />     | [Point72 - Cubist](https://www.point72.com/cubist/) |        Central Research Team         |   2022-   |
+|       <img width="75" src="./public/static/img/iex.png" alt="IEX" />        |            [IEX](https://iextrading.com)            | Head of Software Engineeering, Cloud | 2020-2021 |
+| <img width="75" src="./public/static/img/jpmorgan.png" alt="J.P. Morgan" /> |   [J.P. Morgan](https://www.jpmorgan.com/global)    |   Vice President, Athena Research    | 2016-2020 |
+| <img width="75" src="./public/static/img/maystreet.png" alt="MayStreet" />  |         [MayStreet](https://maystreet.com)          |          Software Engineer           | 2015-2016 |
 
 ## Media
 
