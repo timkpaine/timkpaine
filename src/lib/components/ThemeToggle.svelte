@@ -36,7 +36,7 @@
 </script>
 
 <button
-  class="grid size-8 shrink-0 place-items-center rounded-full border border-line text-ink transition-[border-color,box-shadow] hover:border-accent hover:shadow-[0_0_0_2px_var(--color-accent)]"
+  class="grid size-8 shrink-0 place-items-center rounded-full border border-line text-ink transition-[color,background-color,border-color,box-shadow] hover:border-accent hover:bg-ink hover:text-paper hover:shadow-[0_0_0_2px_var(--color-accent)]"
   type="button"
   aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
   aria-pressed={theme === 'dark'}
