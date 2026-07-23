@@ -6,6 +6,7 @@
   --color-muted: #676961;
   --color-line: #cdcec5;
   --color-accent: #c8ff35;
+  --color-accent-ink: #171816;
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
@@ -66,15 +67,35 @@ button:focus-visible {
 }
 
 .link-line {
-  background-image: linear-gradient(currentColor, currentColor);
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
   background-position: 0 100%;
   background-repeat: no-repeat;
-  background-size: 0 1px;
+  background-size: 0 2px;
   transition: background-size 180ms ease;
 }
 
 .link-line:hover {
-  background-size: 100% 1px;
+  background-size: 100% 2px;
+}
+
+.neon-hover {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.neon-hover:hover {
+  color: var(--color-accent-ink);
+  background-color: var(--color-accent);
+}
+
+.neon-hover:hover .neon-hover-muted,
+.neon-hover:hover .link-line {
+  color: var(--color-accent-ink);
+}
+
+.neon-hover:hover .link-line {
+  background-image: linear-gradient(var(--color-accent-ink), var(--color-accent-ink));
 }
 
 .reveal {

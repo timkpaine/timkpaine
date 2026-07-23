@@ -36,7 +36,7 @@
       {/each}
       <ThemeToggle />
       <a
-        class="hidden rounded-full border border-ink px-4 py-2 text-xs font-semibold transition-colors hover:bg-ink hover:text-paper sm:block"
+        class="hidden rounded-full border border-ink px-4 py-2 text-xs font-semibold transition-[border-color,box-shadow] hover:border-accent hover:shadow-[0_0_0_2px_var(--color-accent)] sm:block"
         href="https://www.linkedin.com/in/timkpaine/"
       >
         Say hello

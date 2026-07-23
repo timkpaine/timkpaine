@@ -118,7 +118,7 @@
     <div class="grid border-l border-t border-line sm:grid-cols-2 xl:grid-cols-3">
       {#each organizations as organization, index}
         <a
-          class="group min-h-60 border-b border-r border-line p-6 transition-colors hover:bg-accent sm:min-h-72 sm:p-8"
+          class="neon-hover group min-h-60 border-b border-r border-line p-6 sm:min-h-72 sm:p-8"
           href={organization.href}
           target="_blank"
           rel="noreferrer"
@@ -133,13 +133,13 @@
             />
             <span class="text-xl transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">↗</span>
           </div>
-          <p class="eyebrow mt-10 text-muted group-hover:text-ink">
+          <p class="neon-hover-muted eyebrow mt-10 text-muted">
             {String(index + 1).padStart(2, '0')} / @{organization.handle}
           </p>
           <h3 class="mt-3 text-2xl font-medium tracking-[-0.045em] sm:text-3xl">
             {organization.name}
           </h3>
-          <p class="mt-4 max-w-lg leading-relaxed text-muted group-hover:text-ink">
+          <p class="neon-hover-muted mt-4 max-w-lg leading-relaxed text-muted">
             {organization.description}
           </p>
         </a>
@@ -152,7 +152,7 @@
   </div>
 </section>
 
-<section class="border-t border-line bg-ink text-paper">
+<section class="border-t border-line bg-ink text-paper" data-clock-invert>
   <div class="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
     <div class="mb-12 grid gap-5 md:grid-cols-2 md:items-end">
       <div>
@@ -166,10 +166,10 @@
 
     <div class="border-t border-paper/25">
       {#each talks.slice(0, 5) as talk}
-        <article class="group grid gap-4 border-b border-paper/25 py-7 md:grid-cols-[5rem_1fr_1fr_auto] md:items-center">
-          <p class="font-mono text-xs text-paper/45">{talk.year}</p>
+        <article class="neon-hover group grid gap-4 border-b border-paper/25 py-7 md:grid-cols-[5rem_1fr_1fr_auto] md:items-center">
+          <p class="neon-hover-muted font-mono text-xs text-paper/45">{talk.year}</p>
           <h3 class="max-w-xl text-xl font-medium tracking-[-0.035em]">{talk.title}</h3>
-          <p class="text-sm text-paper/50">{talk.event}</p>
+          <p class="neon-hover-muted text-sm text-paper/50">{talk.event}</p>
           <div class="flex gap-4 text-sm">
             {#if 'recording' in talk}
               <a class="link-line" href={talk.recording}>Watch ↗</a>
@@ -205,10 +205,10 @@
 
       <div class="mt-14 border-t border-line">
         {#each experience as item}
-          <div class="grid gap-2 border-b border-line py-5 sm:grid-cols-[1fr_1fr_auto] sm:items-baseline">
+          <div class="neon-hover group grid gap-2 border-b border-line px-4 py-5 sm:grid-cols-[5rem_1fr_1fr] sm:items-baseline">
+            <p class="neon-hover-muted font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted">{item.years}</p>
             <p class="font-semibold tracking-[-0.02em]">{item.company}</p>
-            <p class="text-sm text-muted">{item.role}</p>
-            <p class="font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted">{item.years}</p>
+            <p class="neon-hover-muted text-sm text-muted">{item.role}</p>
           </div>
         {/each}
       </div>
