@@ -92,13 +92,39 @@ jobs:
           script: |
             const artifactName = 'github-pages'
             const { owner, repo } = context.repo
-            const { data } = await github.rest.actions.listWorkflowRunArtifacts({
-              owner,
-              repo,
-              run_id: context.runId,
-              name: artifactName,
-              per_page: 100
-            })
+            const sleep = milliseconds =>
+              new Promise(resolve => setTimeout(resolve, milliseconds))
+            const withRetries = async (label, operation, shouldRetry) => {
+              const attempts = 6
+
+              for (let attempt = 1; attempt <= attempts; attempt += 1) {
+                try {
+                  return await operation()
+                } catch (error) {
+                  if (attempt === attempts || !shouldRetry(error)) {
+                    throw error
+                  }
+
+                  const delay = attempt * 5000
+                  core.warning(
+                    `${label} failed on attempt ${attempt}; retrying in ${delay / 1000}s`
+                  )
+                  await sleep(delay)
+                }
+              }
+            }
+            const { data } = await withRetries(
+              'Listing Pages artifact',
+              () =>
+                github.rest.actions.listWorkflowRunArtifacts({
+                  owner,
+                  repo,
+                  run_id: context.runId,
+                  name: artifactName,
+                  per_page: 100
+                }),
+              error => error.status === 429 || error.status >= 500
+            )
             const artifacts = data.artifacts.filter(
               artifact => artifact.name === artifactName && !artifact.expired
             )
@@ -109,16 +135,25 @@ jobs:
               )
             }
 
-            const oidcToken = await core.getIDToken()
-            const { data: deployment } = await github.request(
-              'POST /repos/{owner}/{repo}/pages/deployments',
-              {
-                owner,
-                repo,
-                artifact_id: artifacts[0].id,
-                pages_build_version: context.sha,
-                oidc_token: oidcToken
-              }
+            const { data: deployment } = await withRetries(
+              'Creating Pages deployment',
+              async () => {
+                const oidcToken = await core.getIDToken()
+                return github.request(
+                  'POST /repos/{owner}/{repo}/pages/deployments',
+                  {
+                    owner,
+                    repo,
+                    artifact_id: artifacts[0].id,
+                    pages_build_version: context.sha,
+                    oidc_token: oidcToken
+                  }
+                )
+              },
+              error =>
+                error.status >= 500 ||
+                (error.status === 400 &&
+                  error.message.includes('Invalid actions OIDC token'))
             )
             const deploymentId =
               deployment.id ??
@@ -137,10 +172,15 @@ jobs:
             core.setOutput('page_url', deployment.page_url ?? '')
 
             while (Date.now() - startedAt < timeout) {
-              await new Promise(resolve => setTimeout(resolve, pollInterval))
-              const { data: status } = await github.request(
-                'GET /repos/{owner}/{repo}/pages/deployments/{deploymentId}',
-                { owner, repo, deploymentId }
+              await sleep(pollInterval)
+              const { data: status } = await withRetries(
+                'Checking Pages deployment',
+                () =>
+                  github.request(
+                    'GET /repos/{owner}/{repo}/pages/deployments/{deploymentId}',
+                    { owner, repo, deploymentId }
+                  ),
+                error => error.status === 429 || error.status >= 500
               )
 
               core.info(`Current status: ${status.status}`)
