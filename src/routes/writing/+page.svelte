@@ -11,12 +11,11 @@
   <p class="eyebrow mb-6 text-muted">Writing / Soon</p>
   <div class="grid gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
     <h1 class="max-w-5xl text-[clamp(4rem,10vw,9rem)] font-medium leading-[0.84] tracking-[-0.075em]">
-      Working notes, <span class="font-serif italic font-normal">properly edited.</span>
+      Thoughts
     </h1>
     <div class="border-t border-line pt-6 lg:mb-2">
       <p class="max-w-lg text-lg leading-relaxed text-muted">
-        A home for durable ideas about developer tools, data interfaces, open-source maintenance, and whatever else
-        survives the draft folder.
+        A place for my informal thoughts and hobby projects.
       </p>
       <p class="mt-8 font-mono text-[0.65rem] uppercase tracking-[0.12em]">
         First dispatch in progress
