@@ -91,7 +91,8 @@ export const talks = [
     title: 'Build a data studio in your notebook with jupyter-fs',
     event: 'PyData Paris',
     description: 'Composable file systems and data tools inside JupyterLab.',
-    slides: '/talks/jupyterfs2025.html?print-pdf=true'
+    slides: '/talks/jupyterfs2025.html?print-pdf=true',
+    recording: 'https://youtu.be/q0mMlVbXssk',
   },
   {
     year: '2025',
