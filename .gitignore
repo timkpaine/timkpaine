@@ -5,6 +5,9 @@ spark-3.5.1-bin-hadoop3.tgz
 spark-3.5.1-bin-hadoop3
 
 node_modules
+coverage
+playwright-report
+test-results
 .svelte-kit
 build
 .vite

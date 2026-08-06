@@ -1,0 +1,12 @@
+node_modules
+pnpm-lock.yaml
+build
+.svelte-kit
+coverage
+playwright-report
+test-results
+public/talks
+.github/CODE_OF_CONDUCT.md
+.github/ISSUE_TEMPLATE
+README.md
+SPONSOR.md

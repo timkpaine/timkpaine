@@ -1,8 +1,8 @@
 <script lang="ts">
   import { experience, organizations, talks } from '$lib/data/site';
+  import { LiveSignal } from '@timkpaine/ui';
   import { onMount } from 'svelte';
 
-  const signal = [22, 52, 34, 72, 46, 88, 62, 28, 54, 38, 78, 48, 92, 58, 32, 68, 42, 82, 56, 24, 64, 44, 74, 36];
   const weatherUrl =
     'https://api.open-meteo.com/v1/forecast?latitude=40.7128&longitude=-74.0060&current=temperature_2m&temperature_unit=fahrenheit&timezone=America%2FNew_York';
 
@@ -55,60 +55,23 @@
         <span class="size-2 rounded-full bg-accent ring-1 ring-ink"></span>
         Software engineer · Open-source maintainer
       </p>
-      <h1 class="max-w-5xl text-[clamp(4.5rem,11vw,10.5rem)] font-medium leading-[0.84] tracking-[-0.075em]">
-        Hello.
-      </h1>
+      <h1 class="max-w-5xl text-[clamp(4.5rem,11vw,10.5rem)] font-medium leading-[0.84] tracking-[-0.075em]">Hello.</h1>
       <p class="mt-9 max-w-2xl text-lg leading-relaxed tracking-[-0.025em] text-muted sm:text-xl">
-        New York–based engineer working across data systems, developer tools, visualization,
-        machine learning, and computing hardware.
+        New York–based engineer working across data systems, developer tools, visualization, machine learning, and
+        computing hardware.
       </p>
     </div>
 
-    <div class="reveal lg:pb-3" style="animation-delay: 120ms">
-      <div class="border-y border-line py-5">
-        <div class="mb-5 flex items-center justify-between">
-          <span class="eyebrow text-muted">Live signal</span>
-          <span class="flex flex-col items-end gap-1 font-mono uppercase">
-            <span class="text-[0.65rem] tracking-[0.12em]" aria-live="polite">
-              NYC / 40.71° N <span class="mx-0.5 text-[0.7em] text-muted">×</span> 74.01° W /
-              {temperature === null ? '--' : Math.round(temperature)}°F
-            </span>
-            <a
-              class="link-line text-[0.52rem] tracking-[0.1em] text-muted"
-              href="https://open-meteo.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Weather by Open-Meteo ↗
-            </a>
-          </span>
-        </div>
-        <div class="flex h-32 items-end gap-[3px] overflow-hidden" aria-hidden="true">
-          {#each signal as height, index}
-            <span
-              class="signal-bar min-w-1 flex-1 bg-ink"
-              style:height={`${height}%`}
-              style:animation-delay={`${index * -90}ms`}
-            ></span>
-          {/each}
-        </div>
-      </div>
-      <div class="mt-4 grid grid-cols-2 gap-4 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted">
-        <span>Data systems</span>
-        <span class="text-right">Human interfaces</span>
-      </div>
-    </div>
+    <LiveSignal {temperature} />
   </div>
 </section>
 
-<section id="work" class="border-t border-line">
+<section id="communities" class="border-t border-line">
   <div class="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
     <div class="mb-12 grid gap-5 md:grid-cols-2 md:items-end">
       <div>
         <p class="eyebrow mb-5 text-muted">01 / GitHub</p>
-        <h2 class="text-4xl font-medium tracking-[-0.055em] sm:text-6xl">
-          Organizations & communities.
-        </h2>
+        <h2 class="text-4xl font-medium tracking-[-0.055em] sm:text-6xl">Organizations & communities.</h2>
       </div>
       <p class="max-w-xl text-base leading-relaxed text-muted md:justify-self-end">
         A selection of the accounts and open-source communities that shape my work.
@@ -156,20 +119,22 @@
   <div class="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
     <div class="mb-12 grid gap-5 md:grid-cols-2 md:items-end">
       <div>
-        <p class="eyebrow mb-5 text-paper/55">02 / Recent talks</p>
+        <p class="eyebrow mb-5 text-paper/70">02 / Recent talks</p>
         <h2 class="text-4xl font-medium tracking-[-0.055em] sm:text-6xl">Ideas.</h2>
       </div>
-      <p class="max-w-lg text-base leading-relaxed text-paper/60 md:justify-self-end">
+      <p class="max-w-lg text-base leading-relaxed text-paper/70 md:justify-self-end">
         Talks on open source, high-performance interfaces, notebooks, and specialized computing.
       </p>
     </div>
 
     <div class="border-t border-paper/25">
       {#each talks.slice(0, 5) as talk}
-        <article class="neon-hover group grid gap-4 border-b border-paper/25 py-7 md:grid-cols-[5rem_1fr_1fr_auto] md:items-center">
-          <p class="neon-hover-muted font-mono text-xs text-paper/45">{talk.year}</p>
+        <article
+          class="neon-hover group grid gap-4 border-b border-paper/25 py-7 md:grid-cols-[5rem_1fr_1fr_auto] md:items-center"
+        >
+          <p class="neon-hover-muted font-mono text-xs text-paper/70">{talk.year}</p>
           <h3 class="max-w-xl text-xl font-medium tracking-[-0.035em]">{talk.title}</h3>
-          <p class="neon-hover-muted text-sm text-paper/50">{talk.event}</p>
+          <p class="neon-hover-muted text-sm text-paper/70">{talk.event}</p>
           <div class="flex gap-4 text-sm">
             {#if 'recording' in talk}
               <a class="link-line" href={talk.recording}>Watch ↗</a>
@@ -185,27 +150,27 @@
   </div>
 </section>
 
-<section id="about" class="border-t border-line">
+<section id="work" class="border-t border-line">
   <div class="mx-auto grid max-w-[92rem] gap-16 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-12 lg:py-28">
     <div>
       <p class="eyebrow mb-5 text-muted">03 / About</p>
-      <h2 class="max-w-md text-4xl font-medium tracking-[-0.055em] sm:text-6xl">
-        Research + Product.
-      </h2>
+      <h2 class="max-w-md text-4xl font-medium tracking-[-0.055em] sm:text-6xl">Research + Product.</h2>
     </div>
     <div>
       <p class="max-w-2xl text-2xl leading-snug tracking-[-0.04em] sm:text-3xl">
-        My background is building full-stack applications for front-office users and developers,
-        where performance and clarity have to coexist.
+        My background is building full-stack applications for front-office users and developers, where performance and
+        clarity have to coexist.
       </p>
       <p class="mt-7 max-w-2xl leading-relaxed text-muted">
-        I contribute to large-scale open-source communities including JupyterLab and conda-forge,
-        advise teams in data and finance, and teach what I learn along the way.
+        I contribute to large-scale open-source communities including JupyterLab and conda-forge, advise teams in data
+        and finance, and teach what I learn along the way.
       </p>
 
       <div class="mt-14 border-t border-line">
         {#each experience as item}
-          <div class="neon-hover group grid gap-2 border-b border-line px-4 py-5 sm:grid-cols-[5rem_1fr_1fr] sm:items-baseline">
+          <div
+            class="neon-hover group grid gap-2 border-b border-line px-4 py-5 sm:grid-cols-[5rem_1fr_1fr] sm:items-baseline"
+          >
             <p class="neon-hover-muted font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted">{item.years}</p>
             <p class="font-semibold tracking-[-0.02em]">{item.company}</p>
             <p class="neon-hover-muted text-sm text-muted">{item.role}</p>
@@ -220,23 +185,3 @@
     </div>
   </div>
 </section>
-
-<style>
-  .signal-bar {
-    transform-origin: bottom;
-    animation: signal 1.8s ease-in-out infinite alternate;
-  }
-
-  @keyframes signal {
-    to {
-      transform: scaleY(0.34);
-      opacity: 0.38;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .signal-bar {
-      animation: none;
-    }
-  }
-</style>

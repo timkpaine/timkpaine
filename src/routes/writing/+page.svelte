@@ -15,8 +15,8 @@
     </h1>
     <div class="border-t border-line pt-6 lg:mb-2">
       <p class="max-w-lg text-lg leading-relaxed text-muted">
-        A home for durable ideas about developer tools, data interfaces, open-source maintenance,
-        and whatever else survives the draft folder.
+        A home for durable ideas about developer tools, data interfaces, open-source maintenance, and whatever else
+        survives the draft folder.
       </p>
       <p class="mt-8 font-mono text-[0.65rem] uppercase tracking-[0.12em]">
         First dispatch in progress

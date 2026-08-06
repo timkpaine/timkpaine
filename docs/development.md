@@ -12,6 +12,15 @@ pnpm install
 pnpm dev --open
 ```
 
+Quality checks and automatic formatting:
+
+```bash
+pnpm check
+pnpm lint
+pnpm fix
+pnpm test
+```
+
 Production preview:
 
 ```bash
