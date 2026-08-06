@@ -7,6 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -81,7 +82,79 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+    timeout-minutes: 35
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/github-script@v9
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const artifactName = 'github-pages'
+            const { owner, repo } = context.repo
+            const { data } = await github.rest.actions.listWorkflowRunArtifacts({
+              owner,
+              repo,
+              run_id: context.runId,
+              name: artifactName,
+              per_page: 100
+            })
+            const artifacts = data.artifacts.filter(
+              artifact => artifact.name === artifactName && !artifact.expired
+            )
+
+            if (artifacts.length !== 1) {
+              throw new Error(
+                `Expected one ${artifactName} artifact, found ${artifacts.length}`
+              )
+            }
+
+            const oidcToken = await core.getIDToken()
+            const { data: deployment } = await github.request(
+              'POST /repos/{owner}/{repo}/pages/deployments',
+              {
+                owner,
+                repo,
+                artifact_id: artifacts[0].id,
+                pages_build_version: context.sha,
+                oidc_token: oidcToken
+              }
+            )
+            const deploymentId =
+              deployment.id ??
+              deployment.status_url?.split('/').pop() ??
+              context.sha
+            const finalErrors = {
+              deployment_failed: 'Deployment failed',
+              deployment_content_failed: 'Artifact content could not be deployed',
+              deployment_cancelled: 'Deployment was cancelled',
+              deployment_lost: 'Deployment failed to report final status'
+            }
+            const pollInterval = 5000
+            const timeout = 30 * 60 * 1000
+            const startedAt = Date.now()
+
+            core.setOutput('page_url', deployment.page_url ?? '')
+
+            while (Date.now() - startedAt < timeout) {
+              await new Promise(resolve => setTimeout(resolve, pollInterval))
+              const { data: status } = await github.request(
+                'GET /repos/{owner}/{repo}/pages/deployments/{deploymentId}',
+                { owner, repo, deploymentId }
+              )
+
+              core.info(`Current status: ${status.status}`)
+              if (status.status === 'succeed') {
+                core.info('Reported success!')
+                return
+              }
+              if (finalErrors[status.status]) {
+                throw new Error(finalErrors[status.status])
+              }
+            }
+
+            await github.request(
+              'POST /repos/{owner}/{repo}/pages/deployments/{deploymentId}/cancel',
+              { owner, repo, deploymentId }
+            )
+            throw new Error('Pages deployment timed out after 30 minutes')
