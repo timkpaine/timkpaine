@@ -92,7 +92,7 @@ export const talks = [
     event: 'PyData Paris',
     description: 'Composable file systems and data tools inside JupyterLab.',
     slides: '/talks/jupyterfs2025.html?print-pdf=true',
-    recording: 'https://youtu.be/q0mMlVbXssk',
+    recording: 'https://youtu.be/q0mMlVbXssk'
   },
   {
     year: '2025',
