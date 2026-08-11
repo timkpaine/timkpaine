@@ -1,8 +1,8 @@
 # Hello
 
-[![](https://img.shields.io/badge/Website-red)](https://tim.paine.nyc/)
-[![](https://img.shields.io/badge/LinkedIn-blue)](https://www.linkedin.com/in/timkpaine/)
-[![GitHub followers](https://img.shields.io/github/followers/timkpaine?label=Follow&style=social)](https://github.com/timkpaine)
+[![](https://img.shields.io/badge/Website-red?style=for-the-badge)](https://tim.paine.nyc/)
+[![](https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge)](https://www.linkedin.com/in/timkpaine/)
+[![GitHub followers](https://img.shields.io/github/followers/timkpaine?label=Follow&style=for-the-badge)](https://github.com/timkpaine)
 
 ## Experience
 
