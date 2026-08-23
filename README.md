@@ -33,7 +33,7 @@ My background is building high performance, full stack applications for front of
 
 ## Projects
 
-I own and/or maintain projects in the following organizations.
+I have created, owned, and/or maintained projects in the following organizations.
 
 |                                                                                                           |                                                                         |                                                                         |
 | :-------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------- | :---------------------------------------------------------------------- |
