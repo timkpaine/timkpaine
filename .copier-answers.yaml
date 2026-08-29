@@ -1,0 +1,11 @@
+# Changes here will be overwritten by Copier
+_commit: 195919b
+_src_path: https://github.com/python-project-templates/base.git
+add_extension: site-sveltekit
+brand_name: Tim Paine
+github: timkpaine
+project_description: Personal website of Tim Paine
+project_name: timkpaine
+site_adapter: static
+site_url: https://tim.paine.nyc
+

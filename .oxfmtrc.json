@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 120,
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "sortPackageJson": false,
+  "svelte": true,
+  "ignorePatterns": [
+    ".github/CODE_OF_CONDUCT.md",
+    ".github/ISSUE_TEMPLATE/**",
+    ".svelte-kit/**",
+    ".copier-answers.yaml",
+    "README.md",
+    "SPONSOR.md",
+    "build/**",
+    "coverage/**",
+    "playwright-report/**",
+    "static/**",
+    "test-results/**"
+  ]
+}
