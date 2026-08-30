@@ -44,7 +44,19 @@ export const posts: Post[] = Object.entries(modules)
   })
   .sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime());
 
-/** Drafts stay reachable by direct URL but are kept out of the index, feed, and sitemap. */
+/**
+ * Drafts are visible while developing, and when a preview build opts in with
+ * `VITE_INCLUDE_DRAFTS=true`, which is how the end-to-end tests reach them.
+ */
+const includeDrafts = import.meta.env.DEV || import.meta.env.VITE_INCLUDE_DRAFTS === 'true';
+
+/**
+ * Posts listed in the index. A production build lists no drafts, so nothing
+ * links to them and they are never prerendered — a draft cannot be deployed.
+ */
+export const visiblePosts = includeDrafts ? posts : posts.filter((post) => !post.draft);
+
+/** Posts for the feed and sitemap. Drafts are excluded even while developing. */
 export const publishedPosts = posts.filter((post) => !post.draft);
 
 export const formatDate = (value: string) =>

@@ -11,9 +11,9 @@ draft: true
   import pipeline from './pipeline.png?enhanced';
 </script>
 
-This post is a working reference for adding content. It is marked `draft: true`, so it stays out of the
-index, the feed, and the sitemap, and carries a `noindex` tag — but it is still reachable at its URL, so
-the layout can be reviewed before anything is published.
+This post is a working reference for adding content. It is marked `draft: true`, so it shows up while
+running the site locally but is never written into a production build — there is no published URL to
+find. Drafts are also withheld from the feed and the sitemap, even locally.
 
 ## Frontmatter
 
@@ -28,7 +28,7 @@ optional.
 | `updated`     | no       | Adds `dateModified` and the sitemap `lastmod`.             |
 | `tags`        | no       | Rendered as chips and emitted as `article:tag`.            |
 | `image`       | no       | Overrides the social card, e.g. `/og/my-post.png`.         |
-| `draft`       | no       | Hides the post from the index, feed, and sitemap.          |
+| `draft`       | no       | Local only. Never built for production, never syndicated.  |
 
 ## Images
 

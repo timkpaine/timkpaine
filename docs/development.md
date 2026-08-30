@@ -62,8 +62,20 @@ draft: true
 ```
 
 `title`, `description`, and `date` are required. `updated` adds `dateModified` and the sitemap
-`lastmod`; `image` overrides the social card; `draft` hides the post from the index, the feed, and the
-sitemap while leaving it reachable at its URL with a `noindex` tag.
+`lastmod`, and `image` overrides the social card.
+
+`draft: true` keeps a post local. It is listed and readable under `pnpm dev`, marked with a Draft
+badge, but a production build lists no drafts — so nothing links to one, and it is never prerendered.
+There is no published URL to stumble on. Drafts are kept out of the feed and sitemap even locally, and
+`deploy.yml` re-checks the built output before publishing.
+
+Because the build only prerenders what it can reach from `/` and `/sitemap.xml`, a page that nothing
+links to will not be built. That is what keeps drafts unpublished, but it also means a genuinely
+unreachable page is a build error rather than a silent omission. Add such a page to `prerender.entries`
+in `svelte.config.js`.
+
+To preview the site exactly as deployed, run `pnpm build && pnpm preview`; the drafts disappear. The
+end-to-end tests opt back in with `VITE_INCLUDE_DRAFTS=true` so they can exercise a draft.
 
 Ordinary markdown works. A few things are wired up on top of it:
 

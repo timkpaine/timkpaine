@@ -111,10 +111,17 @@ test('post renders a readable date rather than a raw timestamp', async ({ page }
   await expect(time).toHaveText(/^\w+ \d{1,2}, \d{4}$/);
 });
 
-test('drafts stay out of the index, feed, and sitemap', async ({ page }) => {
+test('drafts are flagged in the index and never syndicated', async ({ page }) => {
   await page.goto('/writing/');
-  await expect(page.locator('a[href="/writing/example-post/"]')).toHaveCount(0);
 
+  // This preview build sets VITE_INCLUDE_DRAFTS so the tests can reach the
+  // post. A production build lists no drafts at all, so nothing links to them
+  // and they are never prerendered.
+  const link = page.locator('a[href="/writing/example-post/"]');
+  await expect(link).toHaveCount(1);
+  await expect(page.locator('article', { has: link }).getByText('Draft')).toBeVisible();
+
+  // Drafts are withheld from the feed and sitemap even when they are listed.
   const feed = await (await page.request.get('/writing/rss.xml')).text();
   expect(feed).not.toContain('example-post');
 
