@@ -1,16 +1,20 @@
 {
-  "name": "tim-paine-nyc",
+  "name": "timkpaine",
+  "version": "0.1.0",
+  "description": "Personal website of Tim Paine",
   "private": true,
-  "version": "0.0.0",
   "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=22"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "lint": "prettier --check .",
-    "fix": "prettier --write .",
+    "lint": "oxlint . && oxfmt --check .",
+    "fix": "oxlint --fix . && oxfmt --write .",
     "test": "pnpm test:e2e",
     "test:e2e": "playwright test",
     "test:e2e:update": "playwright test --update-snapshots"
@@ -18,20 +22,18 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.60.0",
-    "@timkpaine/ui": "file:../../ui",
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.70.1",
+    "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@tailwindcss/vite": "^4.3.3",
+    "@timkpaine/ui": "file:../../ui",
     "@types/node": "^26.0.0",
-    "prettier": "^3.8.4",
-    "prettier-plugin-svelte": "^4.1.1",
+    "oxfmt": "^0.63.0",
+    "oxlint": "^1.78.0",
     "svelte": "^5.56.7",
     "svelte-check": "^4.3.4",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3",
     "vite": "^8.1.5"
-  },
-  "engines": {
-    "node": ">=22"
   }
 }

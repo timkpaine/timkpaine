@@ -13,13 +13,13 @@ export default defineConfig({
     toHaveScreenshot: { maxDiffPixelRatio: 0.01, threshold: 0.2, animations: 'disabled', caret: 'hide' }
   },
   use: {
-    baseURL: 'http://127.0.0.1:4176',
+    baseURL: 'http://127.0.0.1:4177',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure'
   },
   webServer: {
-    command: 'vite build && vite preview --host 127.0.0.1 --port 4176 --strictPort',
-    port: 4176,
+    command: 'vite build && vite preview --host 127.0.0.1 --port 4177 --strictPort',
+    port: 4177,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000
   },
