@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-const routes = ['/', '/talks/', '/writing/'];
+const routes = ['/', '/talks/', '/writing/', '/writing/example-post/'];
 
 for (const route of routes) {
   for (const theme of ['light', 'dark'] as const) {

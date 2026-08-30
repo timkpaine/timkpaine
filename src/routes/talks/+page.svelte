@@ -1,15 +1,12 @@
 <script lang="ts">
   import { talks } from '$lib/data/site';
+  import Seo from '$lib/components/Seo.svelte';
 </script>
 
-<svelte:head>
-  <title>Talks — Tim Paine</title>
-  <meta
-    name="description"
-    content="Talks by Tim Paine on Jupyter, data visualization, open source, and specialized computing."
-  />
-  <link rel="canonical" href="https://tim.paine.nyc/talks/" />
-</svelte:head>
+<Seo
+  title="Talks — Tim Paine"
+  description="Talks by Tim Paine on Jupyter, data visualization, open source, and specialized computing."
+/>
 
 <section class="mx-auto max-w-[92rem] px-5 pb-16 pt-16 sm:px-8 lg:px-12 lg:pb-24 lg:pt-24">
   <p class="eyebrow mb-6 text-muted">Talks / 2020—Now</p>
