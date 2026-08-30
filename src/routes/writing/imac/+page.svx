@@ -1,0 +1,43 @@
+---
+title: iMac
+description: One or two sentences describing what this is about. This is the meta description and the summary shown in the index, so write it for someone with no context.
+date: 2026-08-30
+tags: [hardware]
+draft: true
+---
+
+Open with the state it arrived in and what you set out to do. A hardware write-up earns its keep with
+specifics — model, year, what was wrong.
+
+## What it started as
+
+Condition, teardown notes, anything that surprised you.
+
+| Part    | Original | Replacement |
+| ------- | -------- | ----------- |
+| Storage |          |             |
+| Memory  |          |             |
+
+## The work
+
+Steps worth repeating, and the ones that went badly. Photographs do most of the work here.[^photos]
+
+## Where it ended up
+
+What it is used for now, and whether it was worth it.
+
+<!--
+  Images live next to this file and use ordinary markdown:
+      ![Alt text describing the image](./teardown.jpg)
+  Add a caption by passing a title:
+      ![Alt text](./teardown.jpg "Caption shown under the image")
+  For a wider figure, import it and use Figure directly:
+      <script>
+        import Figure from '$lib/components/Figure.svelte';
+        import teardown from './teardown.jpg?enhanced';
+      </script>
+      <Figure src={teardown} alt="Alt text" caption="Caption" wide />
+-->
+
+[^photos]: Drop photos in this directory and reference them with a relative path. They are converted to
+    AVIF and WebP at several widths, so full-resolution originals are fine to commit.

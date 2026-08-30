@@ -1,0 +1,43 @@
+---
+title: Linerack
+description: One or two sentences describing the project. This is the meta description and the summary shown in the index, so write it for someone who has not heard of it.
+date: 2026-08-30
+tags: [projects]
+draft: true
+---
+
+Open with what this is and why it exists, in two or three sentences. Assume the reader arrived from a
+search result and has no context.
+
+## Background
+
+What problem prompted it, and what already existed. Link out to prior art rather than summarising
+it.[^prior]
+
+## How it works
+
+The interesting part. Prefer a concrete example over a description of one:
+
+```python
+# Replace with something real from the project.
+```
+
+## What I would do differently
+
+Worth its own section — this is usually the part people remember.
+
+<!--
+  Images live next to this file and use ordinary markdown:
+      ![Alt text describing the image](./photo.jpg)
+  Add a caption by passing a title:
+      ![Alt text](./photo.jpg "Caption shown under the image")
+  For a wider figure, import it and use Figure directly:
+      <script>
+        import Figure from '$lib/components/Figure.svelte';
+        import photo from './photo.jpg?enhanced';
+      </script>
+      <Figure src={photo} alt="Alt text" caption="Caption" wide />
+-->
+
+[^prior]: Footnotes collect at the end of the post with a link back. Name them anything; the markers are
+    renumbered to match the order they appear in.
