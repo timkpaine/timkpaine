@@ -23,9 +23,13 @@ const CONVERTIBLE = new Set(['.jpg', '.jpeg', '.png', '.tif', '.tiff']);
 
 const kb = (bytes) => `${Math.round(bytes / 1024)}kB`;
 
-const directories = process.argv.slice(2);
+const args = process.argv.slice(2);
+/** Convert photographs the post does not reference yet, so they are ready to drop in. */
+const all = args.includes('--all');
+const directories = args.filter((arg) => !arg.startsWith('--'));
+
 if (!directories.length) {
-  console.error('usage: node scripts/optimize-images.mjs <post directory> [...]');
+  console.error('usage: node scripts/optimize-images.mjs [--all] <post directory> [...]');
   process.exit(1);
 }
 
@@ -46,8 +50,8 @@ for (const directory of directories) {
     const name = basename(source, extname(source));
     const target = `${name}.webp`;
 
-    // Only touch images the post actually uses.
-    if (!markdown.includes(`./${source}`)) {
+    const referenced = markdown.includes(`./${source}`);
+    if (!referenced && !all) {
       console.log(`  skip     ${source} (not referenced)`);
       continue;
     }

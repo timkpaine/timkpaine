@@ -25,8 +25,8 @@ open to swap in a faster SSD and upgrade the memory.
 
 ![iMac with the case removed](./insides.webp "Just thinking about removing the screen makes me nervous to this day")
 
-I loved this machine. For a birthday, I even got a soft rolling case for it so i could bring it with me
-back and forth to school, for internships in other states, to friend's dorm rooms to play League.
+I loved this machine. For a birthday, I even got a soft rolling case for it so I could bring it with me
+back and forth to school, for internships in other states, to friends' dorm rooms to play League.
 
 When I got an internship in Japan in 2014, I had no room for my iMac and had to purchase a MacBook, but even so,
 the iMac remained my primary device until around 2020.
@@ -39,7 +39,7 @@ the use case for the machine became more and more limited.
 
 And then in 2025, it finally died completely and would not power on.
 
-Perhaps it was sentimentality, or a consiousness of how much eWaste would be generated, or just a lingering affection
+Perhaps it was sentimentality, or a consciousness of how much e-waste would be generated, or just a lingering affection
 for the beautiful display, but this was not the ending I wanted.
 
 So it was time to chop it up. The plan was simple, gut it for whatever internal components could be salvaged and get the display working
@@ -62,9 +62,47 @@ Unfortunately a lot of other components would not be useable.
 The motherboard is bespoke for the shape of the device, the power supply was likely broken,
 and all of the form-molded internal components like fans and speakers were unlikely to be reused.
 
-![motherboard and heatsinks](./motherboard.webp)
+![Motherboard and heatsinks](./motherboard.webp)
 
-![internal fans and other plastic components](./fans.webp)
+![Internal fans and other plastic components](./fans.webp)
+
+Assessing the parts, they were pretty standard LGA1155 components. A standard i7-2600, standard DDR3 SODIMMs, standard drives, etc etc.
+With some converters, a power supply, and a CPU fan, it should fit nicely on a standard LGA1155 motherboard, so I grabbed one from eBay and
+the rest of the parts from Newegg and set up a test bench.
+
+I went with an Intel DH67GD, which had the right size (Micro ATX) and IO for my needs. It was ~$70 on eBay.
+I also ordered some slightly sketchy SODIMM-DIMM converters, which are almost certainly not built to last, but what the hell.
+
+![CPU and memory installed in the new motherboard](./memory.webp)
+
+![Motherboard fully connected](./test.webp)
+
+I wasn't sure if the SSD could still be trusted and with SSD prices at record highs, I was lucky to find
+an old Samsung drive salvaged from yet another old Mac.
+
+![Fully assembled computer inside](./assembled.webp)
 
 
+With a quick flash of Ubuntu 24.04, I had managed to salvage the CPU, memory, and SSD, with around $140 in other components (case, power supply, motherboard).
+This is probably a net loss, but it was fun and my conscience felt better about the reuse.
 
+
+The real win would come from the display.
+
+
+It's fairly easy to find controllers, and I found one for my screen variant `LM270WQ1(SD)(E3)` [on eBay](https://www.ebay.com/itm/155443699116) with an HDMI port.
+
+![Display controller kit](./controllerkit.webp)
+
+There were only two cables to attach, and with the guts of the iMac removed, it was easy to fit inside the cavity and wire out the back.
+I preattached the HDMI cable and routed the other end out the back along with the power cable and controller.
+
+![Cables coming out the iMac's back power hole](./cables.webp)
+
+The end result was a little ugly, but I didn't feel like messing with the aluminum enclosure or drilling additional holes or anything like that, so it would suffice.
+
+![Functioning iMac display](./display.webp)
+
+While the internal components were probably net-negative on cost, for about $45 I was able to keep this beautiful 1440p display out of a landfill.
+
+And just in time for my MacBook screen to crack!
