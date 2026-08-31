@@ -12,7 +12,7 @@ the best designed Apple laptop of all time, in the pantheon
 of design greats with the [iMac G4](https://en.wikipedia.org/wiki/IMac_G4)
 and [iPhone 4](https://en.wikipedia.org/wiki/IPhone_4).
 
-![Black Apple MacBook](./macbook.jpg "Not my photo, as I didn't even have a cell phone at the time!")
+![Black Apple MacBook](./macbook.webp "Not my photo, as I didn't even have a cell phone at the time!")
 
 Alas, the years took their toll on both the software and the physical case
 (the black plastic had a tendency to crack along edges), and in early 2012
@@ -23,4 +23,48 @@ I knew I wanted a Mac, and I was willing to sacrifice portability for the beauty
 from the refurbished store. It had barely come out of the box when I had already cracked it
 open to swap in a faster SSD and upgrade the memory.
 
-![iMac with the case removed](./insides.jpg "Just thinking about removing the screen makes me nervous to this day")
+![iMac with the case removed](./insides.webp "Just thinking about removing the screen makes me nervous to this day")
+
+I loved this machine. For a birthday, I even got a soft rolling case for it so i could bring it with me
+back and forth to school, for internships in other states, to friend's dorm rooms to play League.
+
+When I got an internship in Japan in 2014, I had no room for my iMac and had to purchase a MacBook, but even so,
+the iMac remained my primary device until around 2020.
+
+Since then, it has lived in my parent's house, and got intermittent use for lightweight tasks like web browsing.
+Around 2016, a latent graphics driver or hardware issue required a persistent DVI connection or it would instantaneously reboot,
+which I worked around with a DVI cable and a dummy HDMI display emulator. When the internal hard drive died, I
+shifted all important files to the SSD. Since Apple removed [Target Display Mode](https://support.apple.com/en-us/105126),
+the use case for the machine became more and more limited.
+
+And then in 2025, it finally died completely and would not power on.
+
+Perhaps it was sentimentality, or a consiousness of how much eWaste would be generated, or just a lingering affection
+for the beautiful display, but this was not the ending I wanted.
+
+So it was time to chop it up. The plan was simple, gut it for whatever internal components could be salvaged and get the display working
+on its own.
+
+The first part was easy. After removing the display, I separated components one at a time.
+
+![A pile of internal computer components](./parts.webp)
+
+iMacs are roughly a laptop platform, so the following parts could probably find use:
+
+- cpu
+- memory
+- laptop-size graphics card
+- drives
+
+![The salvageable components](./salvage.webp)
+
+Unfortunately a lot of other components would not be useable.
+The motherboard is bespoke for the shape of the device, the power supply was likely broken,
+and all of the form-molded internal components like fans and speakers were unlikely to be reused.
+
+![motherboard and heatsinks](./motherboard.webp)
+
+![internal fans and other plastic components](./fans.webp)
+
+
+
