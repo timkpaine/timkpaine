@@ -1,30 +1,28 @@
 ---
-title: iMac
-description: One or two sentences describing what this is about. This is the meta description and the summary shown in the index, so write it for someone with no context.
-date: 2026-08-30
+title: Converting an old iMac into mini PC and monitor
+description: In my attempt to reduce my personal e-waste, I repurpose a beloved 27" iMac into an HDMI display and separate small form factor PC.
+date: 2026-08-31
 tags: [hardware]
 draft: true
 ---
 
-Open with the state it arrived in and what you set out to do. A hardware write-up earns its keep with
-specifics — model, year, what was wrong.
 
-## What it started as
+My first personal computer was a Core 2 Duo MacBook from
+Apple's "Black and White" era. It remains, in my opinion,
+the best designed Apple laptop of all time, in the pantheon
+of design greats with the [iMac G4](https://en.wikipedia.org/wiki/IMac_G4)
+and [iPhone 4](https://en.wikipedia.org/wiki/IPhone_4).
 
-Condition, teardown notes, anything that surprised you.
 
-| Part    | Original | Replacement |
-| ------- | -------- | ----------- |
-| Storage |          |             |
-| Memory  |          |             |
+![Black Apple MacBook](./macbook.jpg "Not my photo, as I didn't even have a cell phone at the time!)
 
-## The work
+Alas, the years took their toll on both the software and the physical case
+(the black plastic had a tendency to crack along edges), and in early 2012
+I had declared my Computer Science undergraduate major and was in need of a better device.
 
-Steps worth repeating, and the ones that went badly. Photographs do most of the work here.[^photos]
 
-## Where it ended up
 
-What it is used for now, and whether it was worth it.
+
 
 <!--
   Images live next to this file and use ordinary markdown:

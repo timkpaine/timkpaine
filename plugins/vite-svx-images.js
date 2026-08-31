@@ -1,5 +1,5 @@
 const MARKDOWN_IMAGE = /!\[([^\]]*)\]\(\s*(\.{1,2}\/[^)\s]+?)(?:\s+"([^"]*)")?\s*\)/g;
-const FENCE = /^(```|~~~)[\s\S]*?^\1/gm;
+const INERT = /<!--[\s\S]*?-->|^(```|~~~)[\s\S]*?^\1/gm;
 const FRONTMATTER = /^---\r?\n[\s\S]*?\r?\n---/;
 const COMPONENT = 'MdFigure';
 
@@ -13,26 +13,32 @@ const escapeAttribute = (value) =>
     .replace(/"/g, '&quot;');
 
 /**
- * Masks fenced code blocks so image syntax inside them is left alone.
+ * Hides fenced code blocks and HTML comments.
+ *
+ * Neither is content: an image inside them must not be rewritten, and a
+ * `<script>` shown as an example must not be mistaken for the post's own.
  *
  * @param {string} code
  * @returns {[string, (value: string) => string]}
  */
-const maskFences = (code) => {
+const maskInert = (code) => {
   /** @type {string[]} */
-  const fences = [];
-  const masked = code.replace(FENCE, (match) => {
-    fences.push(match);
-    return `  FENCE${fences.length - 1}  `;
+  const regions = [];
+  const masked = code.replace(INERT, (match) => {
+    regions.push(match);
+    return `  INERT${regions.length - 1}  `;
   });
   /** @param {string} value */
-  const restore = (value) => value.replace(/  FENCE(\d+)  /g, (_match, index) => fences[Number(index)]);
+  const restore = (value) => value.replace(/ {2}INERT(\d+) {2}/g, (_match, index) => regions[Number(index)]);
   return [masked, restore];
 };
 
 /**
  * Adds imports to the post's instance script, creating one when absent. They
  * must land after the frontmatter, which mdsvex expects at the very top.
+ *
+ * Runs against masked source so a `<script>` inside a comment is not treated
+ * as the real one.
  *
  * @param {string} code
  * @param {string[]} imports
@@ -75,7 +81,7 @@ export function svxImages() {
     transform(code, id) {
       if (!id.split('?')[0].endsWith('.svx')) return null;
 
-      const [masked, restoreFences] = maskFences(code);
+      const [masked, restoreInert] = maskInert(code);
       /** @type {Map<string, string>} */
       const names = new Map();
       /** @type {string[]} */
@@ -102,10 +108,17 @@ export function svxImages() {
         }
       );
 
+      // Anything still looking like a relative image did not parse — usually an
+      // unterminated title quote. It would otherwise render as literal text.
+      for (const leftover of rewritten.match(/!\[[^\]]*\]\(\s*\.{1,2}\/[^\n]*/g) ?? []) {
+        this.warn(`Malformed image in ${id.split('/').slice(-2).join('/')}: ${leftover.trim()}`);
+      }
+
       if (!imports.length) return null;
 
       imports.unshift(`import ${COMPONENT} from '$lib/components/Figure.svelte';`);
-      return { code: injectImports(restoreFences(rewritten), imports), map: null };
+      // Restore last, so masked regions never take part in the rewrite.
+      return { code: restoreInert(injectImports(rewritten, imports)), map: null };
     }
   };
 }
