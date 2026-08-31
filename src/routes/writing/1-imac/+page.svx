@@ -14,7 +14,7 @@ of design greats with the [iMac G4](https://en.wikipedia.org/wiki/IMac_G4)
 and [iPhone 4](https://en.wikipedia.org/wiki/IPhone_4).
 
 
-![Black Apple MacBook](./macbook.jpg "Not my photo, as I didn't even have a cell phone at the time!)
+![Black Apple MacBook](./macbook.jpg "Not my photo, as I didn't even have a cell phone at the time!")
 
 Alas, the years took their toll on both the software and the physical case
 (the black plastic had a tendency to crack along edges), and in early 2012
