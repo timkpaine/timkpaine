@@ -34,6 +34,6 @@
     </picture>
   {/if}
   {#if caption}
-    <figcaption class="mt-3 text-sm leading-relaxed text-muted">{caption}</figcaption>
+    <figcaption class="mt-3 text-center text-sm leading-relaxed text-muted">{caption}</figcaption>
   {/if}
 </figure>
