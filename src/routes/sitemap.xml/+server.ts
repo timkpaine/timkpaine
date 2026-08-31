@@ -1,5 +1,6 @@
 import { SITE_URL } from '@timkpaine/ui';
-import { publishedPosts, toIsoDate } from '$lib/posts';
+import { toIsoDate } from '$lib/dates';
+import { publishedPosts } from '$lib/posts';
 import type { RequestHandler } from './$types';
 
 export const prerender = true;

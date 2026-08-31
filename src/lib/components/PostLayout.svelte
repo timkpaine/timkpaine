@@ -2,7 +2,7 @@
   import { page } from '$app/state';
   import { BRAND_NAME, SITE_URL } from '@timkpaine/ui';
   import Seo from '$lib/components/Seo.svelte';
-  import { formatDate, toIsoDate } from '$lib/posts';
+  import { formatDate, toIsoDate } from '$lib/dates';
   import type { PostMetadata } from '$lib/posts';
 
   type Props = PostMetadata & { children: import('svelte').Snippet };

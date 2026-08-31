@@ -1,6 +1,7 @@
 <script lang="ts">
   import Seo from '$lib/components/Seo.svelte';
-  import { formatDate, toIsoDate, visiblePosts } from '$lib/posts';
+  import { formatDate, toIsoDate } from '$lib/dates';
+  import { visiblePosts } from '$lib/posts';
 </script>
 
 <Seo

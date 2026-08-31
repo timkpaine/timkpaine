@@ -1,4 +1,5 @@
 import { SITE_URL } from '@timkpaine/ui';
+import { dateOrder } from '$lib/dates';
 
 /** Shape returned by a Vite `?enhanced` image import. */
 export type EnhancedPicture = {
@@ -9,11 +10,7 @@ export type EnhancedPicture = {
 export type PostMetadata = {
   title: string;
   description: string;
-  /**
-   * Frontmatter dates arrive as full ISO strings: YAML parses an unquoted
-   * `2026-08-29` into a Date, which mdsvex then serialises. Quoted dates stay
-   * `YYYY-MM-DD`, so both forms have to be handled.
-   */
+  /** See `parseDate` in `$lib/dates` for the formats this arrives in. */
   date: string;
   updated?: string;
   tags?: string[];
@@ -27,11 +24,11 @@ export type Post = PostMetadata & {
   absoluteUrl: string;
 };
 
-const parseDate = (value: string | Date): Date => {
-  if (value instanceof Date) return value;
-  return new Date(/^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T00:00:00Z` : value);
-};
-
+/**
+ * Anything a post renders with must import from `$lib/dates`, not from here.
+ * This glob pulls in every post, so importing back into this module from a
+ * post's layout would create a cycle the dev server cannot resolve.
+ */
 const modules = import.meta.glob<PostMetadata>('/src/routes/writing/*/+page.svx', {
   eager: true,
   import: 'metadata'
@@ -42,7 +39,7 @@ export const posts: Post[] = Object.entries(modules)
     const slug = path.split('/').at(-2) ?? '';
     return { ...metadata, slug, url: `/writing/${slug}/`, absoluteUrl: `${SITE_URL}/writing/${slug}/` };
   })
-  .sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime());
+  .sort((a, b) => dateOrder(b.date) - dateOrder(a.date));
 
 /**
  * Drafts are visible while developing, and when a preview build opts in with
@@ -58,17 +55,3 @@ export const visiblePosts = includeDrafts ? posts : posts.filter((post) => !post
 
 /** Posts for the feed and sitemap. Drafts are excluded even while developing. */
 export const publishedPosts = posts.filter((post) => !post.draft);
-
-export const formatDate = (value: string) =>
-  parseDate(value).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'UTC'
-  });
-
-/** `YYYY-MM-DD`, for `datetime` attributes and sitemap `lastmod`. */
-export const toIsoDate = (value: string) => parseDate(value).toISOString().slice(0, 10);
-
-/** RFC 822, required by RSS `pubDate`. */
-export const toRfc822 = (value: string) => parseDate(value).toUTCString();

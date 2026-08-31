@@ -1,5 +1,6 @@
 import { BRAND_NAME, SITE_URL } from '@timkpaine/ui';
-import { publishedPosts, toRfc822 } from '$lib/posts';
+import { toRfc822 } from '$lib/dates';
+import { publishedPosts } from '$lib/posts';
 import type { RequestHandler } from './$types';
 
 export const prerender = true;

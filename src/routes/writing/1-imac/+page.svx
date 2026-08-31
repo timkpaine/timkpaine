@@ -6,13 +6,11 @@ tags: [hardware]
 draft: true
 ---
 
-
 My first personal computer was a Core 2 Duo MacBook from
 Apple's "Black and White" era. It remains, in my opinion,
 the best designed Apple laptop of all time, in the pantheon
 of design greats with the [iMac G4](https://en.wikipedia.org/wiki/IMac_G4)
 and [iPhone 4](https://en.wikipedia.org/wiki/IPhone_4).
-
 
 ![Black Apple MacBook](./macbook.jpg "Not my photo, as I didn't even have a cell phone at the time!")
 
@@ -20,22 +18,9 @@ Alas, the years took their toll on both the software and the physical case
 (the black plastic had a tendency to crack along edges), and in early 2012
 I had declared my Computer Science undergraduate major and was in need of a better device.
 
+I knew I wanted a Mac, and I was willing to sacrifice portability for the beauty that was the
+2011 iMac 27" display. With my student discount, I was able to pick up a top-of-the-line i7
+from the refurbished store. It had barely come out of the box when I had already cracked it
+open to swap in a faster SSD and upgrade the memory.
 
-
-
-
-<!--
-  Images live next to this file and use ordinary markdown:
-      ![Alt text describing the image](./teardown.jpg)
-  Add a caption by passing a title:
-      ![Alt text](./teardown.jpg "Caption shown under the image")
-  For a wider figure, import it and use Figure directly:
-      <script>
-        import Figure from '$lib/components/Figure.svelte';
-        import teardown from './teardown.jpg?enhanced';
-      </script>
-      <Figure src={teardown} alt="Alt text" caption="Caption" wide />
--->
-
-[^photos]: Drop photos in this directory and reference them with a relative path. They are converted to
-    AVIF and WebP at several widths, so full-resolution originals are fine to commit.
+![iMac with the case removed](./insides.jpg "Just thinking about removing the screen makes me nervous to this day")
