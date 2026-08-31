@@ -1,9 +1,8 @@
 ---
 title: Converting an old iMac into mini PC and monitor
 description: In my attempt to reduce my personal e-waste, I repurpose a beloved 27" iMac into an HDMI display and separate small form factor PC.
-date: 2026-08-31
-tags: [hardware]
-draft: true
+date: 2026-08-30
+tags: [hardware, old tech]
 ---
 
 My first personal computer was a Core 2 Duo MacBook from

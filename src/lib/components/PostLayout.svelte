@@ -2,6 +2,7 @@
   import { page } from '$app/state';
   import { BRAND_NAME, SITE_URL } from '@timkpaine/ui';
   import Seo from '$lib/components/Seo.svelte';
+  import TagIcon from '$lib/components/TagIcon.svelte';
   import { formatDate, toIsoDate } from '$lib/dates';
   import type { PostMetadata } from '$lib/posts';
 
@@ -50,40 +51,40 @@
       {/if}
     </p>
 
-    <p
-      class="mb-7 inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted"
-      data-testid="human-written"
-    >
-      <svg
-        class="size-3.5 text-accent"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.9"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M6.5 10.5V20H4a1 1 0 0 1-1-1v-7.5a1 1 0 0 1 1-1h2.5Z" />
-        <path d="M6.5 10.5 10.8 3a2.4 2.4 0 0 1 2.3 3.1L12.3 9H18a2 2 0 0 1 2 2.4l-1.2 6.2a2 2 0 0 1-2 1.4H6.5" />
-      </svg>
-      Written by a human
-    </p>
     <h1 class="max-w-4xl text-[clamp(2.75rem,6vw,5rem)] font-medium leading-[0.94] tracking-[-0.06em]">
       {title}
     </h1>
     <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{description}</p>
-    {#if tags.length}
-      <ul class="mt-7 flex flex-wrap gap-2">
-        {#each tags as tag}
-          <li
-            class="rounded-full border border-line px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted"
-          >
-            {tag}
-          </li>
-        {/each}
-      </ul>
-    {/if}
+
+    <ul class="mt-7 flex flex-wrap items-center gap-2">
+      {#each tags as tag}
+        <li
+          class="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted"
+        >
+          <TagIcon {tag} />
+          {tag}
+        </li>
+      {/each}
+      <li
+        class="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted"
+        data-testid="human-written"
+      >
+        <svg
+          class="size-3 shrink-0 text-accent"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.9"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M6.5 10.5V20H4a1 1 0 0 1-1-1v-7.5a1 1 0 0 1 1-1h2.5Z" />
+          <path d="M6.5 10.5 10.8 3a2.4 2.4 0 0 1 2.3 3.1L12.3 9H18a2 2 0 0 1 2 2.4l-1.2 6.2a2 2 0 0 1-2 1.4H6.5" />
+        </svg>
+        Written by a human
+      </li>
+    </ul>
   </header>
 
   <div class="prose mt-12">

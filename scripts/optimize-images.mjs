@@ -62,9 +62,14 @@ for (const directory of directories) {
 
     const image = sharp(input).rotate();
     const { width = 0 } = await image.metadata();
+
+    // A PNG source is nearly always a screenshot or diagram, where soft text is
+    // obvious in a way it never is on a photograph. Give those more bits.
+    const screenshot = extname(source).toLowerCase() === '.png';
+
     await image
       .resize({ width: Math.min(width, MAX_WIDTH), withoutEnlargement: true })
-      .webp({ quality: QUALITY })
+      .webp({ quality: screenshot ? 94 : QUALITY })
       .toFile(output);
 
     const after = (await stat(output)).size;
