@@ -19,6 +19,7 @@ export default defineConfig({
   },
   webServer: {
     command: 'vite build && vite preview --host 127.0.0.1 --port 4177 --strictPort',
+    env: { VITE_INCLUDE_DRAFTS: 'true' },
     port: 4177,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000

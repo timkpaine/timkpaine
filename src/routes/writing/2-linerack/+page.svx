@@ -1,0 +1,73 @@
+---
+title: LineRack - an effects chain that fits in your pocket.
+description: Unhappy with the terrible quality of my work computer, I sought out a replacement.
+date: 2026-08-31
+tags: [projects, work in progress]
+---
+
+tl;dr I'm working on [linerack.dev](https://linerack.dev), a user-customizable DSP/Effects chain that fits in your pocket
+
+If I am sitting at my computer, it's highly likely I'm listening to music.
+I have a lot of "pro audio" equipment for my recording hobby, but when it comes to
+headphones and "HiFi" I'm not exactly picky or opinionated. My usual listening setup
+is a pair of Audio-Technica ATH-M50 or some computer monitors I got on Drop (née Massdrop) on a whim, plugged
+directly into my computer's audio port. On the software side, I'll listen to normal-quality Spotify or
+Apple Music, and I'll tune the EQ and add a touch of reverb with the incredible
+[SoundSource app from RogueAmoeba](https://rogueamoeba.com/soundsource/).
+
+![My soundsource audio configuration](./ss.webp)
+
+
+This software makes a huge difference, even with low quality audio. A little compression and some reverb
+goes a long way to making a bland studio recording feel more live and alive.
+
+On days when I commute in to work, I have a conundrum. There is currently no SoundSource mobile app,
+and my workstation is a Windows machine. I looked around for portable headphone preamps, and there are
+many well-reviewed ones on the market. However, I couldn't find one that allowed someone to tune EQ,
+add reverb, compression, and more, for a reasonable price. So as a developer familiar with *most* of
+the technologies involved, with an LLM to help fill in the gaps, I decided to see if I could build my own.
+
+I started off with only one reference point. For a few years, I have been programming my keyboards with
+[usevia.app](https://usevia.app/) (Chrome only), which uses [the WebHID API](https://developer.mozilla.org/en-US/docs/Web/API/WebHID_API)
+to interface with the peripheral. I thought this ability to program the device without any fancy drivers or software
+and the ability to download/share configurations would be a great feature for my device.
+
+After a lot of surveying, I decided on the [Seed3](https://daisy.audio/products/seed3) platform, which would
+let me plug in my computer or phone via USB-C for audio and/or power, have dedicated audio-in if desired, and route
+audio out via a separate TRRS jack. I found a small monochrome display [on Adafruit](https://www.adafruit.com/product/4440)
+to serve as the device display. With a few other sundry items, I was ready to start prototyping (a full BOM is [available on the site](https://linerack.dev/docs/prototype-hardware)).
+
+Fast forward a few hours, and the device was up and running with audio and a few simple effects (EQ, Limiter) configurable over WebHID.
+
+![The prototype on a breadboard](./prototype.webp)
+
+Everything mostly worked according to spec, with the usual fun brought by any embedded device ("the doc says this pin 'active low' but it's actually 'active high' :-(").
+
+Both the Seed3 and display were set up as dev devices with breadboard pins, so I carefully deconstructed and desoldered these.
+I had an LLM scaffold a 3D printable case, and after a few iterations it was mostly fitting together (albeit with the world's worst soldering job)
+
+![Soldered prototype in a 3D printed case](./wired.webp)
+
+The device supports up to 4 preset effects chains with a user-customizable name.
+Clicking the button shows the display, double-clicking advances to the next preset, and holding for 5 seconds cycles
+through one of 3 available display presets: the preset name and number of blocks, the EQ curve, and an L/R gain display
+
+![Device display](./1.webp)
+![Device EQ curve display](./2.webp)
+![Device left/right volume display](./3.webp)
+
+There are a lot of extra details to get right, such as routing host-controlled volume to the device (and writing a corresponding display for that).
+
+![Device volume display](./4.webp)
+
+So far, it's been working really well.
+The terrible audio on my Windows machine sounds a bit less terrible.
+It connects and works fine from a phone (though not configurable from it due to WebHID limitations).
+I've ordered several more Seed3 boards and displays, and I'm hoping to spend some time making the input and output ports
+swappable, so that it can be used as e.g. an effects control for a guitar, a portable noise gate for a microphone, and any other
+audio application that might benefit from a bit of user-configurable customization.
+
+
+I'm not yet ready to sell these, but I've hosted the website with a full in-browser simulator at [linerack.dev](https://linerack.dev/).
+A beta product page and developer docs are also available, and the source is available [on GitHub](https://github.com/1kbgz/linerack).
+

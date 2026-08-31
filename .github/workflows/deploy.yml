@@ -73,6 +73,23 @@ jobs:
       - name: Build site
         run: pnpm build
 
+      # A draft is kept out of the build by never being linked. Confirm that
+      # held before anything is published.
+      - name: Verify no drafts were built
+        run: |
+          set -euo pipefail
+          status=0
+          for dir in build/writing/*/; do
+            [ -d "$dir" ] || continue
+            slug=$(basename "$dir")
+            source="src/routes/writing/$slug/+page.svx"
+            if [ -f "$source" ] && grep -qE '^draft:[[:space:]]*true[[:space:]]*$' "$source"; then
+              echo "::error::Draft post '$slug' was included in the build"
+              status=1
+            fi
+          done
+          exit $status
+
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v5
         with:

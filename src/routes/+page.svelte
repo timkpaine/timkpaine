@@ -1,5 +1,6 @@
 <script lang="ts">
   import { experience, organizations, talks } from '$lib/data/site';
+  import Seo from '$lib/components/Seo.svelte';
   import { LiveSignal } from '@timkpaine/ui';
   import { onMount } from 'svelte';
 
@@ -39,14 +40,10 @@
   });
 </script>
 
-<svelte:head>
-  <title>Tim Paine — Software engineer and open-source maintainer</title>
-  <meta
-    name="description"
-    content="New York software engineer and open-source builder working across data systems, visualization, Jupyter, and computing hardware."
-  />
-  <link rel="canonical" href="https://tim.paine.nyc/" />
-</svelte:head>
+<Seo
+  title="Tim Paine — Software engineer and open-source maintainer"
+  description="New York software engineer and open-source builder working across data systems, visualization, Jupyter, and computing hardware."
+/>
 
 <section class="mx-auto max-w-[92rem] px-5 pb-20 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pb-28 lg:pt-24">
   <div class="grid items-end gap-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(22rem,0.8fr)]">

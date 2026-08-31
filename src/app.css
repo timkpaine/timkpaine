@@ -2,3 +2,4 @@
 @import '@timkpaine/ui/tokens.css';
 @import '@timkpaine/ui/tailwind.css';
 @import '@timkpaine/ui/base.css';
+@import './prose.css';

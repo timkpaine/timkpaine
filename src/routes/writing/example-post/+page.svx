@@ -1,0 +1,75 @@
+---
+title: How this writing section works
+description: A reference post covering frontmatter, images, footnotes, and the metadata this section emits for search engines and feed readers.
+date: 2026-08-29
+tags: [meta, sveltekit]
+draft: true
+---
+
+<script>
+  import Figure from '$lib/components/Figure.svelte';
+  import pipeline from './pipeline.png?enhanced';
+</script>
+
+This post is a working reference for adding content. It is marked `draft: true`, so it shows up while
+running the site locally but is never written into a production build — there is no published URL to
+find. Drafts are also withheld from the feed and the sitemap, even locally.
+
+## Frontmatter
+
+Every post begins with a frontmatter block. `title`, `description`, and `date` are required; the rest are
+optional.
+
+| Field         | Required | Notes                                                      |
+| ------------- | -------- | ---------------------------------------------------------- |
+| `title`       | yes      | Heading, page title, feed entry, and card preview.         |
+| `description` | yes      | Meta description and the summary shown in the index.       |
+| `date`        | yes      | `YYYY-MM-DD`. Drives ordering and the feed's publish date. |
+| `updated`     | no       | Adds `dateModified` and the sitemap `lastmod`.             |
+| `tags`        | no       | Rendered as chips and emitted as `article:tag`.            |
+| `image`       | no       | Overrides the social card, e.g. `/og/my-post.png`.         |
+| `draft`       | no       | Local only. Never built for production, never syndicated.  |
+
+## Images
+
+Keep images next to the post that uses them. Ordinary markdown syntax is enough — relative paths are
+rewritten at build time into responsive markup with AVIF and WebP variants and intrinsic dimensions, so
+nothing shifts as the page loads:
+
+![A stylised view of the content pipeline](./pipeline.png)
+
+Add a caption by passing a title, or use `Figure` directly when the image should break out of the prose
+column:
+
+<Figure src={pipeline} alt="Source, build, and output stages of the content pipeline" caption="The three stages every post passes through." wide />
+
+Remote and root-relative sources are passed through untouched, so `/static/img/logo.png` still works.
+
+## Footnotes and links
+
+Footnotes use the usual reference syntax and collect at the end of the post with return links.[^images]
+Several can point back at the same explanation.[^drafts]
+
+Reference-style links keep prose readable by moving URLs to the [bottom of the file][mdsvex], and ordinary
+inline links behave as expected.
+
+## Code
+
+Fenced code blocks are styled to match the rest of the site:
+
+```ts
+import { publishedPosts } from '$lib/posts';
+
+const latest = publishedPosts.at(0);
+```
+
+> Drafts are the one exception to "what is in the directory is on the site" — they are reachable, but
+> never advertised.
+
+[^images]: The rewrite lives in `plugins/vite-svx-images.js`. It runs as a `pre` Vite transform, hoists an
+    `?enhanced` import for each relative image, and swaps the markdown for a `Figure`.
+
+[^drafts]: Draft filtering lives in `src/lib/posts.ts`, which the index, the feed, and the sitemap all
+    read from.
+
+[mdsvex]: https://mdsvex.pngwn.io
