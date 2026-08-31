@@ -31,18 +31,19 @@ back and forth to school, for internships in other states, to friends' dorm room
 When I got an internship in Japan in 2014, I had no room for my iMac and had to purchase a MacBook, but even so,
 the iMac remained my primary device until around 2020.
 
-Since then, it has lived in my parent's house, and got intermittent use for lightweight tasks like web browsing.
 Around 2016, a latent graphics driver or hardware issue required a persistent DVI connection or it would instantaneously reboot,
 which I worked around with a DVI cable and a dummy HDMI display emulator. When the internal hard drive died, I
 shifted all important files to the SSD. Since Apple removed [Target Display Mode](https://support.apple.com/en-us/105126),
 the use case for the machine became more and more limited.
+
+Since 2020, it has lived in my parents' house, and got intermittent use for lightweight tasks like web browsing.
 
 And then in 2025, it finally died completely and would not power on.
 
 Perhaps it was sentimentality, or a consciousness of how much e-waste would be generated, or just a lingering affection
 for the beautiful display, but this was not the ending I wanted.
 
-So it was time to chop it up. The plan was simple, gut it for whatever internal components could be salvaged and get the display working
+So it was time to chop it up. The plan was simple: gut it for whatever internal components could be salvaged and get the display working
 on its own.
 
 The first part was easy. After removing the display, I separated components one at a time.
@@ -58,7 +59,7 @@ iMacs are roughly a laptop platform, so the following parts could probably find 
 
 ![The salvageable components](./salvage.webp)
 
-Unfortunately a lot of other components would not be useable.
+Unfortunately a lot of other components would not be usable.
 The motherboard is bespoke for the shape of the device, the power supply was likely broken,
 and all of the form-molded internal components like fans and speakers were unlikely to be reused.
 

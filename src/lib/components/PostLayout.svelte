@@ -49,6 +49,26 @@
         <span class="ml-3 rounded-full border border-line px-2 py-0.5 text-[0.6rem]">Draft</span>
       {/if}
     </p>
+
+    <p
+      class="mb-7 inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted"
+      data-testid="human-written"
+    >
+      <svg
+        class="size-3.5 text-accent"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M6.5 10.5V20H4a1 1 0 0 1-1-1v-7.5a1 1 0 0 1 1-1h2.5Z" />
+        <path d="M6.5 10.5 10.8 3a2.4 2.4 0 0 1 2.3 3.1L12.3 9H18a2 2 0 0 1 2 2.4l-1.2 6.2a2 2 0 0 1-2 1.4H6.5" />
+      </svg>
+      Written by a human
+    </p>
     <h1 class="max-w-4xl text-[clamp(2.75rem,6vw,5rem)] font-medium leading-[0.94] tracking-[-0.06em]">
       {title}
     </h1>

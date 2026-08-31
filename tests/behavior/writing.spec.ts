@@ -58,6 +58,16 @@ test('footnotes render and link both ways', async ({ page }) => {
   await expect(page.locator(`article ${backref}`)).toBeVisible();
 });
 
+test('posts are badged as human written', async ({ page }) => {
+  await page.goto(POST);
+
+  const badge = page.getByTestId('human-written');
+  await expect(badge).toBeVisible();
+  await expect(badge).toHaveText(/written by a human/i);
+  // The icon is decorative; the text carries the meaning.
+  await expect(badge.locator('svg')).toHaveAttribute('aria-hidden', 'true');
+});
+
 test('headings expose stable anchors', async ({ page }) => {
   await page.goto(POST);
 
