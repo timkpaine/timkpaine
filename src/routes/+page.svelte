@@ -1,184 +1,133 @@
 <script lang="ts">
-  import { experience, organizations, talks } from '$lib/data/site';
+  import { DataTable, type Column, type Row } from '@timkpaine/ui';
   import Seo from '$lib/components/Seo.svelte';
-  import { LiveSignal } from '@timkpaine/ui';
-  import { onMount } from 'svelte';
+  import { experience, organizations, talks } from '$lib/data/site';
+  import { formatDate } from '$lib/dates';
+  import { visiblePosts } from '$lib/posts';
 
-  const weatherUrl =
-    'https://api.open-meteo.com/v1/forecast?latitude=40.7128&longitude=-74.0060&current=temperature_2m&temperature_unit=fahrenheit&timezone=America%2FNew_York';
+  const roleColumns: Column[] = [
+    { key: 'company', label: 'Organization' },
+    { key: 'years', label: 'Period', sortable: true },
+    { key: 'role', label: 'Role' }
+  ];
 
-  let temperature: number | null = null;
+  const talkColumns: Column[] = [
+    { key: 'title', label: 'Title', sortable: true },
+    { key: 'year', label: 'Year', sortable: true },
+    { key: 'event', label: 'Venue', sortable: true }
+  ];
 
-  onMount(() => {
-    const controller = new AbortController();
+  const writingColumns: Column[] = [
+    { key: 'title', label: 'Title', sortable: true },
+    { key: 'date', label: 'Date', sortable: true }
+  ];
 
-    const updateWeather = async () => {
-      try {
-        const response = await fetch(weatherUrl, { signal: controller.signal });
-        if (!response.ok) return;
+  const roleRows: Row[] = experience.map((item) => ({ ...item }));
 
-        const data = (await response.json()) as {
-          current?: { temperature_2m?: number };
-        };
-        const nextTemperature = data.current?.temperature_2m;
+  const talkRows: Row[] = talks.slice(0, 5).map((talk) => ({
+    title: talk.title,
+    year: talk.year,
+    event: talk.event
+  }));
 
-        if (typeof nextTemperature === 'number' && Number.isFinite(nextTemperature)) {
-          temperature = nextTemperature;
-        }
-      } catch (error) {
-        if (error instanceof DOMException && error.name === 'AbortError') return;
-      }
-    };
-
-    void updateWeather();
-    const interval = window.setInterval(updateWeather, 15 * 60 * 1000);
-
-    return () => {
-      controller.abort();
-      window.clearInterval(interval);
-    };
-  });
+  const writingRows: Row[] = visiblePosts.map((post) => ({
+    title: post.title,
+    date: formatDate(post.date),
+    url: post.url
+  }));
 </script>
 
 <Seo
-  title="Tim Paine — Software engineer and open-source maintainer"
-  description="New York software engineer and open-source builder working across data systems, visualization, Jupyter, and computing hardware."
+  title="Tim Paine"
+  description="Tim Paine is a software engineer in New York working on data systems, visualization, and computing hardware."
 />
 
-<section class="mx-auto max-w-[92rem] px-5 pb-20 pt-14 sm:px-8 sm:pt-20 lg:px-12 lg:pb-28 lg:pt-24">
-  <div class="grid items-end gap-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(22rem,0.8fr)]">
-    <div class="reveal">
-      <p class="eyebrow mb-7 flex items-center gap-3 text-muted">
-        <span class="size-2 rounded-full bg-accent ring-1 ring-ink"></span>
-        Software engineer · Open-source maintainer
-      </p>
-      <h1 class="max-w-5xl text-[clamp(4.5rem,11vw,10.5rem)] font-medium leading-[0.84] tracking-[-0.075em]">Hello.</h1>
-      <p class="mt-9 max-w-2xl text-lg leading-relaxed tracking-[-0.025em] text-muted sm:text-xl">
-        New York–based engineer working across data systems, developer tools, visualization, machine learning, and
-        computing hardware.
-      </p>
-    </div>
+<section class="page">
+  <header class="intro">
+    <h1>Tim Paine</h1>
+    <p>
+      Software engineer in New York. I work on data systems, visualization, and the hardware
+      underneath them.
+    </p>
+    <p class="tp-dim">
+      Point72 · Cubist, Central Research Team. Open source at {organizations.slice(0, 5).join(', ')},
+      and <a href="https://github.com/timkpaine">more <span class="tp-host">github.com</span></a>.
+    </p>
+  </header>
 
-    <LiveSignal {temperature} />
+  <DataTable caption="Résumé" meta="{roleRows.length} rows" columns={roleColumns} rows={roleRows} />
+
+  <div>
+    <DataTable
+      caption="Talks"
+      meta="{talks.length} total, {talkRows.length} shown"
+      columns={talkColumns}
+      rows={talkRows}
+    />
+    <p class="more"><a href="/talks/">All {talks.length} talks</a></p>
   </div>
-</section>
 
-<section id="communities" class="border-t border-line">
-  <div class="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-    <div class="mb-12 grid gap-5 md:grid-cols-2 md:items-end">
-      <div>
-        <p class="eyebrow mb-5 text-muted">01 / GitHub</p>
-        <h2 class="text-4xl font-medium tracking-[-0.055em] sm:text-6xl">Organizations & communities.</h2>
-      </div>
-      <p class="max-w-xl text-base leading-relaxed text-muted md:justify-self-end">
-        A selection of the accounts and open-source communities that shape my work.
-      </p>
-    </div>
-
-    <div class="grid border-l border-t border-line sm:grid-cols-2 xl:grid-cols-3">
-      {#each organizations as organization, index}
-        <a
-          class="neon-hover group min-h-60 border-b border-r border-line p-6 sm:min-h-72 sm:p-8"
-          href={organization.href}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <div class="flex items-start justify-between gap-6">
-            <img
-              class="size-12 rounded-xl bg-white object-cover ring-1 ring-line"
-              src={organization.avatar}
-              alt={`${organization.name} logo`}
-              width="48"
-              height="48"
-            />
-            <span class="text-xl transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">↗</span>
-          </div>
-          <p class="neon-hover-muted eyebrow mt-10 text-muted">
-            {String(index + 1).padStart(2, '0')} / @{organization.handle}
-          </p>
-          <h3 class="mt-3 text-2xl font-medium tracking-[-0.045em] sm:text-3xl">
-            {organization.name}
-          </h3>
-          <p class="neon-hover-muted mt-4 max-w-lg leading-relaxed text-muted">
-            {organization.description}
-          </p>
-        </a>
-      {/each}
-    </div>
-
-    <a class="link-line mt-9 inline-block text-sm font-semibold" href="https://github.com/timkpaine">
-      View full GitHub profile ↗
-    </a>
-  </div>
-</section>
-
-<section class="border-t border-line bg-ink text-paper" data-clock-invert>
-  <div class="mx-auto max-w-[92rem] px-5 py-20 sm:px-8 lg:px-12 lg:py-28">
-    <div class="mb-12 grid gap-5 md:grid-cols-2 md:items-end">
-      <div>
-        <p class="eyebrow mb-5 text-paper/70">02 / Recent talks</p>
-        <h2 class="text-4xl font-medium tracking-[-0.055em] sm:text-6xl">Ideas.</h2>
-      </div>
-      <p class="max-w-lg text-base leading-relaxed text-paper/70 md:justify-self-end">
-        Talks on open source, high-performance interfaces, notebooks, and specialized computing.
-      </p>
-    </div>
-
-    <div class="border-t border-paper/25">
-      {#each talks.slice(0, 5) as talk}
-        <article
-          class="neon-hover group grid gap-4 border-b border-paper/25 py-7 md:grid-cols-[5rem_1fr_1fr_auto] md:items-center"
-        >
-          <p class="neon-hover-muted font-mono text-xs text-paper/70">{talk.year}</p>
-          <h3 class="max-w-xl text-xl font-medium tracking-[-0.035em]">{talk.title}</h3>
-          <p class="neon-hover-muted text-sm text-paper/70">{talk.event}</p>
-          <div class="flex gap-4 text-sm">
-            {#if 'recording' in talk}
-              <a class="link-line" href={talk.recording}>Watch ↗</a>
-            {/if}
-            {#if 'slides' in talk}
-              <a class="link-line" href={talk.slides}>Slides ↗</a>
-            {/if}
-          </div>
-        </article>
-      {/each}
-    </div>
-    <a class="link-line mt-9 inline-block text-sm font-semibold" href="/talks/">View full archive →</a>
-  </div>
-</section>
-
-<section id="work" class="border-t border-line">
-  <div class="mx-auto grid max-w-[92rem] gap-16 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-12 lg:py-28">
+  {#if writingRows.length}
     <div>
-      <p class="eyebrow mb-5 text-muted">03 / About</p>
-      <h2 class="max-w-md text-4xl font-medium tracking-[-0.055em] sm:text-6xl">Research + Product.</h2>
+      <DataTable
+        caption="Writing"
+        meta="{writingRows.length} {writingRows.length === 1 ? 'post' : 'posts'}"
+        columns={writingColumns}
+        rows={writingRows}
+        href={(row) => String(row.url)}
+      />
+      <p class="more"><a href="/writing/">All writing</a></p>
     </div>
-    <div>
-      <p class="max-w-2xl text-2xl leading-snug tracking-[-0.04em] sm:text-3xl">
-        My background is building full-stack applications for front-office users and developers, where performance and
-        clarity have to coexist.
-      </p>
-      <p class="mt-7 max-w-2xl leading-relaxed text-muted">
-        I contribute to large-scale open-source communities including JupyterLab and conda-forge, advise teams in data
-        and finance, and teach what I learn along the way.
-      </p>
-
-      <div class="mt-14 border-t border-line">
-        {#each experience as item}
-          <div
-            class="neon-hover group grid gap-2 border-b border-line px-4 py-5 sm:grid-cols-[5rem_1fr_1fr] sm:items-baseline"
-          >
-            <p class="neon-hover-muted font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted">{item.years}</p>
-            <p class="font-semibold tracking-[-0.02em]">{item.company}</p>
-            <p class="neon-hover-muted text-sm text-muted">{item.role}</p>
-          </div>
-        {/each}
-      </div>
-
-      <div class="mt-10 flex flex-wrap gap-7">
-        <a class="link-line text-sm font-semibold" href="https://www.linkedin.com/in/timkpaine/">Get in touch ↗</a>
-        <a class="link-line text-sm font-semibold" href="/rsc/TPCV.pdf">Résumé ↗</a>
-      </div>
-    </div>
-  </div>
+  {/if}
 </section>
+
+<style>
+  .page {
+    display: grid;
+    gap: 2.25rem;
+    width: min(calc(100% - 2.5rem), var(--tp-content-width));
+    margin: 0 auto;
+    padding: 3rem 0 5rem;
+  }
+
+  .intro {
+    display: grid;
+    gap: 0.75rem;
+    max-width: 62ch;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .intro p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .more {
+    margin: 0.6rem 0 0;
+    font-size: 0.75rem;
+  }
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.25em;
+  }
+
+  @media (min-width: 640px) {
+    .page {
+      width: min(calc(100% - 4rem), var(--tp-content-width));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page {
+      width: min(calc(100% - 6rem), var(--tp-content-width));
+    }
+  }
+</style>
