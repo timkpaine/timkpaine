@@ -1,57 +1,128 @@
 <script lang="ts">
-  import { talks } from '$lib/data/site';
+  import { DataTable, type Column, type Row } from '@timkpaine/ui';
   import Seo from '$lib/components/Seo.svelte';
+  import { talks } from '$lib/data/site';
+
+  const columns: Column[] = [
+    { key: 'title', label: 'Title', sortable: true },
+    { key: 'year', label: 'Year', sortable: true },
+    { key: 'event', label: 'Venue', sortable: true },
+    { key: 'description', label: 'Summary' }
+  ];
+
+  const rows: Row[] = talks.map((talk) => ({ ...talk }));
+
+  /** The media links for one talk, in a stable order. */
+  function media(talk: Record<string, string>): { href: string; label: string }[] {
+    const out: { href: string; label: string }[] = [];
+    if (talk.recording) out.push({ href: talk.recording, label: 'video' });
+    if (talk.slides) out.push({ href: talk.slides, label: 'slides' });
+    if (talk.source) out.push({ href: talk.source, label: 'source' });
+    return out;
+  }
 </script>
 
 <Seo
   title="Talks — Tim Paine"
-  description="Talks by Tim Paine on Jupyter, data visualization, open source, and specialized computing."
+  description="Conference talks by Tim Paine on Jupyter, data visualization, open source, and specialized computing."
 />
 
-<section class="mx-auto max-w-[92rem] px-5 pb-16 pt-16 sm:px-8 lg:px-12 lg:pb-24 lg:pt-24">
-  <p class="eyebrow mb-6 text-muted">Talks / 2020—Now</p>
-  <div class="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
-    <h1 class="max-w-5xl text-[clamp(4rem,10vw,9rem)] font-medium leading-[0.84] tracking-[-0.075em]">Ideas.</h1>
-    <p class="max-w-lg text-lg leading-relaxed text-muted lg:pb-2">
-      Conference talks, practical demos, and a growing archive of slides about building software for data-intensive
-      work.
-    </p>
+<section class="page">
+  <header>
+    <h1>Talks</h1>
+    <p class="tp-dim">{talks.length} talks, 2020 to 2025.</p>
+  </header>
+
+  <DataTable caption="Archive" meta="{talks.length} rows" {columns} {rows} searchable />
+
+  <div class="media">
+    <h2>Slides and recordings</h2>
+    <ul>
+      {#each talks as talk (talk.title)}
+        <li>
+          <span class="title">{talk.title}</span>
+          {#each media(talk as unknown as Record<string, string>) as link (link.href)}
+            <a class={link.label} href={link.href}>{link.label}</a>
+          {/each}
+        </li>
+      {/each}
+    </ul>
   </div>
 </section>
 
-<section class="border-t border-line">
-  <div class="mx-auto max-w-[92rem] px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
-    <div class="border-t border-line">
-      {#each talks as talk, index}
-        <article
-          class="grid gap-6 border-b border-line py-8 lg:grid-cols-[5rem_minmax(0,1.4fr)_minmax(14rem,0.6fr)] lg:py-10"
-        >
-          <div class="flex items-baseline justify-between lg:block">
-            <p class="eyebrow text-muted">{talk.year}</p>
-            <p class="font-mono text-[0.6rem] text-muted lg:mt-2">{String(index + 1).padStart(2, '0')}</p>
-          </div>
-          <div>
-            <h2 class="max-w-3xl text-2xl font-medium leading-tight tracking-[-0.045em] sm:text-4xl">
-              {talk.title}
-            </h2>
-            <p class="mt-4 max-w-2xl leading-relaxed text-muted">{talk.description}</p>
-          </div>
-          <div class="lg:text-right">
-            <p class="mb-5 text-sm font-semibold">{talk.event}</p>
-            <div class="flex flex-wrap gap-5 text-sm lg:justify-end">
-              {#if 'recording' in talk}
-                <a class="link-line" href={talk.recording}>Watch ↗</a>
-              {/if}
-              {#if 'slides' in talk}
-                <a class="link-line" href={talk.slides}>Slides ↗</a>
-              {/if}
-              {#if 'source' in talk}
-                <a class="link-line" href={talk.source}>Source ↗</a>
-              {/if}
-            </div>
-          </div>
-        </article>
-      {/each}
-    </div>
-  </div>
-</section>
+<style>
+  .page {
+    display: grid;
+    gap: 2.25rem;
+    width: min(calc(100% - 2.5rem), var(--tp-content-width));
+    margin: 0 auto;
+    padding: 3rem 0 5rem;
+  }
+
+  h1 {
+    margin: 0 0 0.4rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  header p {
+    margin: 0;
+    font-size: 0.8rem;
+  }
+
+  h2 {
+    margin: 0 0 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  ul {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.3rem 0;
+    border-bottom: var(--tp-border-width) solid var(--tp-rule);
+    font-size: 0.8rem;
+  }
+
+  .title {
+    flex: 1 1 24ch;
+  }
+
+  a {
+    color: var(--tp-fg);
+    text-decoration: none;
+    border-bottom: 1px solid currentcolor;
+  }
+
+  a.video {
+    color: var(--tp-video);
+  }
+
+  a.slides,
+  a.source {
+    color: var(--tp-slides);
+  }
+
+  @media (min-width: 640px) {
+    .page {
+      width: min(calc(100% - 4rem), var(--tp-content-width));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page {
+      width: min(calc(100% - 6rem), var(--tp-content-width));
+    }
+  }
+</style>
