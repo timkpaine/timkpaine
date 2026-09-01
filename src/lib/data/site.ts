@@ -1,88 +1,16 @@
+/** Open-source accounts, listed inline rather than as a card grid. */
 export const organizations = [
-  {
-    name: 'Tim Paine',
-    handle: 'timkpaine',
-    description: 'Personal projects across data, Jupyter, finance, and developer tools.',
-    href: 'https://github.com/timkpaine',
-    avatar: 'https://avatars.githubusercontent.com/u/3105306?v=4'
-  },
-  {
-    name: '1kbgz',
-    handle: '1kbgz',
-    description: 'A development studio based in New York City.',
-    href: 'https://github.com/1kbgz',
-    avatar: 'https://avatars.githubusercontent.com/u/147121325?v=4'
-  },
-  {
-    name: 'FINOS',
-    handle: 'finos',
-    description: 'Open innovation and open-source collaboration across financial services.',
-    href: 'https://github.com/finos',
-    avatar: 'https://avatars.githubusercontent.com/u/35377814?v=4'
-  },
-  {
-    name: 'Perspective',
-    handle: 'perspective-dev',
-    description: 'High-performance visualization and analytics for large, streaming datasets.',
-    href: 'https://github.com/perspective-dev',
-    avatar: 'https://avatars.githubusercontent.com/u/195977497?v=4'
-  },
-  {
-    name: 'dau.',
-    handle: 'dau-dev',
-    description: 'A dataflow hardware accelerator platform.',
-    href: 'https://github.com/dau-dev',
-    avatar: 'https://avatars.githubusercontent.com/u/113467871?v=4'
-  },
-  {
-    name: 'Point72',
-    handle: 'Point72',
-    description: 'Open-source software from a global asset management firm.',
-    href: 'https://github.com/Point72',
-    avatar: 'https://avatars.githubusercontent.com/u/112506536?v=4'
-  },
-  {
-    name: 'JPMorganChase',
-    handle: 'jpmorganchase',
-    description: 'Open-source projects from JPMorganChase.',
-    href: 'https://github.com/jpmorganchase',
-    avatar: 'https://avatars.githubusercontent.com/u/22640571?v=4'
-  },
-  {
-    name: 'Python Project Templates',
-    handle: 'python-project-templates',
-    description: 'Project templates for Python, C++, Rust, JavaScript, Jupyter, and more.',
-    href: 'https://github.com/python-project-templates',
-    avatar: 'https://avatars.githubusercontent.com/u/137446063?v=4'
-  },
-  {
-    name: 'nbprint',
-    handle: 'nbprint',
-    description: 'A framework for building print-oriented media with Jupyter.',
-    href: 'https://github.com/nbprint',
-    avatar: 'https://avatars.githubusercontent.com/u/166062041?v=4'
-  },
-  {
-    name: 'laminar',
-    handle: 'airflow-laminar',
-    description: 'Tools that make Apache Airflow smoother.',
-    href: 'https://github.com/airflow-laminar',
-    avatar: 'https://avatars.githubusercontent.com/u/177271696?v=4'
-  },
-  {
-    name: 'JupyterLab',
-    handle: 'jupyterlab',
-    description: 'The next-generation user interface for Project Jupyter.',
-    href: 'https://github.com/jupyterlab',
-    avatar: 'https://avatars.githubusercontent.com/u/22800682?v=4'
-  },
-  {
-    name: 'conda-forge',
-    handle: 'conda-forge',
-    description: 'Community-led packages and infrastructure for conda.',
-    href: 'https://github.com/conda-forge',
-    avatar: 'https://avatars.githubusercontent.com/u/11897326?v=4'
-  }
+  'JupyterLab',
+  'conda-forge',
+  'Perspective',
+  'nbprint',
+  'dau.',
+  'airflow-laminar',
+  'python-project-templates',
+  'FINOS',
+  'Point72',
+  'JPMorganChase',
+  '1kbgz'
 ] as const;
 
 export const talks = [
