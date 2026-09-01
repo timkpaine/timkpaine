@@ -1,2 +1,8 @@
 allowBuilds:
   sharp: true
+
+# @sveltejs/enhanced-img pins sharp ^0.34.1, which carries the libvips
+# advisories CVE-2026-33327, -33328, -35590 and -35591. Dependabot cannot lift
+# it past that pin, so force the patched line for every consumer.
+overrides:
+  sharp: ^0.35.0
