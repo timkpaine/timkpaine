@@ -1,5 +1,6 @@
 .prose {
-  color: var(--tp-color-ink);
+  color: var(--tp-fg);
+  font-family: var(--tp-font-sans);
   font-size: 1.0625rem;
   line-height: 1.75;
   max-width: 42rem;
@@ -43,19 +44,19 @@
 .prose h3 a:hover::after,
 .prose h4 a:hover::after {
   content: ' #';
-  color: var(--tp-color-muted);
+  color: var(--tp-fg-dim);
 }
 
 .prose a {
   color: inherit;
   text-decoration: underline;
-  text-decoration-color: var(--tp-color-line);
+  text-decoration-color: var(--tp-rule);
   text-underline-offset: 0.25em;
   transition: text-decoration-color var(--tp-motion-fast, 150ms) var(--tp-ease-out, ease);
 }
 
 .prose a:hover {
-  text-decoration-color: var(--tp-color-accent);
+  text-decoration-color: var(--tp-fg);
 }
 
 .prose strong {
@@ -80,23 +81,22 @@
 }
 
 .prose blockquote {
-  border-left: 2px solid var(--tp-color-accent);
+  border-left: 2px solid var(--tp-rule);
   padding-left: 1.25em;
-  color: var(--tp-color-muted);
+  color: var(--tp-fg-dim);
   font-style: italic;
 }
 
 .prose code {
   font-family: var(--tp-font-mono);
   font-size: 0.875em;
-  background: color-mix(in srgb, var(--tp-color-ink) 7%, transparent);
-  border-radius: 0.25rem;
+  background: var(--tp-bg-code);
   padding: 0.15em 0.4em;
 }
 
 .prose pre:focus-visible,
 .prose .table-scroll:focus-visible {
-  outline: var(--tp-focus-width, 2px) solid var(--tp-color-accent);
+  outline: var(--tp-focus-width, 2px) solid var(--tp-fg);
   outline-offset: var(--tp-focus-offset, 2px);
 }
 
@@ -104,9 +104,8 @@
   font-family: var(--tp-font-mono);
   font-size: 0.85rem;
   line-height: 1.6;
-  background: color-mix(in srgb, var(--tp-color-ink) 5%, transparent);
-  border: 1px solid var(--tp-color-line);
-  border-radius: 0.5rem;
+  background: var(--tp-bg-code);
+  border: 1px solid var(--tp-rule);
   padding: 1.15rem 1.35rem;
   overflow-x: auto;
 }
@@ -119,7 +118,6 @@
 
 .prose img,
 .prose picture {
-  border-radius: 0.5rem;
   display: block;
   height: auto;
   max-width: 100%;
@@ -137,7 +135,7 @@
 
 .prose th,
 .prose td {
-  border-bottom: 1px solid var(--tp-color-line);
+  border-bottom: 1px solid var(--tp-rule);
   padding: 0.6em 0.9em;
   text-align: left;
 }
@@ -148,7 +146,7 @@
 
 .prose hr {
   border: 0;
-  border-top: 1px solid var(--tp-color-line);
+  border-top: 1px solid var(--tp-rule);
 }
 
 .prose .not-prose {
@@ -170,8 +168,8 @@
 }
 
 .prose .footnotes {
-  border-top: 1px solid var(--tp-color-line);
-  color: var(--tp-color-muted);
+  border-top: 1px solid var(--tp-rule);
+  color: var(--tp-fg-dim);
   font-size: 0.9rem;
   margin-top: 3.5em;
   padding-top: 1.5em;
@@ -197,25 +195,26 @@
   }
 }
 
-/* Syntax tokens, tuned to stay legible in both themes. */
+/* Syntax tokens. Values verified against --tp-bg-code in both themes; see
+   the tokens.test.ts contrast suite in @timkpaine/ui. */
 .prose .token.comment,
 .prose .token.prolog,
 .prose .token.doctype,
 .prose .token.cdata {
-  color: color-mix(in srgb, var(--tp-color-muted) 85%, transparent);
+  color: var(--tp-fg-dim);
   font-style: italic;
 }
 
 .prose .token.punctuation,
 .prose .token.operator {
-  color: var(--tp-color-muted);
+  color: var(--tp-fg-dim);
 }
 
 .prose .token.keyword,
 .prose .token.selector,
 .prose .token.important,
 .prose .token.atrule {
-  color: var(--tp-color-accent);
+  color: var(--tp-syn-keyword);
   font-weight: 600;
 }
 
@@ -223,7 +222,7 @@
 .prose .token.char,
 .prose .token.attr-value,
 .prose .token.regex {
-  color: color-mix(in srgb, var(--tp-color-accent) 55%, var(--tp-color-ink));
+  color: var(--tp-syn-string);
 }
 
 .prose .token.function,
@@ -235,5 +234,5 @@
 .prose .token.boolean,
 .prose .token.constant,
 .prose .token.symbol {
-  color: color-mix(in srgb, var(--tp-color-ink) 70%, var(--tp-color-accent));
+  color: var(--tp-syn-number);
 }
