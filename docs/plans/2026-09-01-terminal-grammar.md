@@ -50,10 +50,12 @@ non-default branches, which is the isolation that matters.
 ### Task 1: Wire up the new stylesheet entry points
 
 **Files:**
+
 - Modify: `src/app.css`
 - Modify: `src/routes/+layout.svelte`
 
 **Interfaces:**
+
 - Consumes: `@timkpaine/ui/fonts.css`, `tokens.css`, `tailwind.css`, `base.css`.
 - Produces: a page whose base typography is Spline Sans Mono.
 
@@ -114,13 +116,17 @@ git commit -m "Load the terminal grammar stylesheets and drop the system clock"
 ### Task 2: Retarget prose.css
 
 **Files:**
+
 - Modify: `src/prose.css`
 
 **Interfaces:**
+
 - Consumes: tokens from the UI package.
 - Produces: readable longform in both themes, with a syntax palette that passes AA.
 
-This fixes a live bug: syntax keywords currently render `#c8ff35` on the light ground at **1.03:1** — invisible. The suite never caught it because the a11y audit only ran against the UI gallery.
+This fixes a live bug: syntax keywords currently render `#c8ff35` on the light ground at **1.03:1** — invisible.
+
+Correction: the a11y audit here _did_ already cover `/writing/example-post/`, which contains a `ts` fence. Injecting the old styling makes axe report a serious color-contrast violation, so coverage was not the gap. Why the suite was green beforehand was not established — do not assume the audit is a sufficient guard on its own. The token-level contrast suite in `@timkpaine/ui` is the reliable check.
 
 - [ ] **Step 1: Replace every removed token reference**
 
@@ -130,12 +136,12 @@ grep -n "tp-color-" src/prose.css
 
 Apply this mapping across the whole file:
 
-| Old | New |
-| --- | --- |
-| `--tp-color-ink` | `--tp-fg` |
+| Old                | New           |
+| ------------------ | ------------- |
+| `--tp-color-ink`   | `--tp-fg`     |
 | `--tp-color-muted` | `--tp-fg-dim` |
-| `--tp-color-line` | `--tp-rule` |
-| `--tp-color-paper` | `--tp-bg` |
+| `--tp-color-line`  | `--tp-rule`   |
+| `--tp-color-paper` | `--tp-bg`     |
 
 - [ ] **Step 2: Set prose in the sans stack**
 
@@ -260,9 +266,11 @@ git commit -m "Retarget prose styles and fix unreadable syntax keywords"
 ### Task 3: Reshape the site data
 
 **Files:**
+
 - Modify: `src/lib/data/site.ts`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: `organizations: readonly string[]`, plus unchanged `talks` and `experience`. Every page below reads from here.
 
@@ -311,9 +319,11 @@ git commit -m "Reduce the organizations list to plain names"
 ### Task 4: Rebuild the home page
 
 **Files:**
+
 - Modify: `src/routes/+page.svelte` (full rewrite)
 
 **Interfaces:**
+
 - Consumes: `DataTable` and `Column`/`Row` types from `@timkpaine/ui`; `experience`, `talks`, `organizations` from `$lib/data/site`; `visiblePosts` from `$lib/posts`.
 - Produces: the site's index.
 
@@ -369,13 +379,10 @@ Deleted here: the `clamp(4.5rem, 11vw, 10.5rem)` "Hello." hero, the `LiveSignal`
 <section class="page">
   <header class="intro">
     <h1>Tim Paine</h1>
-    <p>
-      Software engineer in New York. I work on data systems, visualization, and the hardware
-      underneath them.
-    </p>
+    <p>Software engineer in New York. I work on data systems, visualization, and the hardware underneath them.</p>
     <p class="tp-dim">
-      Point72 · Cubist, Central Research Team. Open source at {organizations.slice(0, 5).join(', ')},
-      and <a href="https://github.com/timkpaine">more <span class="tp-host">github.com</span></a>.
+      Point72 · Cubist, Central Research Team. Open source at {organizations.slice(0, 5).join(', ')}, and
+      <a href="https://github.com/timkpaine">more <span class="tp-host">github.com</span></a>.
     </p>
   </header>
 
@@ -481,9 +488,11 @@ git commit -m "Rebuild the index as three tables"
 ### Task 5: Rebuild the talks page
 
 **Files:**
+
 - Modify: `src/routes/talks/+page.svelte` (full rewrite)
 
 **Interfaces:**
+
 - Consumes: `talks` from `$lib/data/site`, `DataTable`.
 - Produces: the full talks archive.
 
@@ -644,9 +653,11 @@ git commit -m "Rebuild the talks page as a searchable table"
 ### Task 6: Rebuild the writing index
 
 **Files:**
+
 - Modify: `src/routes/writing/+page.svelte` (full rewrite)
 
 **Interfaces:**
+
 - Consumes: `visiblePosts` from `$lib/posts`, `formatDate`/`toIsoDate` from `$lib/dates`, `DataTable`.
 - Produces: the writing index. Keeps the RSS link and the draft marker.
 
@@ -771,10 +782,12 @@ git commit -m "Rebuild the writing index as a table"
 ### Task 7: Restyle the post layout and the error page
 
 **Files:**
+
 - Modify: `src/routes/+error.svelte` (full rewrite)
 - Modify: `src/lib/components/PostLayout.svelte:57-105`
 
 **Interfaces:**
+
 - Consumes: tokens; `TagIcon`, `Seo`, `$lib/dates` all unchanged.
 - Produces: the article shell for every `.svx` post.
 
@@ -963,10 +976,12 @@ git commit -m "Restyle post headers and simplify the error page"
 ### Task 8: Audit a post with code, then verify everything
 
 **Files:**
+
 - Modify: `tests/` — add an accessibility spec covering a writing post
 - Verify: the whole site
 
 **Interfaces:**
+
 - Consumes: everything above.
 
 - [ ] **Step 1: Find the existing test layout**
@@ -977,7 +992,19 @@ ls tests/ && ls tests/*/
 
 Note the directory convention and the `playwright.config.ts` `testDir`, then place the new spec to match.
 
-- [ ] **Step 2: Write the failing audit**
+- [ ] **Step 2: Verify existing coverage instead of adding a duplicate**
+
+`tests/a11y/audit.spec.ts` already audits `/writing/example-post/` in both
+themes and both viewports, and that post contains a fenced `ts` block. Adding a
+second spec for the same route is churn. Run what exists:
+
+```bash
+pnpm exec playwright test tests/a11y --reporter=line
+```
+
+Expected: 16 passing. Skip the spec below unless coverage is actually missing.
+
+- [ ] **Step 2b (skipped): Write the failing audit**
 
 Create `tests/a11y/post.spec.ts` (adjust the path to the convention found in Step 1):
 
@@ -994,9 +1021,7 @@ for (const theme of ['light', 'dark'] as const) {
     await page.addInitScript((value) => localStorage.setItem('theme', value), theme);
     await page.goto(POST);
 
-    const results = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze();
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
 
     const violations = results.violations.filter((violation) =>
       ['serious', 'critical'].includes(violation.impact ?? '')
