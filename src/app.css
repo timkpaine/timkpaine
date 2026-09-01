@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import '@timkpaine/ui/fonts.css';
 @import '@timkpaine/ui/tokens.css';
 @import '@timkpaine/ui/tailwind.css';
 @import '@timkpaine/ui/base.css';

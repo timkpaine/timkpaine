@@ -1,7 +1,7 @@
 <script lang="ts">
   import '../app.css';
   import { page } from '$app/state';
-  import { Footer, Nav, SystemClock } from '@timkpaine/ui';
+  import { Footer, Nav } from '@timkpaine/ui';
 
   let { children } = $props();
 </script>
@@ -13,4 +13,3 @@
 <Nav currentPath={page.url.pathname} />
 <main>{@render children()}</main>
 <Footer />
-<SystemClock />
