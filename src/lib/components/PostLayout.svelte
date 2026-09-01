@@ -40,50 +40,23 @@
   {@html `<script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, '\\u003c')}<\/script>`}
 </Seo>
 
-<article class="mx-auto max-w-[68rem] px-5 pb-24 pt-14 sm:px-8 lg:px-12 lg:pt-20">
-  <header class="border-b border-line pb-10">
-    <p class="eyebrow mb-6 text-muted">
-      <a class="link-line" href="/writing/">Writing</a>
-      <span class="mx-2">/</span>
+<article class="post">
+  <header>
+    <p class="crumb tp-dim">
+      <a href="/writing/">Writing</a>
+      <span aria-hidden="true">/</span>
       <time datetime={toIsoDate(date)}>{formatDate(date)}</time>
-      {#if draft}
-        <span class="ml-3 rounded-full border border-line px-2 py-0.5 text-[0.6rem]">Draft</span>
-      {/if}
+      {#if draft}<span class="draft">draft</span>{/if}
     </p>
 
-    <h1 class="max-w-4xl text-[clamp(2.75rem,6vw,5rem)] font-medium leading-[0.94] tracking-[-0.06em]">
-      {title}
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{description}</p>
+    <h1>{title}</h1>
+    <p class="description">{description}</p>
 
-    <ul class="mt-7 flex flex-wrap items-center gap-2">
-      {#each tags as tag}
-        <li
-          class="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted"
-        >
-          <TagIcon {tag} />
-          {tag}
-        </li>
+    <ul class="tags">
+      {#each tags as tag (tag)}
+        <li><TagIcon {tag} />{tag}</li>
       {/each}
-      <li
-        class="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted"
-        data-testid="human-written"
-      >
-        <svg
-          class="size-3 shrink-0 text-accent"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.9"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M6.5 10.5V20H4a1 1 0 0 1-1-1v-7.5a1 1 0 0 1 1-1h2.5Z" />
-          <path d="M6.5 10.5 10.8 3a2.4 2.4 0 0 1 2.3 3.1L12.3 9H18a2 2 0 0 1 2 2.4l-1.2 6.2a2 2 0 0 1-2 1.4H6.5" />
-        </svg>
-        Written by a human
-      </li>
+      <li data-testid="human-written">written by a human</li>
     </ul>
   </header>
 
@@ -91,7 +64,83 @@
     {@render children()}
   </div>
 
-  <footer class="mt-16 border-t border-line pt-8">
-    <a class="link-line text-sm font-semibold" href="/writing/">← All writing</a>
+  <footer>
+    <a href="/writing/">All writing</a>
   </footer>
 </article>
+
+<style>
+  .post {
+    width: min(calc(100% - 2.5rem), 68rem);
+    margin: 0 auto;
+    padding: 3rem 0 6rem;
+  }
+
+  header {
+    padding-bottom: 1.75rem;
+    border-bottom: var(--tp-border-width) solid var(--tp-rule);
+  }
+
+  .crumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+    font-size: 0.72rem;
+  }
+
+  .draft {
+    padding: 0 0.35rem;
+    color: var(--tp-on-select-fg);
+    background: var(--tp-select);
+  }
+
+  h1 {
+    margin: 0;
+    max-width: 30ch;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  .description {
+    margin: 0.8rem 0 0;
+    max-width: 60ch;
+    color: var(--tp-fg-dim);
+    font-family: var(--tp-font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tags li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.1rem 0.4rem;
+    border: var(--tp-border-width) solid var(--tp-rule);
+    color: var(--tp-fg-dim);
+    font-size: 0.7rem;
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    border-top: var(--tp-border-width) solid var(--tp-rule);
+    font-size: 0.8rem;
+  }
+
+  a {
+    color: inherit;
+  }
+</style>

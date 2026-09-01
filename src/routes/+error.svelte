@@ -6,13 +6,36 @@
   <title>{page.status} — Tim Paine</title>
 </svelte:head>
 
-<section class="mx-auto grid min-h-[70vh] max-w-[92rem] place-items-center px-5 py-20 text-center">
-  <div>
-    <p class="eyebrow mb-5 text-muted">Error / {page.status}</p>
-    <h1 class="text-5xl font-medium tracking-[-0.06em] sm:text-8xl">This path went quiet.</h1>
-    <p class="mx-auto mt-6 max-w-md leading-relaxed text-muted">
-      {page.error?.message ?? 'The page could not be found.'}
-    </p>
-    <a class="link-line mt-9 inline-block text-sm font-semibold" href="/">Return home →</a>
-  </div>
+<section>
+  <h1>{page.status}</h1>
+  <p>{page.error?.message ?? 'Page not found.'}</p>
+  <p><a href="/">Index</a></p>
 </section>
+
+<style>
+  section {
+    display: grid;
+    gap: 0.6rem;
+    width: min(calc(100% - 2.5rem), var(--tp-content-width));
+    min-height: 50vh;
+    align-content: center;
+    margin: 0 auto;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  p {
+    margin: 0;
+    color: var(--tp-fg-dim);
+    font-size: 0.85rem;
+  }
+
+  a {
+    color: var(--tp-fg);
+  }
+</style>
