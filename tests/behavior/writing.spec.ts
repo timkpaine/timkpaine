@@ -63,9 +63,8 @@ test('posts are badged as human written', async ({ page }) => {
 
   const badge = page.getByTestId('human-written');
   await expect(badge).toBeVisible();
+  // The text carries the meaning; there is no decorative icon.
   await expect(badge).toHaveText(/written by a human/i);
-  // The icon is decorative; the text carries the meaning.
-  await expect(badge.locator('svg')).toHaveAttribute('aria-hidden', 'true');
 });
 
 test('headings expose stable anchors', async ({ page }) => {
@@ -129,7 +128,8 @@ test('drafts are flagged in the index and never syndicated', async ({ page }) =>
   // and they are never prerendered.
   const link = page.locator('a[href="/writing/example-post/"]');
   await expect(link).toHaveCount(1);
-  await expect(page.locator('article', { has: link }).getByText('Draft')).toBeVisible();
+  // The index is a table; the draft marker rides in the row's title cell.
+  await expect(page.locator('tr', { has: link })).toContainText('(draft)');
 
   // Drafts are withheld from the feed and sitemap even when they are listed.
   const feed = await (await page.request.get('/writing/rss.xml')).text();

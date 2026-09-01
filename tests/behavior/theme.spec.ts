@@ -14,10 +14,14 @@ test('theme selection persists across navigation', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('data-theme', expected);
 });
 
-test('Work navigation targets the resume section', async ({ page }) => {
+test('primary navigation reaches the archive pages', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('link', { name: 'Work', exact: true }).click();
 
-  await expect(page).toHaveURL(/#work$/);
-  await expect(page.locator('#work').getByRole('heading', { name: 'Research + Product.' })).toBeVisible();
+  await page.getByRole('link', { name: 'talks', exact: true }).click();
+  await expect(page).toHaveURL(/\/talks\/$/);
+  await expect(page.getByRole('heading', { name: 'Talks', level: 1 })).toBeVisible();
+
+  await page.getByRole('link', { name: 'writing', exact: true }).click();
+  await expect(page).toHaveURL(/\/writing\/$/);
+  await expect(page.getByRole('heading', { name: 'Writing', level: 1 })).toBeVisible();
 });
