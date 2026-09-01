@@ -16,14 +16,14 @@
 
 <figure class="not-prose my-10" class:figure-wide={wide}>
   {#if typeof src === 'string'}
-    <img class="w-full rounded-lg border border-line" {src} {alt} {loading} decoding="async" />
+    <img class="w-full border border-rule" {src} {alt} {loading} decoding="async" />
   {:else}
     <picture>
       {#each Object.entries(src.sources) as [format, srcset]}
         <source {srcset} type="image/{format}" />
       {/each}
       <img
-        class="w-full rounded-lg border border-line"
+        class="w-full border border-rule"
         src={src.img.src}
         width={src.img.w}
         height={src.img.h}
@@ -34,6 +34,6 @@
     </picture>
   {/if}
   {#if caption}
-    <figcaption class="mt-3 text-center text-sm leading-relaxed text-muted">{caption}</figcaption>
+    <figcaption class="mt-3 text-center text-xs leading-relaxed text-fg-dim">{caption}</figcaption>
   {/if}
 </figure>
