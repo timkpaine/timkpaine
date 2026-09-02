@@ -46,10 +46,6 @@
   <header class="intro">
     <h1>Tim Paine</h1>
     <p>Software engineer in New York. I work on data systems, visualization, and the hardware underneath them.</p>
-    <p class="tp-dim">
-      Point72 · Cubist, Central Research Team. Open source at {organizations.slice(0, 5).join(', ')}, and
-      <a href="https://github.com/timkpaine">more <span class="tp-host">github.com</span></a>.
-    </p>
   </header>
 
   <DataTable caption="Résumé" meta="{roleRows.length} rows" columns={roleColumns} rows={roleRows} />
