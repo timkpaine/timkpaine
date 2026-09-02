@@ -9,7 +9,7 @@
 <section>
   <h1>{page.status}</h1>
   <p>{page.error?.message ?? 'Page not found.'}</p>
-  <p><a href="/">Index</a></p>
+  <p><a class="tp-link-line" href="/">Index</a></p>
 </section>
 
 <style>

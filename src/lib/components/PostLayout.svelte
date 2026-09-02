@@ -43,7 +43,7 @@
 <article class="post">
   <header>
     <p class="crumb tp-dim">
-      <a href="/writing/">Writing</a>
+      <a class="tp-link-line" href="/writing/">Writing</a>
       <span aria-hidden="true">/</span>
       <time datetime={toIsoDate(date)}>{formatDate(date)}</time>
       {#if draft}<span class="draft">draft</span>{/if}
@@ -65,7 +65,7 @@
   </div>
 
   <footer>
-    <a href="/writing/">All writing</a>
+    <a class="tp-link-line" href="/writing/">All writing</a>
   </footer>
 </article>
 

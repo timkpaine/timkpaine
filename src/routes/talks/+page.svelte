@@ -33,7 +33,7 @@
     <p class="tp-dim">{talks.length} talks, 2020 to 2025.</p>
   </header>
 
-  <DataTable caption="Archive" meta="{talks.length} rows" {columns} {rows} searchable />
+  <DataTable caption="Archive" meta="{talks.length} rows" {columns} {rows} />
 
   <div class="media">
     <h2>Slides and recordings</h2>
@@ -42,7 +42,7 @@
         <li>
           <span class="title">{talk.title}</span>
           {#each media(talk as unknown as Record<string, string>) as link (link.href)}
-            <a class={link.label} href={link.href}>{link.label}</a>
+            <a class="tp-link-line {link.label}" href={link.href}>{link.label}</a>
           {/each}
         </li>
       {/each}
@@ -101,8 +101,6 @@
 
   a {
     color: var(--tp-fg);
-    text-decoration: none;
-    border-bottom: 1px solid currentcolor;
   }
 
   a.video {

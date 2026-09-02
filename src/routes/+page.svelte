@@ -1,7 +1,7 @@
 <script lang="ts">
   import { DataTable, type Column, type Row } from '@timkpaine/ui';
   import Seo from '$lib/components/Seo.svelte';
-  import { experience, organizations, talks } from '$lib/data/site';
+  import { experience, talks } from '$lib/data/site';
   import { formatDate } from '$lib/dates';
   import { visiblePosts } from '$lib/posts';
 
@@ -57,7 +57,7 @@
       columns={talkColumns}
       rows={talkRows}
     />
-    <p class="more"><a href="/talks/">All {talks.length} talks</a></p>
+    <p class="more"><a class="tp-link-line" href="/talks/">All {talks.length} talks</a></p>
   </div>
 
   {#if writingRows.length}
@@ -69,7 +69,7 @@
         rows={writingRows}
         href={(row) => String(row.url)}
       />
-      <p class="more"><a href="/writing/">All writing</a></p>
+      <p class="more"><a class="tp-link-line" href="/writing/">All writing</a></p>
     </div>
   {/if}
 </section>

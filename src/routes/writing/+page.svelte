@@ -28,7 +28,7 @@
     <h1>Writing</h1>
     <p class="tp-dim">
       Notes and hobby projects.
-      <a href="/writing/rss.xml">RSS</a>
+      <a class="tp-link-line" href="/writing/rss.xml">RSS</a>
     </p>
   </header>
 
@@ -38,7 +38,6 @@
       meta="{rows.length} {rows.length === 1 ? 'post' : 'posts'}"
       {columns}
       {rows}
-      searchable
       href={(row) => String(row.url)}
     />
   {:else}
