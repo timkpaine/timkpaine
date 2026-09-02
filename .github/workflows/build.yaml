@@ -28,6 +28,25 @@ jobs:
           path: _ui
           persist-credentials: false
 
+      # A change here often needs a matching change in the UI package, and the
+      # two land in separate pull requests. Without this the site is tested
+      # against the UI package's default branch, so a paired branch fails until
+      # its counterpart merges - which looks like this repository is broken.
+      - name: Use the matching UI branch when there is one
+        env:
+          UI_TOKEN: ${{ secrets.UI_REPO_TOKEN }}
+          BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          cd "$GITHUB_WORKSPACE/_ui"
+          remote="https://x-access-token:${UI_TOKEN}@github.com/timkpaine/ui.git"
+          if git ls-remote --exit-code --heads "$remote" "$BRANCH" >/dev/null 2>&1; then
+            git fetch --depth=1 "$remote" "$BRANCH"
+            git checkout --detach FETCH_HEAD
+            echo "@timkpaine/ui: using branch $BRANCH"
+          else
+            echo "@timkpaine/ui: no branch named $BRANCH, using the default branch"
+          fi
+
       - name: Position UI package for local dependency
         run: mv "$GITHUB_WORKSPACE/_ui" "$(dirname "$(dirname "$GITHUB_WORKSPACE")")/ui"
 
