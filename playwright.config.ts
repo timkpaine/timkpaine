@@ -26,6 +26,14 @@ export default defineConfig({
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } } },
-    { name: 'mobile', use: { ...devices['Desktop Chrome'], viewport: { width: 390, height: 844 } } }
+    { name: 'mobile', use: { ...devices['Desktop Chrome'], viewport: { width: 390, height: 844 } } },
+    // WebKit covers behaviour and accessibility only. Safari's tab order differs
+    // from Chromium's, and a keyboard layer that worked in one and was inert in
+    // the other shipped unnoticed. Visual baselines stay single-engine.
+    {
+      name: 'webkit',
+      testIgnore: ['**/visual/**'],
+      use: { ...devices['Desktop Safari'], viewport: { width: 1280, height: 800 } }
+    }
   ]
 });

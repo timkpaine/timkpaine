@@ -63,7 +63,7 @@ jobs:
         run: pnpm lint
 
       - name: Install Playwright browser
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium webkit
 
       - name: Test site behavior and accessibility
         run: pnpm test:e2e
