@@ -57,7 +57,7 @@
       columns={talkColumns}
       rows={talkRows}
     />
-    <p class="more"><a href="/talks/">All {talks.length} talks</a></p>
+    <p class="more"><a class="tp-link-line" href="/talks/">All {talks.length} talks</a></p>
   </div>
 
   {#if writingRows.length}
@@ -69,7 +69,7 @@
         rows={writingRows}
         href={(row) => String(row.url)}
       />
-      <p class="more"><a href="/writing/">All writing</a></p>
+      <p class="more"><a class="tp-link-line" href="/writing/">All writing</a></p>
     </div>
   {/if}
 </section>
