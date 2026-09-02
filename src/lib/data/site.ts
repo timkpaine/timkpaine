@@ -1,18 +1,3 @@
-/** Open-source accounts, listed inline rather than as a card grid. */
-export const organizations = [
-  'JupyterLab',
-  'conda-forge',
-  'Perspective',
-  'nbprint',
-  'dau.',
-  'airflow-laminar',
-  'python-project-templates',
-  'FINOS',
-  'Point72',
-  'JPMorganChase',
-  '1kbgz'
-] as const;
-
 export const talks = [
   {
     year: '2025',

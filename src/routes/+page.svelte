@@ -1,7 +1,7 @@
 <script lang="ts">
   import { DataTable, type Column, type Row } from '@timkpaine/ui';
   import Seo from '$lib/components/Seo.svelte';
-  import { experience, organizations, talks } from '$lib/data/site';
+  import { experience, talks } from '$lib/data/site';
   import { formatDate } from '$lib/dates';
   import { visiblePosts } from '$lib/posts';
 
