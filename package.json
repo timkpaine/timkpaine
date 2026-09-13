@@ -20,9 +20,10 @@
     "test:e2e:update": "playwright test --update-snapshots"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.12.1",
-    "@playwright/test": "^1.60.0",
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1",
     "@sveltejs/adapter-static": "^3.0.10",
+<<<<<<< before updating
     "@sveltejs/enhanced-img": "^0.11.0",
     "@sveltejs/kit": "^2.70.1",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
@@ -39,8 +40,18 @@
     "sharp": "^0.35.4",
     "svelte": "^5.56.7",
     "svelte-check": "^4.3.4",
+=======
+    "@sveltejs/kit": "^2.70.3",
+    "@sveltejs/vite-plugin-svelte": "^7.3.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.4.0",
+    "oxfmt": "^0.66.0",
+    "oxlint": "^1.81.0",
+    "svelte": "^5.57.0",
+    "svelte-check": "^4.7.6",
+>>>>>>> after updating
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.3",
-    "vite": "^8.1.5"
+    "vite": "^8.2.2"
   }
 }
