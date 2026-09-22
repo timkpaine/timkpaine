@@ -1,59 +1,6 @@
 @import 'tailwindcss';
-<<<<<<< before updating
 @import '@timkpaine/ui/fonts.css';
 @import '@timkpaine/ui/tokens.css';
 @import '@timkpaine/ui/tailwind.css';
 @import '@timkpaine/ui/base.css';
 @import './prose.css';
-=======
-
-/* Neutral placeholders. Replace the values with the brand's own; the names are
- * the contract the rest of the site depends on. */
-
-:root {
-  --brand-bg: #ffffff;
-  --brand-bg-raised: #f6f6f6;
-  --brand-fg: #171717;
-  --brand-fg-muted: #5c5c5c;
-  --brand-border: #e0e0e0;
-  --brand-focus: #1a56c4;
-
-  color-scheme: light;
-}
-
-:root[data-theme='dark'] {
-  --brand-bg: #121212;
-  --brand-bg-raised: #1c1c1c;
-  --brand-fg: #ededed;
-  --brand-fg-muted: #a6a6a6;
-  --brand-border: #333333;
-  --brand-focus: #8ab4ff;
-
-  color-scheme: dark;
-}
-
-@theme inline {
-  --color-bg: var(--brand-bg);
-  --color-bg-raised: var(--brand-bg-raised);
-  --color-fg: var(--brand-fg);
-  --color-fg-muted: var(--brand-fg-muted);
-  --color-border: var(--brand-border);
-}
-
-body {
-  margin: 0;
-  color: var(--brand-fg);
-  background: var(--brand-bg);
-  font-family: system-ui, sans-serif;
-}
-
-a {
-  color: inherit;
-}
-
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--brand-focus);
-  outline-offset: 4px;
-}
->>>>>>> after updating
