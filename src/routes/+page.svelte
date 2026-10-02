@@ -45,7 +45,7 @@
 <section class="page">
   <header class="intro">
     <h1>Tim Paine</h1>
-    <p>Software engineer in New York. I work on data systems, visualization, and the hardware underneath them.</p>
+    <p>Software engineer in New York. I work on systems, data, visualization, and hardware.</p>
   </header>
 
   <DataTable caption="Résumé" meta="{roleRows.length} rows" columns={roleColumns} rows={roleRows} />
