@@ -1,4 +1,8 @@
+<<<<<<< before updating
 import { enhancedImages } from '@sveltejs/enhanced-img';
+=======
+import adapter from '@sveltejs/adapter-static';
+>>>>>>> after updating
 import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig, type Plugin } from 'vite';
@@ -20,5 +24,15 @@ const imageTools = (enhancedImages() as unknown as Plugin[]).filter(
 );
 
 export default defineConfig({
+<<<<<<< before updating
   plugins: [svxImages(), tailwindcss(), imageTools, sveltekit()]
+=======
+  plugins: [
+    tailwindcss(),
+    sveltekit({
+      adapter: adapter({ fallback: '404.html', precompress: true, strict: true }),
+      prerender: { entries: ['*'] }
+    })
+  ]
+>>>>>>> after updating
 });
