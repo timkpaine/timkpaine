@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { EnhancedPicture } from '$lib/posts';
+  import type { EnhancedPicture } from '#lib/posts.ts';
 
   type Props = {
     /** An image imported with `?enhanced`, or a plain URL for remote images. */

@@ -116,7 +116,7 @@ export function svxImages() {
 
       if (!imports.length) return null;
 
-      imports.unshift(`import ${COMPONENT} from '$lib/components/Figure.svelte';`);
+      imports.unshift(`import ${COMPONENT} from '#lib/components/Figure.svelte';`);
       // Restore last, so masked regions never take part in the rewrite.
       return { code: restoreInert(injectImports(rewritten, imports)), map: null };
     }

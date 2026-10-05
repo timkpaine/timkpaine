@@ -1,7 +1,7 @@
 import { goto } from '$app/navigation';
 import { setTheme, type Command } from '@timkpaine/ui';
-import { talks } from '$lib/data/site';
-import { visiblePosts } from '$lib/posts';
+import { talks } from '#lib/data/site.ts';
+import { visiblePosts } from '#lib/posts.ts';
 
 /**
  * Everything the palette can reach: the three pages, every writing post, every
