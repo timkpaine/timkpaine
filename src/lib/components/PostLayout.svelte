@@ -1,10 +1,10 @@
 <script lang="ts">
   import { page } from '$app/state';
   import { BRAND_NAME, SITE_URL } from '@timkpaine/ui';
-  import Seo from '$lib/components/Seo.svelte';
-  import TagIcon from '$lib/components/TagIcon.svelte';
-  import { formatDate, toIsoDate } from '$lib/dates';
-  import type { PostMetadata } from '$lib/posts';
+  import Seo from '#lib/components/Seo.svelte';
+  import TagIcon from '#lib/components/TagIcon.svelte';
+  import { formatDate, toIsoDate } from '#lib/dates.ts';
+  import type { PostMetadata } from '#lib/posts.ts';
 
   type Props = PostMetadata & { children: import('svelte').Snippet };
 

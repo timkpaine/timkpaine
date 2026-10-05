@@ -2,7 +2,7 @@
   import '../app.css';
   import { page } from '$app/state';
   import { CommandPalette, Footer, Nav } from '@timkpaine/ui';
-  import { buildCommands } from '$lib/commands';
+  import { buildCommands } from '#lib/commands.ts';
 
   let { children } = $props();
 

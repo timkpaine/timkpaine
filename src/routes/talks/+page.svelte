@@ -1,7 +1,7 @@
 <script lang="ts">
   import { DataTable, type Column, type Row } from '@timkpaine/ui';
-  import Seo from '$lib/components/Seo.svelte';
-  import { talks } from '$lib/data/site';
+  import Seo from '#lib/components/Seo.svelte';
+  import { talks } from '#lib/data/site.ts';
 
   const columns: Column[] = [
     { key: 'title', label: 'Title', sortable: true },

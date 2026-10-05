@@ -1,3 +1,8 @@
+/**
+ * @param {any} node
+ * @param {any} parent
+ * @param {(node: any, parent: any) => void} visitor
+ */
 const walk = (node, parent, visitor) => {
   const children = Array.isArray(node.children) ? [...node.children] : [];
   for (const child of children) walk(child, node, visitor);
@@ -14,6 +19,7 @@ const walk = (node, parent, visitor) => {
  *
  * Code blocks are handled in `plugins/highlight.js`, because mdsvex emits them
  * as raw HTML before rehype runs.
+ * @returns {(tree: any) => void}
  */
 export function rehypeScrollableRegions() {
   return (tree) => {
