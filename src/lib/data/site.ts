@@ -79,7 +79,7 @@ export const experience = [
   },
   {
     company: 'IEX',
-    role: 'Head of Software Engineering, Cloud',
+    role: 'Head of Software Engineering, IEX Cloud',
     years: '2020—2021'
   },
   {

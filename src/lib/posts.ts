@@ -1,5 +1,5 @@
 import { SITE_URL } from '@timkpaine/ui';
-import { dateOrder } from '$lib/dates';
+import { dateOrder } from '#lib/dates.ts';
 
 /** Shape returned by a Vite `?enhanced` image import. */
 export type EnhancedPicture = {
@@ -10,7 +10,7 @@ export type EnhancedPicture = {
 export type PostMetadata = {
   title: string;
   description: string;
-  /** See `parseDate` in `$lib/dates` for the formats this arrives in. */
+  /** See `parseDate` in `#lib/dates.ts` for the formats this arrives in. */
   date: string;
   updated?: string;
   tags?: string[];
@@ -25,7 +25,7 @@ export type Post = PostMetadata & {
 };
 
 /**
- * Anything a post renders with must import from `$lib/dates`, not from here.
+ * Anything a post renders with must import from `#lib/dates.ts`, not from here.
  * This glob pulls in every post, so importing back into this module from a
  * post's layout would create a cycle the dev server cannot resolve.
  */

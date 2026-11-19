@@ -1,9 +1,9 @@
 <script lang="ts">
   import { DataTable, type Column, type Row } from '@timkpaine/ui';
-  import Seo from '$lib/components/Seo.svelte';
-  import { experience, talks } from '$lib/data/site';
-  import { formatDate } from '$lib/dates';
-  import { visiblePosts } from '$lib/posts';
+  import Seo from '#lib/components/Seo.svelte';
+  import { experience, talks } from '#lib/data/site.ts';
+  import { formatDate } from '#lib/dates.ts';
+  import { visiblePosts } from '#lib/posts.ts';
 
   const roleColumns: Column[] = [
     { key: 'company', label: 'Organization' },

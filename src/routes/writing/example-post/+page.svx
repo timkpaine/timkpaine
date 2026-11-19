@@ -7,7 +7,7 @@ draft: true
 ---
 
 <script>
-  import Figure from '$lib/components/Figure.svelte';
+  import Figure from '#lib/components/Figure.svelte';
   import pipeline from './pipeline.png?enhanced';
 </script>
 
@@ -58,7 +58,7 @@ inline links behave as expected.
 Fenced code blocks are styled to match the rest of the site:
 
 ```ts
-import { publishedPosts } from '$lib/posts';
+import { publishedPosts } from '#lib/posts.ts';
 
 const latest = publishedPosts.at(0);
 ```
