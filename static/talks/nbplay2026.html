@@ -1,0 +1,1209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>nbplay</title>
+  <link rel="stylesheet" href="assets/dist/reveal.css">
+  <link rel="stylesheet" href="assets/dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="assets/plugin/highlight/monokai.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBFEVM4RY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PJBFEVM4RY');
+  </script>
+  <style>
+    :root {
+      --c-nbplay: #c75b12;
+      --c-nbplay-bg: #fdf0e3;
+      --c-spaday: #2f8a57;
+      --c-spaday-bg: #eaf6ee;
+      --c-transports: #3b6db3;
+      --c-transports-bg: #eaf1fb;
+      --c-rust: #6b4fa3;
+      --c-rust-bg: #f2eefa;
+      --c-ink: #222;
+      --c-muted: #666;
+    }
+    .reveal .smallfont { font-size: 18px; }
+    .reveal .muted { color: var(--c-muted); }
+    .reveal .caption { font-size: 20px; color: var(--c-muted); margin: 10px 0 0; }
+    .reveal h4.step { font-size: 26px; color: var(--c-nbplay); margin-bottom: 6px; }
+    .reveal table.small { font-size: 20px; }
+    .reveal img.shot { border: 1px solid #ccc; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); }
+    .reveal svg.diagram { width: 100%; height: auto; font-family: "Source Sans Pro", Helvetica, sans-serif; }
+    .reveal svg.diagram text { fill: var(--c-ink); }
+    .reveal svg .fragment { transition: opacity 0.3s ease; }
+
+    /* Moving dashes on the data-flow arrows */
+    .reveal svg .flow { stroke-dasharray: 9 6; animation: flow 0.9s linear infinite; }
+    @keyframes flow { to { stroke-dashoffset: -30; } }
+
+    /* Tiles: notebook roles, stress test, mental model */
+    .reveal .tiles { display: grid; gap: 14px; text-align: left; font-size: 23px; }
+    .reveal .tiles.three { grid-template-columns: repeat(3, 1fr); }
+    .reveal .tiles.two { grid-template-columns: repeat(2, 1fr); }
+    .reveal .tile { border-radius: 8px; padding: 12px 14px; background: #f6f5f2; border-top: 5px solid var(--c-nbplay); }
+    .reveal .tile b { display: block; font-size: 23px; margin-bottom: 4px; }
+    .reveal .tile.t { border-color: var(--c-transports); background: var(--c-transports-bg); }
+    .reveal .tile.s { border-color: var(--c-spaday); background: var(--c-spaday-bg); }
+    .reveal .tile.n { border-color: var(--c-nbplay); background: var(--c-nbplay-bg); }
+    .reveal .tile.r { border-color: var(--c-rust); background: var(--c-rust-bg); }
+
+    /* The separation of concerns */
+    .reveal .layers { display: flex; flex-direction: column; gap: 10px; font-size: 19px; text-align: left; }
+    .reveal .layer { display: grid; grid-template-columns: 150px 1fr 1fr; gap: 14px; align-items: center; border-radius: 8px; padding: 10px 14px; border-left: 8px solid; }
+    .reveal .layer .name { font-weight: bold; font-size: 26px; }
+    .reveal .layer .name small { display: block; font-weight: normal; font-size: 16px; color: var(--c-muted); }
+    .reveal .layer .no { color: var(--c-muted); }
+    .reveal .layer.n { background: var(--c-nbplay-bg); border-color: var(--c-nbplay); }
+    .reveal .layer.s { background: var(--c-spaday-bg); border-color: var(--c-spaday); }
+    .reveal .layer.t { background: var(--c-transports-bg); border-color: var(--c-transports); }
+    .reveal .layer.r { background: var(--c-rust-bg); border-color: var(--c-rust); grid-template-columns: 150px 1fr; }
+
+    /* Big numbers */
+    .reveal .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .reveal .stat { background: #f6f5f2; border-radius: 8px; padding: 14px 8px; }
+    .reveal .stat b { display: block; font-size: 52px; line-height: 1.1; color: var(--c-nbplay); }
+    .reveal .stat span { font-size: 18px; color: var(--c-muted); }
+
+    .reveal .cols { display: flex; gap: 24px; justify-content: center; align-items: flex-start; font-size: 22px; text-align: left; }
+    .reveal .cols > div { flex: 1; }
+    .reveal .cols b { display: block; margin-top: 12px; }
+    .reveal .cols ul { display: block; margin: 4px 0 0 1em; }
+
+    .reveal .split { display: flex; gap: 20px; align-items: flex-start; text-align: left; }
+    .reveal .split > * { flex: 1; min-width: 0; }
+    .reveal .split pre { width: 100%; margin: 0; font-size: 16px; }
+
+    .reveal .qr { display: flex; gap: 60px; justify-content: center; font-size: 22px; }
+    .reveal .qr img { width: 210px; margin: 0 0 6px; }
+
+    /* Live elements. Reset what the reveal theme sets on plain tags; nbplay.css
+       loads after this block, so its own rules win at equal specificity. */
+    .demo { font-size: 13px; line-height: 1.35; text-align: left; letter-spacing: normal; text-transform: none; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b19; margin: 0 auto; }
+    .demo ul, .demo ol { display: block; margin: 0; padding: 0; }
+    .demo li { margin: 0; }
+    .demo p { margin: 0; line-height: inherit; }
+    .demo h1, .demo h2, .demo h3, .demo h4, .demo h5, .demo h6 { margin: 0; font-size: inherit; text-transform: none; line-height: inherit; font-family: inherit; color: inherit; }
+    .demo table td, .demo table th { padding: 2px 4px; border-bottom: none; text-align: left; }
+    .demo pre { box-shadow: none; width: auto; margin: 0; font-size: inherit; }
+    .demo code { font-family: ui-monospace, Menlo, monospace; }
+    .demo a { color: inherit; }
+    .demo-row { display: flex; gap: 12px; align-items: flex-start; }
+    .demo-hidden { display: none; }
+    .reveal .live { display: inline-block; font-size: 15px; font-weight: bold; color: white; background: #d33; border-radius: 4px; padding: 1px 8px; vertical-align: middle; letter-spacing: 0.05em; }
+
+    .demo .patches { display: flex; flex-direction: column; gap: 8px; margin: 0 0 10px; }
+    .demo .patches button { text-align: left; font: 13px ui-monospace, Menlo, monospace; padding: 4px 8px; border: 1px solid var(--c-transports); background: var(--c-transports-bg); border-radius: 4px; cursor: pointer; }
+    .demo .log { font: 13px/1.5 ui-monospace, Menlo, monospace; background: #1e1e1e; color: #ddd; border-radius: 6px; padding: 8px 10px; height: 400px; overflow: hidden; white-space: pre-wrap; }
+    .demo .log .k { color: #7fb4ff; }
+    .demo .log .b { color: #ffb37f; }
+    .demo .log .d { color: #888; }
+
+    .reveal iframe.app { width: 940px; height: 520px; border: 1px solid #ccc; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); background: #faf9f6; }
+  </style>
+  <link rel="stylesheet" href="nbplay2026/nbplay.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-markdown>
+          <script type="text/template">
+              <!-- .slide: data-background-image="assets/img/cubist/lightbg.png" -->
+              <!-- .slide: style="color: white" -->
+              <h3 style="color: white;">A DAW in your Notebook</h3>
+              <h3 style="color: white;">Real-time audio with nbplay, spaday and transports</h3>
+              <br />
+              <span style="color:white;">Tim Paine
+              <br />
+              <a style="color: white; text-decoration: underline;" href="https://github.com/timkpaine">@timkpaine</a></span>
+              <br />
+              <br />
+              <a href="https://point72.com/cubist/"><img src="assets/img/cubist/logo-horizontal-white.png" width=250></img></a>
+          </script>
+      </section>
+
+      <!-- Hook -->
+      <section>
+        <section>
+          <h4>A drum machine <span class="live">LIVE</span></h4>
+          <div class="demo" style="width: 860px; zoom: 1.08">
+            <nbplay-drums id="hook-drums"></nbplay-drums>
+          </div>
+          <p class="caption">A web component on this slide. No server, no kernel: press play, tap a pad.</p>
+        </section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            Can a notebook do this?
+
+            Driven from Python, in a cell
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            With the same widget as a web app, and with no server at all
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            And keep time while you type
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+          </script>
+        </section>
+      </section>
+
+      <!-- What a notebook is -->
+      <section>
+        <section>
+          <h3>A notebook is five things</h3>
+          <svg class="diagram" viewBox="0 0 900 470" role="img" aria-label="A notebook as a browser app, a Python runtime, a document, a widget host and a comm channel">
+            <defs>
+              <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6"><circle cx="5" cy="5" r="4" fill="#999"/></marker>
+            </defs>
+            <g stroke="#bbb" stroke-width="2">
+              <line x1="450" y1="235" x2="160" y2="80"/>
+              <line x1="450" y1="235" x2="740" y2="80"/>
+              <line x1="450" y1="235" x2="160" y2="390"/>
+              <line x1="450" y1="235" x2="740" y2="390"/>
+              <line x1="450" y1="235" x2="450" y2="420"/>
+            </g>
+            <rect x="340" y="190" width="220" height="90" rx="14" fill="#222"/>
+            <text x="450" y="245" text-anchor="middle" font-size="30" font-weight="bold" style="fill: white">a notebook</text>
+
+            <g class="fragment" data-fragment-index="1">
+              <rect x="20" y="30" width="280" height="100" rx="10" fill="var(--c-nbplay-bg)" stroke="var(--c-nbplay)" stroke-width="3"/>
+              <text x="160" y="70" text-anchor="middle" font-size="26" font-weight="bold">a browser app</text>
+              <text x="160" y="104" text-anchor="middle" font-size="19">DOM, Web Audio, Web MIDI</text>
+            </g>
+            <g class="fragment" data-fragment-index="2">
+              <rect x="600" y="30" width="280" height="100" rx="10" fill="var(--c-spaday-bg)" stroke="var(--c-spaday)" stroke-width="3"/>
+              <text x="740" y="70" text-anchor="middle" font-size="26" font-weight="bold">a Python runtime</text>
+              <text x="740" y="104" text-anchor="middle" font-size="19">your data, your code, a GIL</text>
+            </g>
+            <g class="fragment" data-fragment-index="3">
+              <rect x="20" y="340" width="280" height="100" rx="10" fill="#f6f5f2" stroke="#888" stroke-width="3"/>
+              <text x="160" y="380" text-anchor="middle" font-size="26" font-weight="bold">a document</text>
+              <text x="160" y="414" text-anchor="middle" font-size="19">saved, shared, re-run</text>
+            </g>
+            <g class="fragment" data-fragment-index="4">
+              <rect x="330" y="370" width="240" height="90" rx="10" fill="var(--c-rust-bg)" stroke="var(--c-rust)" stroke-width="3"/>
+              <text x="450" y="406" text-anchor="middle" font-size="26" font-weight="bold">a widget host</text>
+              <text x="450" y="438" text-anchor="middle" font-size="19">live views in the output</text>
+            </g>
+            <g class="fragment" data-fragment-index="5">
+              <rect x="600" y="340" width="280" height="100" rx="10" fill="var(--c-transports-bg)" stroke="var(--c-transports)" stroke-width="3"/>
+              <text x="740" y="380" text-anchor="middle" font-size="26" font-weight="bold">a comm channel</text>
+              <text x="740" y="414" text-anchor="middle" font-size="19">messages both ways</text>
+            </g>
+          </svg>
+          <p class="caption fragment" data-fragment-index="6">What kind of app can we build on all five at once?</p>
+        </section>
+
+        <section>
+          <h3>Why a DAW?</h3>
+          <div class="tiles three">
+            <div class="tile fragment"><b>Real-time interaction</b>a key press sounds now, not after a round trip</div>
+            <div class="tile fragment"><b>Visual controls</b>knobs, faders, grids, meters, waveforms</div>
+            <div class="tile fragment"><b>Shared state</b>a dozen widgets editing one song</div>
+            <div class="tile fragment"><b>Timing</b>notes land within milliseconds, in phase across widgets</div>
+            <div class="tile fragment"><b>Playback</b>audio keeps running while a cell runs</div>
+            <div class="tile fragment"><b>Immediacy</b>edit it while it plays, from code or by hand</div>
+          </div>
+          <p class="fragment" style="margin-top: 30px">If the stack can run a DAW, it can run your dashboard</p>
+        </section>
+
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            Not a replacement for Ableton
+
+            A stress test for notebook apps, and a studio you can program
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            [`nbplay`](https://github.com/1kbgz/nbplay): synths, a sampler, a drum machine, sequencers, a timeline, a clip launcher, a mixer
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+          </script>
+        </section>
+      </section>
+
+      <!-- Build it up -->
+      <section>
+        <section data-markdown>
+          <script type="text/template">
+            ## Building a studio
+
+            one widget at a time
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            #### 1. A synth, from Python and from the UI
+            <!-- .element: class="step" -->
+
+            ```python
+            from nbplay import SynthWidget
+
+            synth = SynthWidget()
+            synth  # renders in the cell
+
+            # Python → UI: the knobs move
+            synth.config.oscillator_type = "saw"
+            synth.config.cutoff = 600
+            synth.config.cutoff = 100_000  # ValidationError
+
+            # UI → Python: turn a knob
+            synth.on_change(print)
+            ```
+          </script>
+        </section>
+
+        <section>
+          <h4 class="step">1. A synth, from Python and from the UI <span class="live">LIVE</span></h4>
+          <div class="demo demo-row" style="width: 930px">
+            <div style="width: 560px; height: 520px; overflow: auto; flex: none"><nbplay-synth id="synth"></nbplay-synth></div>
+            <div style="flex: 1; min-width: 0">
+            <div class="patches">
+              <button data-patch='{"oscillatorType":"saw"}'>config.oscillator_type = "saw"</button>
+              <button data-patch='{"oscillatorType":"square","cutoff":900,"resonance":8}'>config.update(oscillator_type="square",<br/>              cutoff=900, resonance=8)</button>
+              <button data-patch='{"lfoTarget":"filter","lfoRate":4,"lfoDepth":0.6}'>config.lfo_target = "filter"</button>
+            </div>
+            <div class="log" id="synth-log"><span class="d">kernel patches (blue) and
+browser edits (orange)
+show up here</span></div>
+            </div>
+          </div>
+          <p class="caption">No kernel on this page: the script answers the way the kernel would.</p>
+        </section>
+
+        <section>
+          <h4 class="step">2. A sampler <span class="live">LIVE</span></h4>
+          <div class="demo" style="width: 640px; zoom: 0.76">
+            <nbplay-sampler id="sampler"></nbplay-sampler>
+          </div>
+          <p class="caption">Drop an audio file on it, or play the pads. Zones, slices and microphone capture too.</p>
+        </section>
+
+        <section>
+          <h4 class="step">3. A sequencer <span class="live">LIVE</span></h4>
+          <div class="demo" style="width: 720px; zoom: 1.28">
+            <nbplay-sequencer id="seq"></nbplay-sequencer>
+          </div>
+          <p class="caption">A row per note or a step grid of chords; double-click a step to type its note.</p>
+        </section>
+
+        <section>
+          <h4 class="step">4. A keyboard, through an arpeggiator <span class="live">LIVE</span></h4>
+          <div class="demo demo-row" style="width: 920px">
+            <div style="flex: none"><nbplay-keyboard id="keys"></nbplay-keyboard></div>
+            <div style="flex: 1; min-width: 0"><nbplay-arpeggiator id="arp"></nbplay-arpeggiator></div>
+          </div>
+          <p class="caption">Click the keyboard and hold a chord on <code>Q W E R T</code>: the arpeggiator plays it on a synth.</p>
+        </section>
+
+        <section>
+          <h4 class="step">5. One transport, one clock <span class="live">LIVE</span></h4>
+          <div class="demo" style="width: 1150px; zoom: 0.8">
+            <nbplay-transport id="studio-transport"></nbplay-transport>
+            <div style="margin-top: 8px"><nbplay-drums id="studio-drums"></nbplay-drums></div>
+            <div style="margin-top: 8px"><nbplay-sequencer id="studio-seq"></nbplay-sequencer></div>
+            <div class="demo-hidden"><nbplay-synth id="studio-bass"></nbplay-synth><nbplay-synth id="studio-lead"></nbplay-synth></div>
+          </div>
+        </section>
+
+        <section>
+          <h4 class="step">6. A mixer on the same session <span class="live">LIVE</span></h4>
+          <div class="demo" style="width: 760px; zoom: 1.2">
+            <nbplay-mixer id="studio-mixer"></nbplay-mixer>
+          </div>
+          <p class="caption">Still playing: the session lives on the page, not on the slide. Mute the drums.</p>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            #### 7. A programmable studio
+            <!-- .element: class="step" -->
+
+            ```python
+            from nbplay import Session, SequencerWidget, SynthWidget
+            from nbplay import DrumMachineWidget
+
+            session = Session(bpm=112)
+            acid = SynthWidget.from_preset("Acid bass")
+            bass = session.add_track("Bass", SequencerWidget(), acid)
+            beat = session.add_track("Beat", None, DrumMachineWidget())
+
+            beat.sound_source.set_row(0, [0, 4, 8, 12])  # the kick
+            bass.sequencer.set_row_note(0, 36)
+            session.midi_router.add_route(bass)  # MIDI keyboards
+
+            session.play()
+            session.bounce()  # render the song to a WAV
+            ```
+          </script>
+        </section>
+
+        <section>
+          <h4 class="step">8. The same session as an app <span class="live">LIVE</span></h4>
+          <iframe class="app" data-src="https://1kbgz.github.io/nbplay/app/" data-preload allow="midi; autoplay"></iframe>
+          <p class="caption">Python in a Web Worker (Pyodide) serving the page: <a href="https://1kbgz.github.io/nbplay/app/">1kbgz.github.io/nbplay/app</a></p>
+        </section>
+      </section>
+
+      <!-- Separation of concerns -->
+      <section>
+        <section data-markdown>
+          <script type="text/template">
+            ## How it fits together
+          </script>
+        </section>
+
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ### Where it started (Feb–Oct 2026)
+
+            One anywidget per instrument, its state in traitlets
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            UI code called `model.get` and `model.set` directly
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            Play state was a trait both sides wrote
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            It ran where ipywidgets runs, and the tests needed a fake model
+            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+            Each instrument mixed three jobs: syncing state, building UI, making sound
+            <!-- .element: class="fragment" data-fragment-index="5" -->
+          </script>
+        </section>
+
+        <section>
+          <h3>Three libraries, one job each</h3>
+          <div class="layers">
+            <div class="layer n fragment" data-fragment-index="3">
+              <div class="name">nbplay<small>the domain</small></div>
+              <div>Instruments as Lit elements: properties in, events out. Audio, MIDI and the clock</div>
+              <div class="no">Never touches a model or a wire</div>
+            </div>
+            <div class="layer s fragment" data-fragment-index="2">
+              <div class="name">spaday<small>the UI</small></div>
+              <div>A tree of web components built in Python; bindings and actions run in the browser</div>
+              <div class="no">Knows nothing about audio. Renders any custom element</div>
+            </div>
+            <div class="layer t fragment" data-fragment-index="1">
+              <div class="name">transports<small>the state</small></div>
+              <div>Typed models sent as patches, with owners, proposals and commands</div>
+              <div class="no">Knows nothing about UI. Any wire, any codec</div>
+            </div>
+            <div class="layer r fragment" data-fragment-index="4">
+              <div class="name">Rust<small>under each</small></div>
+              <div>One core, two bindings: PyO3 for Python, wasm for the browser</div>
+            </div>
+          </div>
+        </section>
+
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ### transports
+
+            Moves typed models across any wire as incremental patches
+
+            ```python
+            session = transports.Session()
+            session.host(config)  # the kernel owns it
+            session.host(status, owner="client")  # the browser does
+            server = transports.Server(session)  # any wire, any codec
+
+            config.bpm = 128
+            session.drain()
+            # [(1, {'rev': 1, 'ops': [{'Set': {
+            #     'path': [{'Key': 'bpm'}], 'value': {'Float': 128.0}}}]})]
+            ```
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            JSON, msgpack or CBOR over a comm, a WebSocket, SSE or `postMessage`
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+          </script>
+        </section>
+
+        <section>
+          <h3>Four ways state moves</h3>
+          <svg class="diagram" viewBox="0 0 900 470" role="img" aria-label="Config patches, browser proposals, status patches and commands between the kernel and the browser">
+            <defs>
+              <marker id="arr-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--c-transports)"/></marker>
+              <marker id="arr-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--c-nbplay)"/></marker>
+              <marker id="arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--c-rust)"/></marker>
+            </defs>
+            <!-- Kernel -->
+            <rect x="10" y="10" width="300" height="380" rx="12" fill="var(--c-spaday-bg)" stroke="var(--c-spaday)" stroke-width="2"/>
+            <text x="160" y="42" text-anchor="middle" font-size="24" font-weight="bold">Python kernel</text>
+            <rect x="40" y="80" width="240" height="80" rx="8" fill="white" stroke="#888"/>
+            <text x="160" y="112" text-anchor="middle" font-size="20" font-weight="bold">config</text>
+            <text x="160" y="138" text-anchor="middle" font-size="16">pydantic, the kernel owns it</text>
+            <rect x="40" y="250" width="240" height="80" rx="8" fill="white" stroke="#888"/>
+            <text x="160" y="282" text-anchor="middle" font-size="20" font-weight="bold">status</text>
+            <text x="160" y="308" text-anchor="middle" font-size="16">the browser owns it</text>
+            <!-- Wire -->
+            <rect x="330" y="10" width="240" height="380" rx="12" fill="var(--c-transports-bg)" stroke="var(--c-transports)" stroke-width="2" stroke-dasharray="6 4"/>
+            <text x="450" y="42" text-anchor="middle" font-size="22" font-weight="bold">transports</text>
+            <text x="450" y="66" text-anchor="middle" font-size="15" class="muted" style="fill: var(--c-muted)">comm · WebSocket · postMessage</text>
+            <!-- Browser -->
+            <rect x="590" y="10" width="300" height="380" rx="12" fill="var(--c-nbplay-bg)" stroke="var(--c-nbplay)" stroke-width="2"/>
+            <text x="740" y="42" text-anchor="middle" font-size="24" font-weight="bold">Browser</text>
+            <rect x="620" y="80" width="240" height="70" rx="8" fill="white" stroke="#888"/>
+            <text x="740" y="112" text-anchor="middle" font-size="20" font-weight="bold">spaday store</text>
+            <text x="740" y="136" text-anchor="middle" font-size="16">a mirror of both models</text>
+            <rect x="620" y="250" width="240" height="80" rx="8" fill="white" stroke="#888"/>
+            <text x="740" y="282" text-anchor="middle" font-size="20" font-weight="bold">&lt;nbplay-synth&gt;</text>
+            <text x="740" y="308" text-anchor="middle" font-size="16">properties in, events out</text>
+
+            <!-- 1. Kernel edit -->
+            <g class="fragment fade-in-then-out" data-fragment-index="1">
+              <path class="flow" d="M280,110 L620,110" stroke="var(--c-transports)" stroke-width="4" fill="none" marker-end="url(#arr-t)"/>
+              <text x="450" y="100" text-anchor="middle" font-size="17">patch, rev 7</text>
+              <path class="flow" d="M740,150 L740,250" stroke="var(--c-transports)" stroke-width="4" fill="none" marker-end="url(#arr-t)"/>
+              <text x="750" y="205" font-size="16">binding sets .cutoff</text>
+              <text x="450" y="440" text-anchor="middle" font-size="22"><tspan font-family="monospace">synth.config.cutoff = 600</tspan>: a patch, then a property</text>
+            </g>
+            <!-- 2. Browser edit -->
+            <g class="fragment fade-in-then-out" data-fragment-index="2">
+              <path class="flow" d="M700,250 L700,150" stroke="var(--c-nbplay)" stroke-width="4" fill="none" marker-end="url(#arr-n)"/>
+              <text x="712" y="205" font-size="16" style="fill: var(--c-nbplay)">nbplay-set</text>
+              <path class="flow" d="M620,100 L280,100" stroke="var(--c-nbplay)" stroke-width="4" fill="none" marker-end="url(#arr-n)"/>
+              <text x="450" y="92" text-anchor="middle" font-size="17">proposal</text>
+              <path class="flow" d="M280,130 L620,130" stroke="var(--c-transports)" stroke-width="4" fill="none" marker-end="url(#arr-t)"/>
+              <text x="450" y="152" text-anchor="middle" font-size="17">validated value, rev 8</text>
+              <text x="450" y="440" text-anchor="middle" font-size="22">A knob is a proposal: pydantic validates it, every client gets the answer</text>
+            </g>
+            <!-- 3. Status -->
+            <g class="fragment fade-in-then-out" data-fragment-index="3">
+              <path class="flow" d="M620,290 L280,290" stroke="var(--c-nbplay)" stroke-width="4" fill="none" marker-end="url(#arr-n)"/>
+              <text x="450" y="280" text-anchor="middle" font-size="17">nbplay-status → patch</text>
+              <text x="450" y="440" text-anchor="middle" font-size="22">Play state and position are the browser's; the kernel mirrors them</text>
+            </g>
+            <!-- 4. Command -->
+            <g class="fragment" data-fragment-index="4">
+              <path class="flow" d="M280,320 L620,320" stroke="var(--c-rust)" stroke-width="4" fill="none" marker-end="url(#arr-r)"/>
+              <text x="450" y="345" text-anchor="middle" font-size="15">command(status, "is_playing", True)</text>
+              <path class="flow" d="M620,270 L280,270" stroke="var(--c-nbplay)" stroke-width="4" fill="none" marker-end="url(#arr-n)"/>
+              <text x="450" y="262" text-anchor="middle" font-size="17">ack, then the new status</text>
+              <text x="450" y="440" text-anchor="middle" font-size="22"><tspan font-family="monospace">session.play()</tspan> can't write browser state, so it asks the owner</text>
+            </g>
+          </svg>
+        </section>
+
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ### spaday
+
+            Web-component UIs configured in Python, executed in the browser
+
+            ```python
+            node = element("nbplay-drums")
+            node.bind("pattern", "config.pattern",
+                      mode="two-way", event="nbplay-set")
+            node.bind("currentStep", "status.current_step",
+                      mode="two-way", event="nbplay-status")
+            ```
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            Bindings and actions run client-side: a toggle or a derived value needs no round trip
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            Elements ship as a `ComponentPackage` (a JS bundle and CSS) found through an entry point
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+          </script>
+        </section>
+
+        <section>
+          <h3>One tree, many hosts</h3>
+          <svg class="diagram" viewBox="0 0 900 430" role="img" aria-label="One spaday tree served to notebook hosts, a served app, a Pyodide page and JupyterLite">
+            <defs>
+              <marker id="arr-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#777"/></marker>
+            </defs>
+            <rect x="10" y="150" width="230" height="130" rx="12" fill="var(--c-spaday-bg)" stroke="var(--c-spaday)" stroke-width="3"/>
+            <text x="125" y="195" text-anchor="middle" font-size="22" font-weight="bold">widget.tree()</text>
+            <text x="125" y="225" text-anchor="middle" font-size="17">elements + bindings</text>
+            <text x="125" y="250" text-anchor="middle" font-size="17">+ transports sessions</text>
+            <g class="fragment">
+              <path d="M240,190 C300,190 300,55 380,55" stroke="#777" stroke-width="3" fill="none" marker-end="url(#arr-g)"/>
+              <rect x="385" y="15" width="505" height="80" rx="10" fill="white" stroke="var(--c-rust)" stroke-width="2"/>
+              <text x="400" y="47" font-size="20" font-weight="bold">anywidget hosts</text>
+              <text x="400" y="77" font-size="17">JupyterLab, Notebook 7, VS Code, Voilà · the widget comm</text>
+            </g>
+            <g class="fragment">
+              <path d="M240,205 C310,205 310,160 380,160" stroke="#777" stroke-width="3" fill="none" marker-end="url(#arr-g)"/>
+              <rect x="385" y="120" width="505" height="80" rx="10" fill="white" stroke="var(--c-transports)" stroke-width="2"/>
+              <text x="400" y="152" font-size="20" font-weight="bold">served app · <tspan font-family="monospace" font-size="18">python -m nbplay.app</tspan></text>
+              <text x="400" y="182" font-size="17">Starlette, one WebSocket per widget, a dockable layout</text>
+            </g>
+            <g class="fragment">
+              <path d="M240,225 C310,225 310,265 380,265" stroke="#777" stroke-width="3" fill="none" marker-end="url(#arr-g)"/>
+              <rect x="385" y="225" width="505" height="80" rx="10" fill="white" stroke="var(--c-nbplay)" stroke-width="2"/>
+              <text x="400" y="257" font-size="20" font-weight="bold">standalone page</text>
+              <text x="400" y="287" font-size="17">Python in a Pyodide Web Worker · postMessage</text>
+            </g>
+            <g class="fragment">
+              <path d="M240,245 C300,245 300,370 380,370" stroke="#777" stroke-width="3" fill="none" marker-end="url(#arr-g)"/>
+              <rect x="385" y="330" width="505" height="80" rx="10" fill="white" stroke="var(--c-spaday)" stroke-width="2"/>
+              <text x="400" y="362" font-size="20" font-weight="bold">JupyterLite</text>
+              <text x="400" y="392" font-size="17">a Pyodide kernel in the browser · the widget comm</text>
+            </g>
+          </svg>
+        </section>
+
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ### Web components, with anywidget
+
+            ```python
+            class Widget(anywidget.AnyWidget):  # spaday.Widget
+                _esm = ...  # the spaday runtime and its wasm core
+                _tree = traitlets.Dict().tag(sync=True)
+            ```
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            anywidget gets the runtime into any widget host; spaday mounts the tree
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            transports state goes over the same comm as its own wire
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            nbplay ships no anywidget code: one JS bundle, one stylesheet, and an entry point
+            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+            ---
+
+            ### Wrapping an element
+
+            ```python
+            class DrumMachineWidget(InstrumentWidget):
+                TAG = "nbplay-drums"
+                CONFIG_MODEL = DrumMachineConfig  # kernel-owned
+                STATUS_MODEL = DrumMachineStatus  # browser-owned
+                CONFIG = {"pattern": "pattern", "bpm": "bpm", ...}
+                STATUS = {"current_step": "currentStep", ...}
+
+                def set_row(self, pad, steps, velocity=100):
+                    ...
+                    self.config.pattern = pattern
+            ```
+
+            ```ts
+            // The element never touches a model
+            this.pattern = pattern;
+            this.emitDetail("nbplay-set", { values: { pattern } });
+            ```
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            ---
+
+            Elements are plain Lit components: properties in, events out
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            `nbplay-set` for config, `nbplay-status` for state, `nbplay-request` for asks
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            So the slides in this talk use the same bundle as the Python package
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            57 elements, from sliders and dials to the timeline, in one gallery page
+            <!-- .element: class="fragment" data-fragment-index="4" -->
+          </script>
+        </section>
+
+        <section>
+          <h4 class="step">Themes are CSS tokens <span class="live">LIVE</span></h4>
+          <div class="demo" id="theme-demo" style="width: 900px">
+            <div style="margin-bottom: 10px"><nbplay-segmented id="theme-pick"></nbplay-segmented></div>
+            <nbplay-drums id="theme-drums"></nbplay-drums>
+          </div>
+          <p class="caption">Every element reads <code>--nbplay-*</code> tokens, which fall back to Jupyter's <code>--jp-*</code> theme.</p>
+        </section>
+      </section>
+
+      <!-- Audio and time -->
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## Audio and time
+
+            ---
+
+            Every sound is made in the browser
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            The kernel is a comm round trip away, has a GIL, and may be busy running your cell
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            So the kernel holds the *document*, and the browser holds *time*
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+          </script>
+        </section>
+
+        <section>
+          <h3>Lookahead scheduling</h3>
+          <svg class="diagram" viewBox="0 0 900 400" role="img" aria-label="A JavaScript timer wakes every 25 ms and schedules notes in the next 100 ms on the audio clock">
+            <!-- Rows -->
+            <text x="10" y="95" font-size="18" font-weight="bold">JS timer</text>
+            <text x="10" y="115" font-size="15" style="fill: var(--c-muted)">every ~25 ms, jittery</text>
+            <text x="10" y="235" font-size="18" font-weight="bold">audio clock</text>
+            <text x="10" y="255" font-size="15" style="fill: var(--c-muted)">AudioContext.currentTime</text>
+            <line x1="200" y1="100" x2="880" y2="100" stroke="#ccc" stroke-width="2"/>
+            <line x1="200" y1="240" x2="880" y2="240" stroke="#333" stroke-width="3"/>
+            <!-- Timer ticks: uneven spacing -->
+            <g fill="var(--c-transports)">
+              <circle cx="210" cy="100" r="7"/><circle cx="252" cy="100" r="7"/><circle cx="300" cy="100" r="7"/>
+              <circle cx="335" cy="100" r="7"/><circle cx="392" cy="100" r="7"/><circle cx="430" cy="100" r="7"/>
+              <circle cx="470" cy="100" r="7"/><circle cx="531" cy="100" r="7"/><circle cx="560" cy="100" r="7"/>
+              <circle cx="604" cy="100" r="7"/><circle cx="650" cy="100" r="7"/><circle cx="690" cy="100" r="7"/>
+              <circle cx="741" cy="100" r="7"/><circle cx="780" cy="100" r="7"/><circle cx="822" cy="100" r="7"/><circle cx="862" cy="100" r="7"/>
+            </g>
+            <!-- Sixteenths at exact times -->
+            <g>
+              <line x1="230" y1="215" x2="230" y2="265" stroke="var(--c-nbplay)" stroke-width="6"/>
+              <line x1="390" y1="215" x2="390" y2="265" stroke="var(--c-nbplay)" stroke-width="6"/>
+              <line x1="550" y1="215" x2="550" y2="265" stroke="var(--c-nbplay)" stroke-width="6"/>
+              <line x1="710" y1="215" x2="710" y2="265" stroke="var(--c-nbplay)" stroke-width="6"/>
+              <line x1="870" y1="215" x2="870" y2="265" stroke="var(--c-nbplay)" stroke-width="6"/>
+            </g>
+            <text x="230" y="290" text-anchor="middle" font-size="15">beat 0</text>
+            <text x="390" y="290" text-anchor="middle" font-size="15">0.25</text>
+            <text x="550" y="290" text-anchor="middle" font-size="15">0.5</text>
+            <text x="710" y="290" text-anchor="middle" font-size="15">0.75</text>
+            <text x="870" y="290" text-anchor="middle" font-size="15">1</text>
+            <!-- Moving window -->
+            <g>
+              <rect x="0" y="70" width="230" height="210" rx="6" fill="var(--c-transports)" fill-opacity="0.12" stroke="var(--c-transports)" stroke-width="2" stroke-dasharray="6 4"/>
+              <line x1="0" y1="60" x2="0" y2="290" stroke="var(--c-transports)" stroke-width="3"/>
+              <text x="115" y="170" text-anchor="middle" font-size="16" style="fill: var(--c-transports)">next 100 ms</text>
+              <animateTransform attributeName="transform" type="translate" from="200 0" to="660 0" dur="5s" repeatCount="indefinite"/>
+            </g>
+            <text x="450" y="345" text-anchor="middle" font-size="21">Each tick schedules the notes in its window at their exact audio-clock time,</text>
+            <text x="450" y="375" text-anchor="middle" font-size="21">so the timer's jitter never reaches the sound</text>
+          </svg>
+        </section>
+
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ### One clock
+
+            A `SessionClock` over `AudioContext.currentTime`: `beat()`, `ctxTimeAt(beat)`, `play()`, `seek()`, `setTempo()`, `setLoop()`
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            Sequencers, the launcher, the timeline, the drum machine, the arpeggiator and the metronome all schedule against it
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            Steps fall on an absolute beat grid, so loops and late joiners stay in phase
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            ---
+
+            ### The session bus
+
+            `globalThis.__nbplay[sessionId]`: one object per session, shared by every element on the page
+
+            <table class="small fragment">
+              <tr><td><code>audioCtx</code>, <code>channels</code>, <code>masterGain</code></td><td>the mixer's Web Audio graph: strips, inserts, sends, returns</td></tr>
+              <tr><td><code>instruments[ch]</code></td><td><code>scheduleNote()</code> and <code>startNote()</code> for each track's synth, sampler or drum machine</td></tr>
+              <tr><td><code>clock</code></td><td>the session clock</td></tr>
+              <tr><td><code>claims[ch]</code></td><td>who plays a track right now</td></tr>
+              <tr><td><code>inputs[ch]</code>, <code>midiIn</code>, <code>launcher</code></td><td>arpeggiators, MIDI routing, clip launches</td></tr>
+            </table>
+          </script>
+        </section>
+
+        <section>
+          <h3>Who plays a track?</h3>
+          <svg class="diagram" viewBox="0 0 900 400" role="img" aria-label="A launched clip, then the arrangement, then the sequencer: one owner per track at a time">
+            <text x="10" y="80" font-size="19" font-weight="bold">launched clip</text>
+            <text x="10" y="150" font-size="19" font-weight="bold">arrangement</text>
+            <text x="10" y="220" font-size="19" font-weight="bold">sequencer</text>
+            <text x="10" y="310" font-size="19" font-weight="bold">you hear</text>
+            <g stroke="#ddd" stroke-width="1">
+              <line x1="180" y1="40" x2="180" y2="340"/><line x1="320" y1="40" x2="320" y2="340"/>
+              <line x1="460" y1="40" x2="460" y2="340"/><line x1="600" y1="40" x2="600" y2="340"/>
+              <line x1="740" y1="40" x2="740" y2="340"/><line x1="880" y1="40" x2="880" y2="340"/>
+            </g>
+            <text x="180" y="30" font-size="15" text-anchor="middle" style="fill: var(--c-muted)">bar 1</text>
+            <text x="320" y="30" font-size="15" text-anchor="middle" style="fill: var(--c-muted)">2</text>
+            <text x="460" y="30" font-size="15" text-anchor="middle" style="fill: var(--c-muted)">3</text>
+            <text x="600" y="30" font-size="15" text-anchor="middle" style="fill: var(--c-muted)">4</text>
+            <text x="740" y="30" font-size="15" text-anchor="middle" style="fill: var(--c-muted)">5</text>
+            <!-- Clip, arrangement, sequencer lanes -->
+            <rect x="320" y="58" width="280" height="34" rx="5" fill="var(--c-rust)"/>
+            <text x="460" y="81" text-anchor="middle" font-size="16" style="fill: white">launched</text>
+            <rect x="600" y="128" width="210" height="34" rx="5" fill="var(--c-transports)"/>
+            <text x="705" y="151" text-anchor="middle" font-size="16" style="fill: white">MIDI clip</text>
+            <rect x="180" y="198" width="700" height="34" rx="5" fill="var(--c-spaday)" fill-opacity="0.25" stroke="var(--c-spaday)" stroke-dasharray="6 4"/>
+            <text x="530" y="221" text-anchor="middle" font-size="16">running the whole time, on the grid</text>
+            <!-- Result -->
+            <g class="fragment">
+              <rect x="180" y="288" width="140" height="34" rx="5" fill="var(--c-spaday)"/>
+              <rect x="320" y="288" width="280" height="34" rx="5" fill="var(--c-rust)"/>
+              <rect x="600" y="288" width="210" height="34" rx="5" fill="var(--c-transports)"/>
+              <rect x="810" y="288" width="70" height="34" rx="5" fill="var(--c-spaday)"/>
+              <text x="450" y="370" text-anchor="middle" font-size="21">One owner per track: launched clip, then arrangement, then sequencer.</text>
+              <text x="450" y="396" text-anchor="middle" font-size="21">The silenced ones keep counting, so they come back in phase.</text>
+            </g>
+          </svg>
+        </section>
+
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ### Live input
+
+            Web MIDI in the page; the MIDI router sends ports, channels and note ranges to tracks
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            A held key gets `startNote()`, which returns a release, so the note-off finds the note it started
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            The computer keyboard is one more port
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            Knobs (CC) go through the kernel for MIDI learn: fine for knobs, never for notes
+            <!-- .element: class="fragment" data-fragment-index="4" -->
+          </script>
+        </section>
+      </section>
+
+      <!-- Components -->
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## The components
+
+            ---
+
+            <div class="cols">
+              <div>
+                <b>Instruments</b>
+                <ul>
+                  <li>Synth: 2 oscillators, noise, filter + envelope, LFO, presets</li>
+                  <li>FM synth</li>
+                  <li>Sampler: zones, slices, mic capture</li>
+                  <li>Drum machine: synth, FM, sample and track pads</li>
+                  <li>Arpeggiator</li>
+                </ul>
+                <b>Sequencing</b>
+                <ul>
+                  <li>Step sequencer (steps or rows)</li>
+                  <li>Timeline: audio + MIDI recording, piano roll</li>
+                  <li>Clip launcher</li>
+                </ul>
+              </div>
+              <div>
+                <b>Mixing</b>
+                <ul>
+                  <li>Mixer: inserts, sends, returns, meters</li>
+                  <li>11 effects, spectrum analyzer</li>
+                  <li>Metronome, render to WAV</li>
+                </ul>
+                <b>Input and output</b>
+                <ul>
+                  <li>QWERTY and MIDI keyboards, pads</li>
+                  <li>MIDI router: routes, mappings, learn</li>
+                  <li>MIDI out and clock</li>
+                </ul>
+                <b>App</b>
+                <ul>
+                  <li>Panels, palette, themes, track menu</li>
+                  <li><code>.nbplay</code> save and load, undo/redo, MIDI files</li>
+                </ul>
+              </div>
+            </div>
+          </script>
+        </section>
+
+        <section>
+          <h4 class="step">The piano roll</h4>
+          <img class="shot" src="assets/img/nbplay2026/roll.png" width=800 />
+          <p class="caption">Click to add a note, drag to move or resize, the wheel for velocity, Quantize to snap.</p>
+        </section>
+
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            <img class="shot" src="assets/img/nbplay2026/router.png" width=800 />
+
+            ---
+
+            <img class="shot" src="assets/img/nbplay2026/app-grim.png" width=1000 />
+          </script>
+        </section>
+      </section>
+
+      <!-- How it was built -->
+      <section>
+        <section>
+          <h3>How it was built</h3>
+          <svg class="diagram" viewBox="0 0 900 430" role="img" aria-label="Development timeline from February to November 2026">
+            <!-- Feb to Oct, then a break, then November by day -->
+            <line x1="30" y1="215" x2="435" y2="215" stroke="#333" stroke-width="3"/>
+            <line x1="465" y1="215" x2="885" y2="215" stroke="#333" stroke-width="3"/>
+            <line x1="438" y1="227" x2="448" y2="203" stroke="#333" stroke-width="2"/>
+            <line x1="452" y1="227" x2="462" y2="203" stroke="#333" stroke-width="2"/>
+            <g font-size="15" text-anchor="middle" style="fill: var(--c-muted)">
+              <text x="40" y="240">Feb</text><text x="87" y="240">Mar</text><text x="135" y="240">Apr</text>
+              <text x="182" y="240">May</text><text x="230" y="240">Jun</text><text x="277" y="240">Jul</text>
+              <text x="325" y="240">Aug</text><text x="372" y="240">Sep</text><text x="420" y="240">Oct</text>
+              <text x="470" y="240">Nov 1</text><text x="675" y="240">Nov 10</text><text x="880" y="240">19</text>
+            </g>
+            <g class="fragment">
+              <circle cx="70" cy="215" r="9" fill="var(--c-rust)"/>
+              <line x1="70" y1="205" x2="70" y2="130" stroke="var(--c-rust)" stroke-width="2"/>
+              <text x="30" y="60" font-size="19" font-weight="bold">Feb 19</text>
+              <text x="30" y="86" font-size="17">Rust core, PyO3 + wasm</text>
+              <text x="30" y="110" font-size="17">anywidget + traitlets widgets</text>
+            </g>
+            <g class="fragment">
+              <rect x="390" y="207" width="20" height="16" rx="4" fill="var(--c-spaday)"/>
+              <line x1="400" y1="225" x2="400" y2="285" stroke="var(--c-spaday)" stroke-width="2"/>
+              <text x="240" y="310" font-size="19" font-weight="bold">Sep</text>
+              <text x="240" y="336" font-size="17">timeline, clip launcher</text>
+              <text x="240" y="360" font-size="17">host tests: Voilà, JupyterLab</text>
+              <text x="240" y="384" font-size="17">Pyodide wheel, JupyterLite</text>
+            </g>
+            <g class="fragment">
+              <rect x="584" y="207" width="137" height="16" rx="4" fill="var(--c-transports)"/>
+              <line x1="650" y1="205" x2="650" y2="130" stroke="var(--c-transports)" stroke-width="2"/>
+              <text x="500" y="36" font-size="19" font-weight="bold">Nov 6–12</text>
+              <text x="500" y="62" font-size="17">Lit elements and a gallery,</text>
+              <text x="500" y="86" font-size="17">then rewritten onto spaday</text>
+              <text x="500" y="110" font-size="17">and transports (#136–#160)</text>
+            </g>
+            <g class="fragment">
+              <rect x="744" y="207" width="114" height="16" rx="4" fill="var(--c-nbplay)"/>
+              <line x1="800" y1="225" x2="800" y2="285" stroke="var(--c-nbplay)" stroke-width="2"/>
+              <text x="620" y="310" font-size="19" font-weight="bold">Nov 13–18</text>
+              <text x="620" y="336" font-size="17">0.4.0 on PyPI, served app</text>
+              <text x="620" y="360" font-size="17">synth, drums, MIDI router,</text>
+              <text x="620" y="384" font-size="17">arpeggiator, piano roll, WAV</text>
+            </g>
+          </svg>
+        </section>
+
+        <section>
+          <div class="stats">
+            <div class="stat"><b>215</b><span>pull requests</span></div>
+            <div class="stat"><b>~23k</b><span>lines of TypeScript</span></div>
+            <div class="stat"><b>~6k</b><span>lines of Python</span></div>
+            <div class="stat"><b>~5k</b><span>lines of Rust</span></div>
+            <div class="stat"><b>~290</b><span>Python tests</span></div>
+            <div class="stat"><b>~570</b><span>browser tests</span></div>
+            <div class="stat"><b>~110</b><span>Rust tests</span></div>
+            <div class="stat"><b>6</b><span>hosts tested live</span></div>
+          </div>
+          <p class="fragment" style="margin-top: 40px">Built mostly by AI coding agents, one small reviewed PR at a time</p>
+        </section>
+
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            Tests render audio with an `OfflineAudioContext` and measure it
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            ```js
+            const data = (await ctx.startRendering()).getChannelData(0);
+            // The open hat rings until the closed hat chokes it
+            expect(peak(0.3, 0.4)).toBeGreaterThan(0.01);
+            expect(choked.late).toBe(0);
+            ```
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            For anything between the kernel and the browser, only a real kernel over the real wire tests the ordering
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            ---
+
+            nbplay is the stress test for its own stack
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            Gaps found here go upstream: model retirement and late hosting (transports #240), writes made while an edit is applied (transports #242), array path writes (spaday #255)
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+          </script>
+        </section>
+      </section>
+
+      <!-- What was hard -->
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## What was hard
+
+            ---
+
+            **Real time.** Nothing time-critical can wait on the kernel; the kernel only mirrors state
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            **One clock, many views.** The same widget can render twice; the launcher elects one engine and the rest follow it
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            **Who plays what.** Pausing the lead didn't stop the lead: a launched clip owned the track. That took a written play/stop matrix to settle
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            ---
+
+            **Ownership races.** A kernel write made while a browser edit was being applied was silently dropped
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            **Coalescing.** Two status writes in one flush arrive as one: fine for a position, wrong for undo
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            **Render order.** Elements get their session id after they connect; the mixer may render last
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            **Browsers.** Suspended audio contexts until a gesture, no Web MIDI in Safari, sysex permissions
+            <!-- .element: class="fragment" data-fragment-index="4" -->
+
+            **Hosts.** Six of them, each with its own lifecycle
+            <!-- .element: class="fragment" data-fragment-index="5" -->
+          </script>
+        </section>
+      </section>
+
+      <!-- Takeaway -->
+      <section>
+        <section>
+          <h3>A mental model for notebook apps</h3>
+          <div class="tiles two">
+            <div class="tile s fragment"><b>Code</b>Python owns the document: what the song is, and an API to change it</div>
+            <div class="tile n fragment"><b>UI</b>Web components that never touch a model: properties in, events out</div>
+            <div class="tile r fragment"><b>Media</b>Made in the browser, on the browser's clock, scheduled ahead</div>
+            <div class="tile t fragment"><b>Live state</b>Typed models with an owner each, sent as patches over any wire</div>
+          </div>
+          <p class="fragment" style="margin-top: 30px">Keep the four apart, and the same app runs in a notebook, a server, or a static page</p>
+        </section>
+      </section>
+
+      <!-- What's next -->
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## What's next
+
+            ---
+
+            **Controllers**: light a Launchpad's pads from session state, control surface pages
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            **Save everything**: a snapshot of any widget, sessions built from snapshots, compose them
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            **Plugins**: effects written in Python (Web Audio graphs or AudioWorklet DSP), Web Audio Modules, a proxy for native VST3/AU/CLAP plugins
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            **More**: record the arpeggiator, per-pad outputs, Ableton Link, OSC
+            <!-- .element: class="fragment" data-fragment-index="4" -->
+          </script>
+        </section>
+
+        <section>
+          <h3>Try it</h3>
+          <div class="qr">
+            <div><img src="assets/img/nbplay2026/qr-repo.svg" alt="QR code for github.com/1kbgz/nbplay"/><br/><a href="https://github.com/1kbgz/nbplay">github.com/1kbgz/nbplay</a></div>
+            <div><img src="assets/img/nbplay2026/qr-app.svg" alt="QR code for the nbplay app"/><br/><a href="https://1kbgz.github.io/nbplay/app/">the app, no install</a></div>
+          </div>
+          <p style="font-size: 28px"><code>pip install nbplay</code><br/><code>python -m nbplay.app</code></p>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ## Q/A
+
+            <span>Tim Paine / <a style="text-decoration: underline;" href="https://github.com/timkpaine">@timkpaine</a></span>
+          </script>
+        </section>
+      </section>
+    </div>
+  </div>
+  <script src="assets/dist/reveal.js"></script>
+  <script src="assets/plugin/markdown/markdown.js"></script>
+  <script src="assets/plugin/highlight/highlight.js"></script>
+  <script src="assets/plugin/notes/notes.js"></script>
+  <script src="assets/plugin/math/math.js"></script>
+  <script>
+    Reveal.initialize({
+      center: true,
+      controls: true,
+      history: true,
+      // Keys typed into a live element (the keyboard, the sequencer) stay there.
+      keyboardCondition: (event) => !(event.target.closest && event.target.closest(".demo")),
+      plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath ],
+      progress: true,
+      slideNumber: true
+    });
+  </script>
+  <script type="module">
+    await import("./nbplay2026/nbplay.js");
+
+    const $ = (id) => document.getElementById(id);
+    const steps = (n, fn) => Array.from({ length: n }, (_, i) => fn(i));
+
+    const pad = (name, note, sound, choke, params) => ({ name, note, sound, gain: 1, pan: 0, choke, params });
+    const KIT = [
+      pad("Kick", 36, "kick", 0, { tune: 0, decay: 0.45, tone: 0.3 }),
+      pad("Snare", 38, "snare", 0, { tune: 0, decay: 0.2, tone: 0.6 }),
+      pad("Closed hat", 42, "hat", 1, { tune: 0, decay: 0.05, tone: 0.6 }),
+      pad("Open hat", 46, "hat", 1, { tune: 0, decay: 0.4, tone: 0.6 }),
+    ];
+    const BEAT = [
+      steps(16, (i) => (i % 4 === 0 ? 110 : 0)),
+      steps(16, (i) => (i % 8 === 4 ? 100 : 0)),
+      steps(16, (i) => (i % 2 === 0 && i !== 14 ? 70 : 0)),
+      steps(16, (i) => (i === 14 ? 90 : 0)),
+    ];
+
+    // A row per note: row r plays rowNotes[r] on the listed steps.
+    const rows = (rowNotes, hits, velocity = 100) =>
+      rowNotes.map((note, r) => steps(16, (i) => ({ active: hits[r].includes(i), note, velocity })));
+
+    function wave(type, n = 512) {
+      const out = new Float32Array(n);
+      for (let i = 0; i < n; i++) {
+        const p = ((i / n) * 4) % 1;
+        out[i] = 0.8 * (type === "saw" ? 2 * p - 1 : type === "square" ? (p < 0.5 ? 1 : -1) : type === "triangle" ? 1 - 4 * Math.abs(p - 0.5) : Math.sin(2 * Math.PI * p));
+      }
+      return out;
+    }
+
+    // A plucked string (Karplus-Strong) for the sampler.
+    function pluck(seconds = 1.2, rate = 44100, hz = 220) {
+      const n = Math.floor(seconds * rate);
+      const period = Math.round(rate / hz);
+      const out = new Float32Array(n);
+      const ring = Float32Array.from({ length: period }, () => Math.random() * 2 - 1);
+      for (let i = 0; i < n; i++) {
+        const j = i % period;
+        const next = ring[(j + 1) % period];
+        out[i] = ring[j];
+        ring[j] = 0.996 * 0.5 * (ring[j] + next);
+      }
+      return out;
+    }
+    function overview(data, n = 1024) {
+      const out = new Float32Array(n);
+      const step = data.length / n;
+      for (let i = 0; i < n; i++) {
+        let peak = 0;
+        for (let j = Math.floor(i * step); j < Math.floor((i + 1) * step); j++) peak = Math.max(peak, Math.abs(data[j]));
+        out[i] = i % 2 ? -peak : peak;
+      }
+      return out;
+    }
+
+    // Hook
+    Object.assign($("hook-drums"), { bpm: 120, pads: KIT, pattern: BEAT });
+
+    // 1. Synth: kernel patches (as the binding applies them) and browser edits.
+    const synth = $("synth");
+    Object.assign(synth, { waveform: wave("sine"), amplitude: 0.4, frequency: 220 });
+    const log = $("synth-log");
+    let lines = [];
+    let rev = 0;
+    const snake = (k) => k.replace(/[A-Z0-9]+/g, (m) => "_" + m.toLowerCase());
+    const show = (cls, text) => {
+      if (!lines.length) log.textContent = "";
+      lines = [...lines, `<span class="${cls}">${text}</span>`].slice(-7);
+      log.innerHTML = lines.join("\n");
+    };
+    const fmt = (v) => (typeof v === "number" ? +v.toFixed(3) : JSON.stringify(v));
+    document.querySelectorAll("[data-patch]").forEach((button) =>
+      button.addEventListener("click", () => {
+        const values = JSON.parse(button.dataset.patch);
+        if (values.oscillatorType) values.waveform = wave(values.oscillatorType);
+        rev += 1;
+        const ops = Object.entries(values).map(([k, v]) => `${snake(k)} = ${k === "waveform" ? "[512 floats]" : fmt(v)}`);
+        show("k", `kernel → patch rev ${rev}: ${ops.join(", ")}`);
+        Object.assign(synth, values);
+      }),
+    );
+    synth.addEventListener("nbplay-set", (e) => {
+      const values = e.detail.values || {};
+      const ops = Object.entries(values).map(([k, v]) => `config.${snake(k)} = ${fmt(v)}`);
+      show("b", `browser → proposal: ${ops.join(", ")}`);
+      // The kernel validates the proposal and answers with the result,
+      // including derived fields such as the waveform preview.
+      if (values.oscillatorType) {
+        rev += 1;
+        show("k", `kernel → patch rev ${rev}: oscillator_type = ${fmt(values.oscillatorType)}, waveform = [512 floats]`);
+        synth.waveform = wave(values.oscillatorType);
+      }
+    });
+    synth.addEventListener("nbplay-status", (e) => {
+      const ops = Object.entries(e.detail.values || {}).map(([k, v]) => `status.${snake(k)} = ${fmt(v)}`);
+      show("b", `browser → status: ${ops.join(", ")}`);
+    });
+
+    // 2. Sampler
+    const sample = pluck();
+    Object.assign($("sampler"), {
+      sampleName: "pluck.wav",
+      sampleRate: 44100,
+      sampleLength: sample.length,
+      sampleData: sample,
+      waveform: overview(sample),
+      rootNote: 57,
+      padCount: 8,
+      padNotes: [45, 48, 52, 55, 57, 60, 64, 67],
+      zones: [],
+    });
+
+    // 3. Sequencer on its own clock
+    Object.assign($("seq"), {
+      bpm: 120,
+      view: "rows",
+      rowNotes: [48, 55, 60, 63, 67],
+      numVoices: 5,
+      length: 16,
+      stepDuration: 0.25,
+      voicesData: rows([48, 55, 60, 63, 67], [[0, 6, 10], [3, 12], [2, 8, 14], [4, 11], [7, 15]], 90),
+    });
+
+    // The studio session: transport, drums (track 0), a bass sequencer and
+    // synth (track 1), a keyboard and arpeggiator on a lead synth (track 2), a mixer.
+    const studio = { sessionId: "studio", bpm: 112 };
+    Object.assign($("studio-transport"), { ...studio });
+    Object.assign($("studio-drums"), { ...studio, channelIndex: 0, pads: KIT, pattern: BEAT });
+    const bassNotes = [36, 39, 43, 46];
+    Object.assign($("studio-seq"), {
+      ...studio,
+      channelIndex: 1,
+      view: "rows",
+      rowNotes: bassNotes,
+      numVoices: 4,
+      length: 16,
+      stepDuration: 0.25,
+      voicesData: rows(bassNotes, [[0, 3, 6, 10, 12], [8], [14], [15]], 100),
+    });
+    const synthPatch = (osc, cutoff, resonance) => ({
+      oscillatorType: osc, amplitude: 0.5, cutoff, resonance, filterEnv: 2.5,
+      filterAttack: 0.005, filterDecay: 0.18, filterSustain: 0.1, filterRelease: 0.1,
+      attack: 0.005, decay: 0.2, sustain: 0.5, release: 0.12,
+    });
+    Object.assign($("studio-bass"), { ...studio, channelIndex: 1, ...synthPatch("saw", 500, 8) });
+    Object.assign($("studio-lead"), { ...studio, channelIndex: 2, ...synthPatch("square", 1800, 3) });
+    Object.assign($("keys"), { ...studio, channelIndex: 2, upperOctave: 5, lowerOctave: 4 });
+    Object.assign($("arp"), { ...studio, channelIndex: 2, order: "updown", octaves: 2, stepDuration: 0.125, gate: 0.6 });
+    const strip = (name, gain, pan, sends) => ({ name, gain, pan, mute: false, solo: false, sends, effects: [] });
+    Object.assign($("studio-mixer"), {
+      sessionId: "studio",
+      channels: [strip("Drums", 0.9, 0, [0.1]), strip("Bass", 0.7, -0.1, [0]), strip("Lead", 0.6, 0.2, [0.35])],
+      returns: [{ name: "Reverb", gain: 0.8, effects: [{ type: "reverb", seconds: 2, decay: 3, wet: 1 }] }],
+      masterGain: 0.85,
+      masterEffects: [{ type: "limiter", threshold: -1, release: 0.05 }],
+    });
+
+    // Themes
+    const THEMES = ["light", "dark", "studio", "flat", "cube", "one", "grim", "pro", "fruit"];
+    const pick = $("theme-pick");
+    Object.assign(pick, { options: THEMES.map((t) => ({ value: t, label: t })), value: "studio" });
+    Object.assign($("theme-drums"), { bpm: 120, pads: KIT, pattern: BEAT, theme: "studio" });
+    pick.addEventListener("change", (e) => {
+      const theme = e.detail?.value ?? pick.value;
+      pick.value = theme;
+      $("theme-drums").theme = theme;
+    });
+  </script>
+</body>
+</html>
