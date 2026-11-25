@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>3 Cool Things</title>
+  <link rel="stylesheet" href="assets/dist/reveal.css">
+  <link rel="stylesheet" href="assets/dist/theme/white.css" id="theme">
+  <link rel="stylesheet" href="assets/plugin/highlight/monokai.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PJBFEVM4RY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PJBFEVM4RY');
+  </script>
+  <style>
+    :root {
+      --c-rust: #6b4fa3;
+      --c-rust-bg: #f2eefa;
+      --c-dau: #0f7c80;
+      --c-dau-bg: #e6f4f4;
+      --c-ink: #222;
+      --c-muted: #666;
+    }
+    .reveal .caption { font-size: 20px; color: var(--c-muted); margin: 10px 0 0; }
+    .reveal .lede { font-size: 26px; color: var(--c-muted); margin-top: -6px; }
+    .reveal .live { display: inline-block; font-size: 15px; font-weight: bold; color: white; background: #d33; border-radius: 4px; padding: 1px 8px; vertical-align: middle; letter-spacing: 0.05em; }
+
+    .reveal .cover { display: flex; flex-direction: column; gap: 28px; align-items: center; text-align: center; color: white; }
+    .reveal .cover .event { font: 22px ui-monospace, Menlo, monospace; margin: 0 0 20px; }
+    .reveal .cover h1 { color: white; font-size: 90px; line-height: 1; text-transform: none; letter-spacing: -3px; margin: 0 0 16px; }
+    .reveal .cover .subtitle { font-size: 26px; line-height: 1.4; margin: 0; }
+    .reveal .cover .profile { color: white; text-align: center; font-size: 27px; line-height: 1.5; }
+    .reveal .cover .profile img { display: block; width: 240px; height: auto; max-width: 100%; margin: 0 auto 12px; }
+    .reveal .cover .profile span { text-decoration: underline; text-underline-offset: 5px; }
+    .reveal .cover .profile small { display: block; font-size: 18px; }
+    .reveal .cover .profile:focus-visible { outline: 3px solid white; outline-offset: 10px; }
+    .reveal .cover .footnote { font-size: 16px; margin: 0; }
+
+    /* Opens each of the three projects */
+    .reveal .num { font-size: 140px; font-weight: bold; line-height: 1; margin: 0; color: var(--c-nbplay); }
+    .reveal .names { font-size: 30px; color: var(--c-muted); }
+    .reveal .names b { font-weight: bold; }
+
+    .reveal .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; text-align: left; font-size: 21px; }
+    .reveal .tile { border-radius: 8px; padding: 12px 14px; background: #f6f5f2; border-top: 5px solid #999; }
+    .reveal .tile b { display: block; font-size: 23px; margin-bottom: 4px; }
+
+    .reveal .layers { display: flex; flex-direction: column; gap: 10px; font-size: 19px; text-align: left; }
+    .reveal .layer { display: grid; grid-template-columns: 150px 1fr 1fr; gap: 14px; align-items: center; border-radius: 8px; padding: 10px 14px; border-left: 8px solid; }
+    .reveal .layer .name { font-weight: bold; font-size: 26px; }
+    .reveal .layer .name small { display: block; font-weight: normal; font-size: 16px; color: var(--c-muted); }
+    .reveal .layer .no { color: var(--c-muted); }
+    .reveal .layer.n { background: var(--c-nbplay-bg); border-color: var(--c-nbplay); }
+    .reveal .layer.s { background: var(--c-spaday-bg); border-color: var(--c-spaday); }
+    .reveal .layer.t { background: var(--c-transports-bg); border-color: var(--c-transports); }
+    .reveal .layer.r { background: var(--c-rust-bg); border-color: var(--c-rust); grid-template-columns: 150px 1fr; }
+    .reveal .layer.d { background: var(--c-dau-bg); border-color: var(--c-dau); grid-template-columns: 190px 1fr 1fr; }
+    .reveal .layer.dk { background: #f6f5f2; border-color: #999; grid-template-columns: 190px 1fr; }
+    .reveal .layer.d .name small, .reveal .layer.dk .name small { font-size: 15px; }
+
+    .reveal .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; text-align: left; font-size: 20px; }
+    .reveal .versus .side { border-radius: 8px; padding: 12px 16px; background: #f6f5f2; border-top: 6px solid #999; }
+    .reveal .versus .side.d { background: var(--c-dau-bg); border-color: var(--c-dau); }
+    .reveal .versus .side > b { display: block; font-size: 24px; margin-bottom: 6px; }
+    .reveal .versus ul { display: block; margin: 0 0 0 1em; }
+    .reveal .versus li { margin: 4px 0; }
+    .reveal .plan { display: flex; gap: 6px; justify-content: center; font-size: 17px; margin: 8px 0 2px; }
+    .reveal .plan span { padding: 3px 10px; border-radius: 4px; background: white; border: 1px solid #bbb; }
+    .reveal .plan span.on { background: var(--c-dau); border-color: var(--c-dau); color: white; }
+    .reveal .plan span.off { background: #ddd; color: var(--c-muted); }
+    .reveal svg.flow { display: block; margin: 0 auto; font-family: "Source Sans Pro", Helvetica, sans-serif; }
+    .reveal svg.flow .lane-card { fill: var(--c-dau-bg); stroke: var(--c-dau); stroke-width: 2; }
+    .reveal svg.flow .lane-cpu { fill: #f6f5f2; stroke: #999; stroke-width: 2; }
+    .reveal svg.flow .lane-label { font-size: 17px; font-weight: bold; fill: var(--c-muted); }
+    .reveal svg.flow .lane-label.card { fill: var(--c-dau); }
+    .reveal svg.flow .box { fill: white; stroke: #888; stroke-width: 1.5; }
+    .reveal svg.flow .box.sched { stroke: var(--c-dau); stroke-width: 2.5; }
+    .reveal svg.flow .box.dma { stroke: var(--c-dau); stroke-dasharray: 5 3; }
+    .reveal svg.flow .box.nosupport { fill: #eee; stroke-dasharray: 5 3; }
+    .reveal svg.flow .tile-on { fill: var(--c-dau); }
+    .reveal svg.flow .t { font-size: 19px; font-weight: bold; fill: var(--c-ink); text-anchor: middle; }
+    .reveal svg.flow .s { font-size: 15px; fill: var(--c-muted); text-anchor: middle; }
+    .reveal svg.flow .w { fill: white; }
+    .reveal svg.flow .e { font-size: 14px; fill: var(--c-dau); text-anchor: middle; font-weight: bold; }
+    .reveal svg.flow .edge { fill: none; stroke: #555; stroke-width: 2; marker-end: url(#arrow); }
+    .reveal svg.wheel .arc { fill: none; stroke: var(--c-dau); stroke-width: 3; marker-end: url(#arrow3); }
+    .reveal svg.wheel .node { fill: white; stroke: var(--c-dau); stroke-width: 2.5; }
+    .reveal svg.wheel .node.decide { fill: var(--c-dau); }
+    .reveal svg.wheel .node.build { fill: #b4561b; stroke: #b4561b; }
+    .reveal svg.wheel .node.run { fill: #3b6db3; stroke: #3b6db3; }
+    .reveal svg.wheel .hub { font-size: 30px; font-weight: bold; fill: var(--c-dau); text-anchor: middle; }
+    .reveal svg.wheel .hub-s { font-size: 18px; fill: var(--c-muted); text-anchor: middle; }
+    .reveal svg.chip .pcb { fill: #1f4a35; }
+    .reveal svg.chip .fingers rect { fill: #d4a83a; }
+    .reveal svg.chip .die { fill: #fbfaf6; stroke: #0d2a1d; stroke-width: 3; }
+    .reveal svg.chip .die-label { font-size: 15px; fill: var(--c-muted); text-anchor: end; font-style: italic; }
+    .reveal svg.chip .board-label { font-size: 17px; font-weight: bold; fill: #d8e8dd; text-anchor: middle; }
+    .reveal svg.chip .board-label.end { text-anchor: end; font-weight: normal; font-style: italic; }
+    .reveal svg.chip .dram { fill: #111; stroke: #555; }
+    .reveal svg.chip .bus { stroke: #d4a83a; stroke-width: 3; }
+    .reveal svg.chip .box.mem { stroke: #3b6db3; stroke-width: 2; }
+    .reveal svg.chip .k-filter { fill: var(--c-dau); }
+    .reveal svg.chip .k-map { fill: var(--c-rust); }
+    .reveal svg.chip .k-agg { fill: #b4561b; }
+    .reveal svg.chip .k-state { fill: #3b6db3; }
+    .reveal svg.chip .ram rect, .reveal svg.chip .ram-key { fill: rgba(255, 255, 255, 0.85); stroke: rgba(0, 0, 0, 0.35); }
+    .reveal svg.chip .m { font-size: 13px; fill: white; text-anchor: middle; font-weight: bold; }
+    .reveal svg.chip .legend text { font-size: 15px; fill: #d8e8dd; }
+    .reveal svg.chip .edge2 { fill: none; stroke: #555; stroke-width: 2; marker-end: url(#arrow2); }
+    .reveal svg.chip .edge2.dashed { stroke-dasharray: 4 3; }
+    .reveal .result { font-size: 26px; margin-top: 14px; }
+    .reveal .result b { color: var(--c-dau); }
+
+    .reveal pre { font-size: 0.5em; }
+    .reveal .facts { font-size: 21px; color: var(--c-muted); }
+    .reveal h3.t { color: var(--c-transports); }
+    .reveal h3.s { color: var(--c-spaday); }
+    .reveal h3.n { color: var(--c-nbplay); }
+
+    .reveal .links { display: flex; gap: 40px; justify-content: center; align-items: flex-end; font-size: 22px; }
+    .reveal .links img { width: 190px; margin: 0 0 6px; }
+    .reveal .links ul { display: block; text-align: left; margin: 0; }
+
+    /* The app gets 1400x840 CSS px to lay out in, scaled to fit the slide */
+    .reveal h4.tight { margin: 0 0 8px; }
+    .reveal .appframe { width: 980px; height: 588px; margin: 0 auto; overflow: hidden; border: 1px solid #ccc; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); background: #1e1e1e; }
+    .reveal .appframe iframe { width: 1400px; height: 840px; max-width: none; max-height: none; border: 0; transform: scale(0.7); transform-origin: 0 0; }
+
+    .reveal .wc { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; text-align: left; font-size: 18px; margin-top: 14px; }
+    .reveal .wc .box { background: #f6f5f2; border-radius: 8px; padding: 10px 12px; }
+    .reveal .wc .box > b { display: block; font-size: 22px; margin-bottom: 6px; }
+    .reveal .chip { display: inline-block; margin: 0 6px 6px 0; padding: 2px 8px; border-radius: 4px; background: white; border: 1px solid #ccc; font-size: 17px; }
+    .reveal .own { margin-top: 6px; padding: 6px 10px; border-left: 5px solid var(--c-transports); background: var(--c-transports-bg); border-radius: 4px; font-size: 17px; }
+    .reveal .own b { display: block; color: var(--c-transports); }
+    .reveal .own code { font-size: 15px; }
+
+    /* Live elements. Reset what the reveal theme sets on plain tags; nbplay.css
+       loads after this block, so its own rules win at equal specificity. */
+    .demo { font-size: 13px; line-height: 1.35; text-align: left; letter-spacing: normal; text-transform: none; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1c1b19; margin: 0 auto; }
+    .demo ul, .demo ol { display: block; margin: 0; padding: 0; }
+    .demo li { margin: 0; }
+    .demo p { margin: 0; line-height: inherit; }
+    .demo h1, .demo h2, .demo h3, .demo h4, .demo h5, .demo h6 { margin: 0; font-size: inherit; text-transform: none; line-height: inherit; font-family: inherit; color: inherit; }
+    .demo table td, .demo table th { padding: 2px 4px; border-bottom: none; text-align: left; }
+    .demo pre { box-shadow: none; width: auto; margin: 0; font-size: inherit; }
+    .demo code { font-family: ui-monospace, Menlo, monospace; }
+    .demo a { color: inherit; }
+  </style>
+  <link rel="stylesheet" href="nbplay2026/nbplay.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background-image="assets/img/cubist/lightbg.png" data-background-color="#0c172d" data-background-opacity="0.45">
+        <div class="cover">
+          <div>
+            <p class="event">Compute Paris 2026</p>
+            <h1>FPGA Accelerated Polars</h1>
+          </div>
+          <a class="profile" href="https://github.com/timkpaine" aria-label="Tim Paine on GitHub">
+            <img src="assets/img/github-timkpaine-qr.svg" width="260" height="260" alt="QR code linking to https://github.com/timkpaine"/>
+            <span>@timkpaine</span>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <section>
+          <h2>Selective FPGA acceleration</h2>
+          <p class="lede"><b>polars-io-tools</b> runs a query's filters in the database, before the data is loaded.<br/><b style="color: var(--c-dau)">dau</b> runs the query's filters and sums on an FPGA, before the data reaches the CPU.</p>
+          <pre><code class="language-python" data-trim>
+query = (
+    frame.lazy()
+    .filter(pl.col("Order Date").is_between(start, end))
+    .group_by("Region", "Category")
+    .agg(pl.col("Sales").sum(), pl.col("Profit").sum(), pl.len())
+)
+inferred = infer_encoding(frame, query)
+decision = evaluate_scan(query, inferred.encoding, platform=board)
+          </code></pre>
+        </section>
+
+        <section>
+          <h4 class="tight">A query split between FPGA and CPU</h4>
+          <pre style="width: 640px; margin: 0 auto 6px"><code class="language-python" data-trim>
+query.sort("Sales", descending=True).collect()
+          </code></pre>
+          <svg class="flow" viewBox="0 0 1000 380" width="960" role="img" aria-label="Dataflow: the scheduler splits rows between the FPGA and the CPU, both filter and sum by group, the CPU merges the partial groups and sorts">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+              </marker>
+            </defs>
+
+            <!-- lanes -->
+            <rect x="318" y="18" width="412" height="138" rx="10" class="lane-card"/>
+            <text x="332" y="42" class="lane-label card">FPGA · 60% of rows</text>
+            <rect x="318" y="214" width="412" height="138" rx="10" class="lane-cpu"/>
+            <text x="332" y="342" class="lane-label">CPU · 40% of rows, in polars</text>
+
+            <!-- source and split -->
+            <rect x="8" y="150" width="118" height="70" rx="8" class="box"/>
+            <text x="67" y="180" class="t">frame</text>
+            <text x="67" y="203" class="s">6M rows</text>
+            <rect x="152" y="145" width="148" height="80" rx="8" class="box sched"/>
+            <text x="226" y="178" class="t">dau-scheduler</text>
+            <text x="226" y="201" class="s">splits the rows</text>
+
+            <!-- card tiles -->
+            <rect x="338" y="60" width="104" height="70" rx="6" class="box dma"/>
+            <text x="390" y="90" class="t">PCIe</text>
+            <text x="390" y="112" class="s">DMA in</text>
+            <rect x="466" y="60" width="104" height="70" rx="6" class="tile-on"/>
+            <text x="518" y="90" class="t w">filter</text>
+            <text x="518" y="112" class="s w">date range</text>
+            <rect x="594" y="60" width="120" height="70" rx="6" class="tile-on"/>
+            <text x="654" y="90" class="t w">group sum</text>
+            <text x="654" y="112" class="s w">44 groups</text>
+
+            <!-- cpu ops -->
+            <rect x="466" y="256" width="104" height="70" rx="6" class="box"/>
+            <text x="518" y="286" class="t">filter</text>
+            <text x="518" y="308" class="s">date range</text>
+            <rect x="594" y="256" width="120" height="70" rx="6" class="box"/>
+            <text x="654" y="286" class="t">group sum</text>
+            <text x="654" y="308" class="s">44 groups</text>
+
+            <!-- merge and sort -->
+            <rect x="764" y="145" width="104" height="80" rx="8" class="box"/>
+            <text x="816" y="178" class="t">merge</text>
+            <text x="816" y="201" class="s">partials</text>
+            <rect x="886" y="145" width="106" height="80" rx="8" class="box nosupport"/>
+            <text x="939" y="178" class="t">sort</text>
+            <text x="939" y="201" class="s">no tile: CPU</text>
+
+            <!-- edges -->
+            <path d="M126,185 L148,185" class="edge"/>
+            <path d="M300,170 C318,170 316,95 334,95" class="edge"/>
+            <path d="M300,200 C318,200 330,291 462,291" class="edge"/>
+            <path d="M442,95 L462,95" class="edge"/>
+            <path d="M570,95 L590,95" class="edge"/>
+            <path d="M570,291 L590,291" class="edge"/>
+            <path d="M714,95 C744,95 740,170 760,170" class="edge"/>
+            <path d="M714,291 C744,291 740,200 760,200" class="edge"/>
+            <path d="M868,185 L882,185" class="edge"/>
+
+            <text x="816" y="134" class="e">44 rows back</text>
+            <text x="816" y="246" class="e">44 rows</text>
+          </svg>
+        </section>
+
+        <section>
+          <h4 class="tight">Inside the card</h4>
+          <svg class="flow chip" viewBox="0 0 1000 420" width="960" role="img" aria-label="An illustrative FPGA design: PCIe DMA and registers, a DDR controller, a burst reader feeding three lanes of different tiles with their own on-chip memory, and a record writer">
+            <defs>
+              <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+              </marker>
+            </defs>
+
+            <!-- board, edge connector, die -->
+            <rect x="24" y="8" width="968" height="404" rx="14" class="pcb"/>
+            <g class="fingers">
+              <rect x="8" y="120" width="18" height="10"/><rect x="8" y="136" width="18" height="10"/><rect x="8" y="152" width="18" height="10"/>
+              <rect x="8" y="168" width="18" height="10"/><rect x="8" y="184" width="18" height="10"/><rect x="8" y="200" width="18" height="10"/>
+              <rect x="8" y="216" width="18" height="10"/><rect x="8" y="232" width="18" height="10"/>
+            </g>
+            <text x="44" y="290" class="board-label" transform="rotate(-90 44 290)">PCIe</text>
+            <rect x="120" y="26" width="858" height="280" rx="8" class="die"/>
+            <text x="968" y="298" class="die-label">FPGA · illustrative design</text>
+
+            <!-- host side -->
+            <rect x="134" y="40" width="100" height="52" rx="6" class="box"/>
+            <text x="184" y="64" class="t">registers</text>
+            <text x="184" y="83" class="s">control</text>
+            <rect x="134" y="112" width="100" height="98" rx="6" class="box"/>
+            <text x="184" y="150" class="t">PCIe DMA</text>
+            <text x="184" y="172" class="s">host ↔ DDR</text>
+            <path d="M184,112 L184,96" class="edge2 dashed"/>
+
+            <!-- memory side -->
+            <rect x="420" y="256" width="280" height="40" rx="6" class="box mem"/>
+            <text x="560" y="282" class="t">DDR controller</text>
+            <rect x="420" y="330" width="60" height="62" rx="3" class="dram"/><rect x="493" y="330" width="60" height="62" rx="3" class="dram"/>
+            <rect x="567" y="330" width="60" height="62" rx="3" class="dram"/><rect x="640" y="330" width="60" height="62" rx="3" class="dram"/>
+            <text x="714" y="366" class="board-label" style="text-anchor: start">DDR</text>
+            <path d="M450,296 L450,330 M523,296 L523,330 M597,296 L597,330 M670,296 L670,330" class="bus"/>
+
+            <!-- reader and writer -->
+            <rect x="252" y="40" width="88" height="198" rx="6" class="box"/>
+            <text x="296" y="132" class="t">burst</text>
+            <text x="296" y="154" class="t">reader</text>
+            <rect x="856" y="62" width="108" height="176" rx="6" class="box"/>
+            <text x="910" y="142" class="t">record</text>
+            <text x="910" y="164" class="t">writer</text>
+
+            <!-- lane A: filter, map, group table -->
+            <rect x="364" y="40" width="92" height="58" rx="6" class="k-filter"/>
+            <text x="410" y="66" class="t w">filter</text><text x="410" y="86" class="s w">date range</text>
+            <rect x="468" y="40" width="92" height="58" rx="6" class="k-map"/>
+            <text x="514" y="66" class="t w">map</text><text x="514" y="86" class="s w">price × disc</text>
+            <rect x="572" y="40" width="262" height="58" rx="6" class="k-agg"/>
+            <text x="636" y="66" class="t w">group table</text><text x="636" y="86" class="s w">sum per group</text>
+            <g class="ram"><rect x="712" y="48" width="14" height="14"/><rect x="730" y="48" width="14" height="14"/><rect x="748" y="48" width="14" height="14"/><rect x="766" y="48" width="14" height="14"/>
+              <rect x="712" y="66" width="14" height="14"/><rect x="730" y="66" width="14" height="14"/><rect x="748" y="66" width="14" height="14"/><rect x="766" y="66" width="14" height="14"/></g>
+            <text x="806" y="74" class="m">LUTRAM</text>
+
+            <!-- lane B: key filter, distinct count -->
+            <rect x="364" y="110" width="92" height="58" rx="6" class="k-filter"/>
+            <text x="410" y="136" class="t w">filter</text><text x="410" y="156" class="s w">key set</text>
+            <rect x="468" y="110" width="366" height="58" rx="6" class="k-agg"/>
+            <text x="536" y="136" class="t w">distinct</text><text x="536" y="156" class="s w">count per group</text>
+            <g class="ram"><rect x="610" y="124" width="16" height="30"/><rect x="630" y="124" width="16" height="30"/><rect x="650" y="124" width="16" height="30"/><rect x="670" y="124" width="16" height="30"/>
+              <rect x="690" y="124" width="16" height="30"/><rect x="710" y="124" width="16" height="30"/><rect x="730" y="124" width="16" height="30"/><rect x="750" y="124" width="16" height="30"/></g>
+            <text x="800" y="136" class="m">BRAM</text><text x="800" y="152" class="m">bitmaps</text>
+
+            <!-- lane C: as-of join, rolling stats -->
+            <rect x="364" y="180" width="196" height="58" rx="6" class="k-state"/>
+            <text x="430" y="206" class="t w">as-of join</text><text x="430" y="226" class="s w">latest quote</text>
+            <g class="ram"><rect x="496" y="192" width="16" height="30"/><rect x="516" y="192" width="16" height="30"/><rect x="536" y="192" width="16" height="30"/></g>
+            <rect x="572" y="180" width="262" height="58" rx="6" class="k-state"/>
+            <text x="650" y="206" class="t w">rolling stats</text><text x="650" y="226" class="s w">mean, variance</text>
+            <g class="ram"><rect x="750" y="192" width="16" height="30"/><rect x="770" y="192" width="16" height="30"/></g>
+            <text x="806" y="206" class="m">BRAM</text>
+
+            <!-- edges -->
+            <path d="M340,69 L360,69 M340,139 L360,139 M340,209 L360,209" class="edge2"/>
+            <path d="M456,69 L464,69 M560,69 L568,69 M456,139 L464,139 M560,209 L568,209" class="edge2"/>
+            <path d="M834,69 L852,69 M834,139 L852,139 M834,209 L852,209" class="edge2"/>
+            <path d="M440,256 C440,248 300,250 296,242" class="edge2"/>
+            <path d="M910,238 C910,276 760,276 704,276" class="edge2"/>
+            <path d="M184,210 C184,276 300,280 416,280" class="edge2"/>
+
+            <!-- legend -->
+            <g class="legend">
+              <rect x="134" y="330" width="16" height="16" class="k-filter"/><text x="158" y="343">filter</text>
+              <rect x="134" y="356" width="16" height="16" class="k-map"/><text x="158" y="369">arithmetic</text>
+              <rect x="250" y="330" width="16" height="16" class="k-agg"/><text x="274" y="343">aggregate</text>
+              <rect x="250" y="356" width="16" height="16" class="k-state"/><text x="274" y="369">stateful</text>
+              <rect x="134" y="382" width="16" height="16" class="ram-key"/><text x="158" y="395">on-chip memory in the tile</text>
+            </g>
+            <text x="960" y="400" class="board-label end">tiles composed per workload</text>
+          </svg>
+        </section>
+
+        <section>
+          <h3>Heterogenous execution</h3>
+          <div class="versus">
+            <div class="side">
+              <b>polars GPU engine</b>
+              <ul>
+                <li>The whole plan runs on the GPU</li>
+                <li>Anything unsupported: the whole plan falls back to CPU</li>
+                <li>Works because the GPU covers almost every operator</li>
+              </ul>
+              <div class="plan"><span class="off">scan</span><span class="off">filter</span><span class="off">sort</span><span class="off">agg</span></div>
+            </div>
+            <div class="side d">
+              <b>dau</b>
+              <ul>
+                <li>Each operator maps to a hardware tile, or stays on the CPU with a stated reason</li>
+                <li>The card runs the part it can carry</li>
+                <li>Rows can be split between card and CPU, which run at the same time</li>
+              </ul>
+              <div class="plan"><span class="on">scan</span><span class="on">filter</span><span>sort</span><span class="on">agg</span></div>
+              <p class="caption" style="text-align: center">the card takes what it can, the CPU the rest</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>Selective and collaborative</h3>
+          <div class="layers">
+            <div class="layer d">
+              <div class="name">dau-polars<small>the frontend</small></div>
+              <div>Captures the polars plan, compiles it onto tiles, chooses: run, flash, rebuild or CPU</div>
+              <div class="no">Builds a new design when one is worth it</div>
+            </div>
+            <div class="layer d">
+              <div class="name">dau-scheduler<small>the split</small></div>
+              <div>How much goes to the card: <code>cpu</code> · <code>offload</code> · <code>collaborative</code> · <code>adaptive</code></div>
+              <div class="no">Balance point in closed form; knows nothing about tiles</div>
+            </div>
+            <div class="layer dk">
+              <div class="name">dau-core<small>build · driver · sim</small></div>
+              <div>Tiles with measured resources, bitstreams from yaml, the PCIe driver, and a simulated card for CI</div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3>A tile set built for your queries</h3>
+          <svg class="flow wheel" viewBox="0 0 1000 410" width="900" role="img" aria-label="The flywheel: queries are captured and compiled onto tiles, priced, a design is built in the background, cached, flashed and run, and the next queries run on it">
+            <defs>
+              <marker id="arrow3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="var(--c-dau)"/>
+              </marker>
+            </defs>
+            <path d="M608.8,77.5 A330,135 0 0 1 698.6,97.2" class="arc"/>
+            <path d="M823.1,177.5 A330,135 0 0 1 823.1,232.5" class="arc"/>
+            <path d="M698.6,312.8 A330,135 0 0 1 608.8,332.5" class="arc"/>
+            <path d="M391.2,332.5 A330,135 0 0 1 301.4,312.8" class="arc"/>
+            <path d="M176.9,232.5 A330,135 0 0 1 176.9,177.5" class="arc"/>
+            <path d="M301.4,97.2 A330,135 0 0 1 391.2,77.5" class="arc"/>
+            <text x="500" y="199" class="hub">the flywheel</text>
+            <text x="500" y="227" class="hub-s">each query you run</text>
+            <text x="500" y="249" class="hub-s">shapes the next design</text>
+            <rect x="400" y="38" width="200" height="64" rx="10" class="node"/>
+            <text x="500" y="66" class="t">your queries</text>
+            <text x="500" y="88" class="s">plain polars</text>
+            <rect x="686" y="106" width="200" height="64" rx="10" class="node"/>
+            <text x="786" y="134" class="t">capture + compile</text>
+            <text x="786" y="156" class="s">plan onto tiles</text>
+            <rect x="686" y="240" width="200" height="64" rx="10" class="node decide"/>
+            <text x="786" y="268" class="t w">price + decide</text>
+            <text x="786" y="290" class="s w">run · flash · rebuild · cpu</text>
+            <rect x="400" y="308" width="200" height="64" rx="10" class="node build"/>
+            <text x="500" y="336" class="t w">build the design</text>
+            <text x="500" y="358" class="s w">in the background</text>
+            <rect x="114" y="240" width="200" height="64" rx="10" class="node"/>
+            <text x="214" y="268" class="t">design cache</text>
+            <text x="214" y="290" class="s">built, timing checked</text>
+            <rect x="114" y="106" width="200" height="64" rx="10" class="node run"/>
+            <text x="214" y="134" class="t w">flash + run</text>
+            <text x="214" y="156" class="s w">bit-exact on the card</text>
+          </svg>
+        </section>
+
+        <section>
+          <h3>Link</h3>
+          <div class="links">
+            <div><img src="assets/img/snake_case2026/qr-dau-dev.svg" alt="QR code for github.com/dau-dev"/><br/><a href="https://github.com/dau-dev">github.com/dau-dev</a></div>
+          </div>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h2>Extras</h2>
+          <p class="lede">The tooling that helped us build all this</p>
+        </section>
+
+        <section>
+          <h3><a href="https://github.com/python-project-templates/base">python-project-templates</a></h3>
+          <p class="lede">A shared starting point for packaging, builds, tests and CI</p>
+          <div class="tiles">
+            <div class="tile" style="border-color: var(--c-rust)"><b>Rust core</b>Shared logic behind native and browser bindings</div>
+            <div class="tile" style="border-color: var(--c-spaday)"><b>Python package</b>PyO3 bindings and Python wheels</div>
+            <div class="tile" style="border-color: var(--c-transports)"><b>JavaScript + WASM</b>wasm-bindgen bindings and a JavaScript package</div>
+          </div>
+          <p class="facts">The <a href="https://github.com/python-project-templates/python-template-rustjswasm">Rust + JS + WASM template</a> helped us reuse the build setup<br/>and spend more time on the libraries.</p>
+        </section>
+
+        <section>
+          <h3><a href="https://copier.readthedocs.io/en/stable/">Copier</a>: keep the setup maintainable</h3>
+          <p class="lede">Templates that can update existing projects</p>
+          <div class="tiles">
+            <div class="tile"><b>Generate</b>Answer prompts to create a project with the pieces you need</div>
+            <div class="tile"><b>Improve</b>Fix shared build and CI setup in the template</div>
+            <div class="tile"><b>Update</b>Bring those changes into existing projects; review and resolve conflicts</div>
+          </div>
+          <pre><code class="language-bash">copier update</code></pre>
+          <p class="facts"><a href="copier2025.html">Control all of your projects with Copier</a><br/>PyData London 2025 talk</p>
+        </section>
+
+        <section>
+          <h3><a href="https://github.com/point72/polars-io-tools">point72/polars-io-tools</a></h3>
+          <p class="lede">Inspect the query and push filters down to the database</p>
+          <pre><code class="language-python" data-trim>
+import polars as pl
+from polars_io_tools import scan_db
+
+orders = scan_db("SELECT * FROM orders", "DSN=warehouse")
+result = (
+    orders.piot.debug()  # Inspect requested filters and columns
+    .filter(pl.col("region") == "EU")  # Push to SQL WHERE
+    .piot.filter_no_pushdown(pl.col("amount") > 100)
+    .select("id", "amount")
+    .collect()
+)
+          </code></pre>
+          <p class="facts">Region filter → database · Amount filter → local Polars<br/>Custom sources for SQL, ClickHouse, Datadog and Delta Lake</p>
+        </section>
+
+    </div>
+  </div>
+  <script src="assets/dist/reveal.js"></script>
+  <script src="assets/plugin/markdown/markdown.js"></script>
+  <script src="assets/plugin/highlight/highlight.js"></script>
+  <script src="assets/plugin/notes/notes.js"></script>
+  <script>
+    Reveal.initialize({
+      center: true,
+      controls: true,
+      history: true,
+      keyboardCondition: (event) => !(event.target.closest && event.target.closest(".demo")),
+      plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ],
+      progress: true,
+      slideNumber: true
+    });
+  </script>
+</body>
+</html>
