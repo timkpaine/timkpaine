@@ -38,6 +38,17 @@
     .reveal svg.diagram text { fill: var(--c-ink); }
     .reveal svg .fragment { transition: opacity 0.3s ease; }
 
+    .reveal .cover { display: flex; flex-direction: column; gap: 28px; align-items: center; text-align: center; color: white; }
+    .reveal .cover .event { font: 22px ui-monospace, Menlo, monospace; margin: 0 0 20px; }
+    .reveal .cover h1 { color: white; font-size: 90px; line-height: 1; text-transform: none; letter-spacing: -3px; margin: 0 0 16px; }
+    .reveal .cover .subtitle { font-size: 26px; line-height: 1.4; margin: 0; }
+    .reveal .cover .profile { color: white; text-align: center; font-size: 27px; line-height: 1.5; }
+    .reveal .cover .profile img { display: block; width: 240px; height: auto; max-width: 100%; margin: 0 auto 12px; }
+    .reveal .cover .profile span { text-decoration: underline; text-underline-offset: 5px; }
+    .reveal .cover .profile small { display: block; font-size: 18px; }
+    .reveal .cover .profile:focus-visible { outline: 3px solid white; outline-offset: 10px; }
+    .reveal .cover .footnote { font-size: 16px; margin: 0; }
+
     /* Moving dashes on the data-flow arrows */
     .reveal svg .flow { stroke-dasharray: 9 6; animation: flow 0.9s linear infinite; }
     @keyframes flow { to { stroke-dashoffset: -30; } }
@@ -118,27 +129,25 @@
     .demo .log .b { color: #ffb37f; }
     .demo .log .d { color: #888; }
 
-    .reveal iframe.app { width: 940px; height: 520px; border: 1px solid #ccc; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); background: #faf9f6; }
+    .reveal iframe.app { width: 940px; height: 600px; border: 1px solid #ccc; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); background: #faf9f6; }
   </style>
   <link rel="stylesheet" href="nbplay2026/nbplay.css">
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
-      <section data-markdown>
-          <script type="text/template">
-              <!-- .slide: data-background-image="assets/img/cubist/lightbg.png" -->
-              <!-- .slide: style="color: white" -->
-              <h3 style="color: white;">A DAW in your Notebook</h3>
-              <h5 style="color: white;">Real-time audio with nbplay, spaday and transports</h5>
-              <br />
-              <span style="color:white;">Tim Paine
-              <br />
-              <a style="color: white; text-decoration: underline;" href="https://github.com/timkpaine">@timkpaine</a></span>
-              <br />
-              <br />
-              <!-- <a href="https://point72.com/cubist/"><img src="assets/img/cubist/logo-horizontal-white.png" width=250></img></a> -->
-          </script>
+      <section data-background-image="assets/img/cubist/lightbg.png" data-background-color="#0c172d" data-background-opacity="0.45">
+        <div class="cover">
+          <div>
+            <p class="event">Compute! Paris 2026</p>
+            <h1>A DAW in your Notebook</h1>
+            <p class="subtitle">Real-time audio with nbplay, spaday and transports</p>
+          </div>
+          <a class="profile" href="https://github.com/timkpaine" aria-label="Tim Paine on GitHub">
+            <img src="assets/img/github-timkpaine-qr.svg" width="260" height="260" alt="QR code linking to https://github.com/timkpaine"/>
+            <span>@timkpaine</span>
+          </a>
+        </div>
       </section>
 
       <!-- Hook -->
@@ -148,7 +157,6 @@
           <div class="demo" style="width: 860px; zoom: 1.08">
             <nbplay-drums id="hook-drums"></nbplay-drums>
           </div>
-          <p class="caption">A web component on this slide. No server, no kernel: press play, tap a pad.</p>
         </section>
         <section data-markdown data-separator="---">
           <script type="text/template">
@@ -157,10 +165,10 @@
             Driven from Python, in a cell
             <!-- .element: class="fragment" data-fragment-index="1" -->
 
-            With the same widget as a web app, and with no server at all
+            With the same widget as a web app
             <!-- .element: class="fragment" data-fragment-index="2" -->
 
-            And keep time while you type
+            And with no server at all
             <!-- .element: class="fragment" data-fragment-index="3" -->
           </script>
         </section>
@@ -182,7 +190,7 @@
             <div class="tile g fragment" data-fragment-index="2"><b>Logistics</b>fleets, routes, warehouses</div>
             <div class="tile g fragment" data-fragment-index="2"><b>Finance</b>trading, risk, market data</div>
           </div>
-          <p class="fragment" data-fragment-index="3" style="margin-top: 36px">Data that changes every second, and people who need to see it and act on it, in rich, responsive apps</p>
+          <p class="fragment" data-fragment-index="3" style="margin-top: 36px">Data that changes every second<br />and people who need to see it and act on it <br />in rich, responsive apps</p>
         </section>
 
         <section>
@@ -262,7 +270,6 @@
               <text x="750" y="350" text-anchor="middle" font-size="16" style="fill: var(--c-muted)">for whoever reads it later</text>
             </g>
           </svg>
-          <p class="caption fragment" data-fragment-index="4">The same data and the same controls in each, ideally built once</p>
         </section>
 
         <section>
@@ -389,7 +396,6 @@
               </g>
             </g>
           </svg>
-          <p class="caption fragment" data-fragment-index="4">Small parts composed into larger ones that behave alike, and themed all at once</p>
         </section>
 
         <section>
@@ -403,19 +409,29 @@
             <div class="tile fragment"><b>Strict transport</b>edits arrive in order, each field has one owner, nothing is lost</div>
           </div>
           <p class="fragment" style="margin-top: 30px; font-size: 32px">In a notebook or a web app, with no loss of performance</p>
-          <p class="fragment muted" style="font-size: 26px">If the stack can run a DAW, it can run your dashboard</p>
+          <p class="fragment" style="margin-top: 30px; font-size: 32px">If it can run a DAW, it can run a dashboard</p>
         </section>
 
         <section data-markdown data-separator="---">
           <script type="text/template">
             Not a replacement for Ableton
 
-            A stress test for notebook apps, and a studio you can program
+            Mostly stress test for notebook apps
             <!-- .element: class="fragment" data-fragment-index="1" -->
 
-            [`nbplay`](https://github.com/1kbgz/nbplay): synths, a sampler, a drum machine, sequencers, a timeline, a clip launcher, a mixer
+            A testbed for a future, more production-worthy DAW
             <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            [`nbplay`](https://github.com/1kbgz/nbplay): synths, a sampler, a drum machine, sequencers, a timeline, a clip launcher, a mixer
+            <!-- .element: class="fragment" data-fragment-index="3" -->
           </script>
+        </section>
+
+        <section>
+          <h3>nbplay</h3>
+          <div class="qr">
+            <div><img src="assets/img/nbplay2026/qr-repo.svg" alt="QR code for github.com/1kbgz/nbplay"/><br/><a href="https://github.com/1kbgz/nbplay">github.com/1kbgz/nbplay</a></div>
+          </div>
         </section>
 
         <section>
@@ -441,7 +457,7 @@
             </g>
             <g class="fragment" data-fragment-index="2">
               <rect x="600" y="30" width="280" height="100" rx="10" fill="var(--c-spaday-bg)" stroke="var(--c-spaday)" stroke-width="3"/>
-              <text x="740" y="70" text-anchor="middle" font-size="26" font-weight="bold">a Python runtime</text>
+              <text x="740" y="70" text-anchor="middle" font-size="26" font-weight="bold">a runtime (Python)</text>
               <text x="740" y="104" text-anchor="middle" font-size="19">your data, your code, a GIL</text>
             </g>
             <g class="fragment" data-fragment-index="3">
@@ -457,10 +473,9 @@
             <g class="fragment" data-fragment-index="5">
               <rect x="600" y="340" width="280" height="100" rx="10" fill="var(--c-transports-bg)" stroke="var(--c-transports)" stroke-width="3"/>
               <text x="740" y="380" text-anchor="middle" font-size="26" font-weight="bold">a comm channel</text>
-              <text x="740" y="414" text-anchor="middle" font-size="19">messages both ways</text>
+              <text x="740" y="414" text-anchor="middle" font-size="19">bidirectional messages</text>
             </g>
           </svg>
-          <p class="caption fragment" data-fragment-index="6">A DAW in a notebook uses all five at once</p>
         </section>
       </section>
 
@@ -505,7 +520,6 @@ browser edits (orange)
 show up here</span></div>
             </div>
           </div>
-          <p class="caption">No kernel on this page: the script answers the way the kernel would.</p>
         </section>
 
         <section>
@@ -513,7 +527,6 @@ show up here</span></div>
           <div class="demo" style="width: 640px; zoom: 0.76">
             <nbplay-sampler id="sampler"></nbplay-sampler>
           </div>
-          <p class="caption">Drop an audio file on it, or play the pads. Zones, slices and microphone capture too.</p>
         </section>
 
         <section>
@@ -521,7 +534,6 @@ show up here</span></div>
           <div class="demo" style="width: 720px; zoom: 1.28">
             <nbplay-sequencer id="seq"></nbplay-sequencer>
           </div>
-          <p class="caption">A row per note or a step grid of chords; double-click a step to type its note.</p>
         </section>
 
         <section>
@@ -530,7 +542,6 @@ show up here</span></div>
             <div style="flex: none"><nbplay-keyboard id="keys"></nbplay-keyboard></div>
             <div style="flex: 1; min-width: 0"><nbplay-arpeggiator id="arp"></nbplay-arpeggiator></div>
           </div>
-          <p class="caption">Click the keyboard and hold a chord on <code>Q W E R T</code>: the arpeggiator plays it on a synth.</p>
         </section>
 
         <section>
@@ -578,7 +589,6 @@ show up here</span></div>
         <section>
           <h4 class="step">8. The same session as an app <span class="live">LIVE</span></h4>
           <iframe class="app" data-src="https://1kbgz.github.io/nbplay/app/" data-preload allow="midi; autoplay"></iframe>
-          <p class="caption">Python in a Web Worker (Pyodide) serving the page: <a href="https://1kbgz.github.io/nbplay/app/">1kbgz.github.io/nbplay/app</a></p>
         </section>
       </section>
 
@@ -588,18 +598,18 @@ show up here</span></div>
 
         <section data-markdown data-separator="---">
           <script type="text/template">
-            ### Where it started (Feb–Oct 2026)
+            ### Where it started
 
-            One anywidget per instrument, its state in traitlets
+            One anywidget per instrument via traitlets
             <!-- .element: class="fragment" data-fragment-index="1" -->
 
             UI code called `model.get` and `model.set` directly
             <!-- .element: class="fragment" data-fragment-index="2" -->
 
-            Play state was a trait both sides wrote
+            Play state was a trait modified from Py/Js
             <!-- .element: class="fragment" data-fragment-index="3" -->
 
-            It ran where ipywidgets runs, and the tests needed a fake model
+            Only runnable in browser, tests needed a fake model
             <!-- .element: class="fragment" data-fragment-index="4" -->
 
             Each instrument mixed three jobs: syncing state, building UI, making sound
@@ -607,13 +617,30 @@ show up here</span></div>
           </script>
         </section>
 
+
+        <section data-markdown data-separator="---">
+          <script type="text/template">
+            ### More broadly
+
+            Having parallel code for Jupyter/Voilà
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+
+            Frontend apps largely JS based
+            <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            Not content with existing "python based" app frameworks
+            <!-- .element: class="fragment" data-fragment-index="3" -->
+          </script>
+        </section>
+
+
         <section>
           <h3>Three libraries, one job each</h3>
           <div class="layers">
             <div class="layer n fragment" data-fragment-index="3">
-              <div class="name">nbplay<small>the domain</small></div>
+              <div class="name">nbplay<small>domain-specific</small></div>
               <div>Instruments as Lit elements: properties in, events out. Audio, MIDI and the clock</div>
-              <div class="no">Never touches a model or a wire</div>
+              <div class="no">Only the domain logic: sync and rendering come from below</div>
             </div>
             <div class="layer s fragment" data-fragment-index="2">
               <div class="name">spaday<small>the UI</small></div>
@@ -654,6 +681,13 @@ show up here</span></div>
             JSON, msgpack or CBOR over a comm, a WebSocket, SSE or `postMessage`
             <!-- .element: class="fragment" data-fragment-index="2" -->
           </script>
+        </section>
+
+        <section>
+          <h3>transports</h3>
+          <div class="qr">
+            <div><img src="assets/img/nbplay2026/qr-transports.svg" alt="QR code for github.com/1kbgz/transports"/><br/><a href="https://github.com/1kbgz/transports">github.com/1kbgz/transports</a></div>
+          </div>
         </section>
 
         <section>
@@ -746,6 +780,13 @@ show up here</span></div>
         </section>
 
         <section>
+          <h3>spaday</h3>
+          <div class="qr">
+            <div><img src="assets/img/nbplay2026/qr-spaday.svg" alt="QR code for github.com/1kbgz/spaday"/><br/><a href="https://github.com/1kbgz/spaday">github.com/1kbgz/spaday</a></div>
+          </div>
+        </section>
+
+        <section>
           <h3>One tree, many hosts</h3>
           <svg class="diagram" viewBox="0 0 900 430" role="img" aria-label="One spaday tree served to notebook hosts, a served app, a Pyodide page and JupyterLite">
             <defs>
@@ -793,7 +834,7 @@ show up here</span></div>
             ```
             <!-- .element: class="fragment" data-fragment-index="1" -->
 
-            anywidget gets the runtime into any widget host; spaday mounts the tree
+            anywidget gets the runtime into any widget host<br />spaday mounts the tree
             <!-- .element: class="fragment" data-fragment-index="2" -->
 
             transports state goes over the same comm as its own wire
@@ -1088,7 +1129,7 @@ show up here</span></div>
             **Browsers.** Suspended audio contexts until a gesture, no Web MIDI in Safari, sysex permissions
             <!-- .element: class="fragment" data-fragment-index="4" -->
 
-            **Hosts.** Six of them, each with its own lifecycle
+            **Hosts.** Six different frameworks with their own lifecycle
             <!-- .element: class="fragment" data-fragment-index="5" -->
           </script>
         </section>
@@ -1164,7 +1205,6 @@ show up here</span></div>
               <text x="40" y="386" font-size="18"><tspan font-weight="bold">the same core</tspan> · Rust, as a Python extension and as wasm</text>
             </g>
           </svg>
-          <p class="caption fragment" data-fragment-index="4">Moving right changes the host and the wire, not the app</p>
         </section>
 
         <section>
@@ -1185,16 +1225,16 @@ show up here</span></div>
 
         <section data-markdown data-separator="---">
           <script type="text/template">
-            **Controllers**: light a Launchpad's pads from session state, control surface pages
+            **Controllers**: add customization around MIDI controllers
             <!-- .element: class="fragment" data-fragment-index="1" -->
 
-            **Save everything**: a snapshot of any widget, sessions built from snapshots, compose them
+            **Save/Restore**: a snapshot of any/all widgets, restore sessions from snapshots
             <!-- .element: class="fragment" data-fragment-index="2" -->
 
-            **Plugins**: effects written in Python (Web Audio graphs or AudioWorklet DSP), Web Audio Modules, a proxy for native VST3/AU/CLAP plugins
+            **Plugins**: effects written in Python (Web Audio graphs or AudioWorklet DSP), Web Audio Modules, a proxy for native VST3/AU plugins
             <!-- .element: class="fragment" data-fragment-index="3" -->
 
-            **More**: record the arpeggiator, per-pad outputs, Ableton Link, OSC
+            **More**: record the arpeggiator, per-pad outputs, more
             <!-- .element: class="fragment" data-fragment-index="4" -->
           </script>
         </section>
