@@ -165,7 +165,27 @@
         </div>
       </section>
 
+
       <section>
+        <section>
+          <h3><a href="https://github.com/point72/polars-io-tools">polars-io-tools</a></h3>
+          <p class="lede">Inspect the query and push filters down to the database</p>
+          <pre><code class="language-python" data-trim>
+import polars as pl
+from polars_io_tools import scan_db
+
+orders = scan_db("SELECT * FROM orders", "DSN=warehouse")
+result = (
+    orders.piot.debug()  # Inspect requested filters and columns
+    .filter(pl.col("region") == "EU")  # Push to SQL WHERE
+    .piot.filter_no_pushdown(pl.col("amount") > 100)
+    .select("id", "amount")
+    .collect()
+)
+          </code></pre>
+          <p class="facts">Region filter → database · Amount filter → local Polars<br/>Custom sources for SQL, ClickHouse, Datadog and Delta Lake</p>
+        </section>
+
         <section>
           <h2>Selective FPGA acceleration</h2>
           <p class="lede"><b>polars-io-tools</b> runs a query's filters in the database, before the data is loaded.<br/><b style="color: var(--c-dau)">dau</b> runs the query's filters and sums on an FPGA, before the data reaches the CPU.</p>
@@ -442,6 +462,25 @@ query.sort("Sales", descending=True).collect()
         </section>
 
         <section>
+          <h3><a href="https://github.com/point72/polars-io-tools">point72/polars-io-tools</a></h3>
+          <p class="lede">Inspect the query and push filters down to the database</p>
+          <pre><code class="language-python" data-trim>
+import polars as pl
+from polars_io_tools import scan_db
+
+orders = scan_db("SELECT * FROM orders", "DSN=warehouse")
+result = (
+    orders.piot.debug()  # Inspect requested filters and columns
+    .filter(pl.col("region") == "EU")  # Push to SQL WHERE
+    .piot.filter_no_pushdown(pl.col("amount") > 100)
+    .select("id", "amount")
+    .collect()
+)
+          </code></pre>
+          <p class="facts">Region filter → database · Amount filter → local Polars<br/>Custom sources for SQL, ClickHouse, Datadog and Delta Lake</p>
+        </section>
+
+        <section>
           <h3><a href="https://github.com/python-project-templates/base">python-project-templates</a></h3>
           <p class="lede">A shared starting point for packaging, builds, tests and CI</p>
           <div class="tiles">
@@ -462,25 +501,6 @@ query.sort("Sales", descending=True).collect()
           </div>
           <pre><code class="language-bash">copier update</code></pre>
           <p class="facts"><a href="copier2025.html">Control all of your projects with Copier</a><br/>PyData London 2025 talk</p>
-        </section>
-
-        <section>
-          <h3><a href="https://github.com/point72/polars-io-tools">point72/polars-io-tools</a></h3>
-          <p class="lede">Inspect the query and push filters down to the database</p>
-          <pre><code class="language-python" data-trim>
-import polars as pl
-from polars_io_tools import scan_db
-
-orders = scan_db("SELECT * FROM orders", "DSN=warehouse")
-result = (
-    orders.piot.debug()  # Inspect requested filters and columns
-    .filter(pl.col("region") == "EU")  # Push to SQL WHERE
-    .piot.filter_no_pushdown(pl.col("amount") > 100)
-    .select("id", "amount")
-    .collect()
-)
-          </code></pre>
-          <p class="facts">Region filter → database · Amount filter → local Polars<br/>Custom sources for SQL, ClickHouse, Datadog and Delta Lake</p>
         </section>
 
     </div>
